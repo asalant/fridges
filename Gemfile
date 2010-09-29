@@ -4,18 +4,11 @@ gem 'rails', '3.0.0'
 gem 'haml', '>= 3.0.18'
 gem 'json'
 
-group :production do
-  gem "pg"
-end
+gem "pg", :group => :production
 
 gem 'sqlite3-ruby', :require => 'sqlite3', :group => :development
+gem 'heroku', :group => :development
 
-group :development do
-  gem 'heroku'
-end
-
-group :test do
-  gem 'rspec-rails', '>= 2.0.0.beta.20'
-  gem 'rspec_tag_matchers'
-  gem 'mocha', '>= 0.9.8'
-end
+gem 'rspec-rails', '>= 2.0.0.beta.20', :group => :test
+gem 'rspec_tag_matchers', :group => :test
+gem 'mocha', '>= 0.9.8', :group => :test
