@@ -4,7 +4,10 @@ gem 'heroku'
 gem 'rails', '3.0.0'
 gem 'haml', '>= 3.0.18'
 gem 'json'
-gem 'sqlite3'
+
+group :development do
+  gem 'sqlite3'
+end
 
 group :test, :development do
   gem 'rspec-rails', '>= 2.0.0.beta.20'
