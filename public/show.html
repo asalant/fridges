@@ -4,68 +4,137 @@
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
   <title>Peep My Fridge</title>
+  <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/2.8.1/build/reset/reset-min.css">
+
+  <style type="text/css" media="all">@import "stylesheets/text.css";</style>
+  <style type="text/css" media="all">@import "stylesheets/960.css";</style>
   <style type="text/css" media="all">@import "stylesheets/annotation.css";</style>
   <style type="text/css" media="all">@import "stylesheets/show.css";</style>
-  <script type="text/javascript" src="javascripts/jquery-1.3.2.js"></script>
-  <script type="text/javascript" src="javascripts/jquery-ui-1.7.1.js"></script>
+  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.5/jquery-ui.min.js"></script>
   <script type="text/javascript" src="javascripts/jquery.annotate.js"></script>
 
   <script language="javascript">
+    var notes = [
+      { "top": 221,
+        "left": 351,
+        "width": 71,
+        "height": 124,
+        "text": "Home made yoghurt. 1/2 gallon of whole Clover milk makes two jars overnight.",
+        "id": "1",
+        "editable": true },
+      { "top": 461,
+        "left": 292,
+        "width": 73,
+        "height": 101,
+        "text": "Soul Food Farm eggs!",
+        "id": "2",
+        "editable": true },
+      { "top": 245,
+        "left": 171,
+        "width": 148,
+        "height": 39,
+        "text": "Ground beef from our 1/4 cow. Defrosted 2 weeks ago for burgers that never happened. Probably bad by now :(",
+        "id": "2",
+        "editable": true }
+    ];
     $(window).load(function() {
-      $("#fridge_1").annotateImage({
+      var $image = $("#fridge_1");
+      $image.annotateImage({
         editable: true,
         useAjax: false,
-        notes: [
-          { "top": 132,
-            "left": 178,
-            "width": 50,
-            "height": 63,
-            "text": "Home made yoghurt. 1/2 gallon of whole Clover milk makes two jars overnight.",
-            "id": "1",
-            "editable": false },
-          { "top": 252,
-            "left": 156,
-            "width": 50,
-            "height": 45,
-            "text": "Soul Food Farm eggs!",
-            "id": "2",
-            "editable": false },
-          { "top": 139,
-            "left": 104,
-            "width": 62,
-            "height": 30,
-            "text": "Ground beef from our 1/4 cow. Defrosted 2 weeks ago for burgers that never happened. Probably bad by now :(",
-            "id": "2",
-            "editable": false }
-        ]
+        notes: notes
+      });
+
+
+      $.each(notes, function(index, value) {
+        var image = $("<div class='note_image'/>").css('height', value.height).css('width', value.width)
+          .css('background-image', "url(" + $image.attr('src') + ")")
+          .css('background-position', ($image.width() - value.left) + "px " + ($image.height() - value.top) + "px");
+        var note = $("<p>" + value.text + "</p>");
+        $('#note_details').append($("<div class='note_detail clearfix'/>").append(image).append(note));
       });
     });
   </script>
 </head>
-<body>
-<h1>Peep My Fridge!</h1>
+<body class="container_12">
+<div id="fb-root"></div>
+<script>
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId  : '150522451651925',
+      status : true, // check login status
+      cookie : true, // enable cookies to allow the server to access the session
+      xfbml  : true  // parse XFBML
+    });
+  };
 
-<div style="float:left;">
-  <div class="photo">
-    <img id="fridge_1" src="images/fridges/alon-wide.jpg" width="600" height="448"/>
+  (function() {
+    var e = document.createElement('script');
+    e.src = document.location.protocol + '//connect.facebook.net/en_US/all.js';
+    e.async = true;
+    document.getElementById('fb-root').appendChild(e);
+  }());
+</script>
+
+
+<div class="header clearfix">
+  <div class="grid_8">
+    <h1>Peep My Fridge!</h1>
+
+    <h3>You are what you refrigerate.</h3>
   </div>
-  <br clear="all">
+  <div class="grid_4 omega">
+    <div id="upload">
+      <h2>What's in your fridge?</h2>
 
-  <h3>Comments</h3>
-  <a href="#">Yum!</a> |
-  <a href="#">Eww... gross!</a>
-
-  <p>
-    <textarea cols=60 rows=6></textarea>
-  </p>
-  <input type="submit" value="submit">
-  </form>
+      <h2><a href="#">Upload photo</a></h2>
+      <h4>or email a photo to <em>new@pmf.us</em></h4>
+    </div>
+  </div>
 </div>
 
-<div style="float:left; margin-left: 40px; width: 200px">
-  <p>We cleaned the fridge Monday night so it's a little empty but everything in it looks so much more appetizing.</p>
+<div class="grid_8 alpha">
+  <div class="photo">
+    <img id="fridge_1" src="images/fridges/alon-tall.jpg" width="600" height="803"/>
+  </div>
+  <div style="">
 
-  <p style="font-style: italic">- Alon S.<br>Sept 24, 2010 4:12pm</p>
+    <p>
+      <a href="#">Yum!</a> |
+      <a href="#">Eww... gross!</a> |
+      <a href="#">Total Bachelor</a> |
+    </p>
+
+    <h2>Talk about it!</h2>
+    <fb:comments numposts="40" width="600"></fb:comments>
+  </div>
+</div>
+
+<div class="grid_4 omega">
+  <h2>Alon's fridge</h2>
+  <h4>added 9/24/10</h4>
+  <h4>23 views</h4>
+
+  <p>We cleaned the fridge Monday night so it's a little empty but everything in it looks so much more appetizing.</p>
+  <h4>Link: <a href="#">http://pmf.us/sle84d</a></h4>
+
+  <div class="sharethis">
+    <span class="st_facebook"></span>
+    <span class="st_twitter"></span>
+    <span class="st_digg"></span>
+    <span class="st_gbuzz"></span>
+    <span class="st_email"></span>
+    <span class="st_sharethis"></span>
+    <script type="text/javascript" src="http://w.sharethis.com/button/buttons.js"></script>
+    <script type="text/javascript">stLight.options({publisher:'18e86a1b-6dbc-4078-96af-195e89f92e22'});</script>
+  </div>
+
+  <h2>Details</h2>
+
+  <div id="note_details"></div>
+
+
 </div>
 </body>
 </html>

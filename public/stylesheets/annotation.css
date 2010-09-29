@@ -4,7 +4,7 @@
     color: #000 !important;
     cursor: pointer;
     display: block;
-    float: left;
+    /*float: left;*/
     font-family: Verdana, Sans-Serif;
     font-size: 12px;    
     height: 18px;
