@@ -1,6 +1,5 @@
 source 'http://rubygems.org'
 
-gem 'heroku'
 gem 'rails', '3.0.0'
 gem 'haml', '>= 3.0.18'
 gem 'json'
@@ -10,6 +9,7 @@ group :production do
 end
 
 group :development do
+  gem 'heroku'
   gem 'sqlite3'
 end
 
