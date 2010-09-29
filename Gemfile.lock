@@ -56,6 +56,7 @@ GEM
     mocha (0.9.8)
       rake
     nokogiri (1.4.3.1)
+    pg (0.9.0)
     polyglot (0.3.1)
     rack (1.2.1)
     rack-mount (0.6.13)
@@ -108,6 +109,7 @@ DEPENDENCIES
   heroku
   json
   mocha (>= 0.9.8)
+  pg
   rails (= 3.0.0)
   rspec-rails (>= 2.0.0.beta.20)
   rspec_tag_matchers
