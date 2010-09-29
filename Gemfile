@@ -8,9 +8,10 @@ group :production do
   gem "pg"
 end
 
+gem 'sqlite3-ruby', :require => 'sqlite3', :group => :development
+
 group :development do
   gem 'heroku'
-  gem 'sqlite3'
 end
 
 group :test do
