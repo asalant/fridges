@@ -3,5 +3,5 @@ class Fridge < ActiveRecord::Base
     :styles         => {:large => "600", :thumb => "100x100#"},
     :storage        => :s3,
     :s3_credentials => "#{Rails.root}/config/s3.yml",
-    :path => "/:style/:filename"
+    :path => ":class/:style/:id_:filename"
 end
