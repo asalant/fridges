@@ -1,0 +1,104 @@
+body {
+	font-family: Lucida Grande, verdana, sans-serif;
+	margin: 0px;
+}
+
+h1 { font-size: 50px;  font-weight: normal;  margin: 0px; font-family: courier; line-height: 1em;}
+h2 { font-size: 20px;  margin: 0px;  font-weight: bold; }
+h3 { font-size: 20px;  margin: 0px; font-weight: normal; }
+h4 { font-size: 14px; color: #333; margin: 5px 0; font-weight: normal; }
+h5 { font-size: 14px; font-family: courier; margin: 0px; font-weight: normal;}
+
+a {  color: #000099; }
+em { font-weight: bold; font-style: normal;}
+hr { margin: 10px 0; color: #ccc;}
+
+#page_container {
+  width: 1150px;
+  margin: 0 auto;
+}
+
+.header_peep, .header_my, .header_fridge, .header_whats {
+  background: #EFF4F8;
+  border: 1px solid #ccc;
+  padding: 0px 10px 5px;
+  margin: 0 4px 3px 0;
+  float: left;
+  /* drop-shadow */
+  -moz-box-shadow: 1px 1px 2px #999;
+  -webkit-box-shadow: 1px 1px 2px #999;
+  box-shadow: 1px 1px 2px #999;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=2, Direction=301, Color='#999')";  /* For IE 8 */
+} 
+
+.header_my {  margin-top: 3px;}
+.header_fridge { margin-top: -1px;}
+.header_whats { padding-bottom: 0px; margin-top: 10px;}
+
+.header {
+  margin-top: 10px;
+}
+
+#nav_bar {
+  width: 100%;
+  padding: 3px 10px;
+  margin: 10px 0px 20px;
+  background: #e3e3e3; /* for non-css3 browsers */
+  border-width: 1px 0;
+  border-style: solid;
+  border-color: #e3e3e3;
+
+  /* gradient */
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#f7f7f7', endColorstr='#e3e3e3'); /* for IE */
+  background: -webkit-gradient(linear, left top, left bottom, from(#f7f7f7), to(#e3e3e3)); /* for webkit browsers */
+  background: -moz-linear-gradient(top,  #f7f7f7,  #e3e3e3); /* for firefox 3.6+ */
+}
+
+#upload {
+  background: url('../images/upload_icon.png') no-repeat 0 0;
+  padding-left: 25px;
+}
+
+#sharethis {
+  margin: 10px 0;
+  padding: 2px 5px;
+  background-color: #EFF4F8;
+}
+
+.note_detail {
+  clear: both;
+  margin: 10px 0;
+  padding: 6px;
+  background-color: #EFF4F8;
+}
+.note_image, .note {
+  float: left;
+  margin-right: 6px;
+}
+
+.note_image {
+  margin-top: 3px;
+}
+
+#footer {
+  text-align: center;
+  margin: 30px 0;
+  border-top: 1px solid #ccc;
+  padding-top: 5px;
+}
+
+.upload_form div {
+  font-size: 14px;
+  padding: 10px 0;
+}
+
+.upload_form input {
+  font-size: 16px;
+  padding: 5px;
+}
+
+.upload_form .btn {
+  font-size: 20px;
+  padding: 10px;
+  background-color: #EFF4F8;
+}

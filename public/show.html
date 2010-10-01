@@ -3,13 +3,13 @@
       xmlns:fb="http://www.facebook.com/2008/fbml">
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-  <title>Peep My Fridge</title>
+  <title>Peep My Fridge!</title>
   <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/2.8.1/build/reset/reset-min.css">
 
   <style type="text/css" media="all">@import "stylesheets/text.css";</style>
   <style type="text/css" media="all">@import "stylesheets/960.css";</style>
   <style type="text/css" media="all">@import "stylesheets/annotation.css";</style>
-  <style type="text/css" media="all">@import "stylesheets/show.css";</style>
+  <style type="text/css" media="all">@import "stylesheets/screen.css";</style>
   <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
   <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.5/jquery-ui.min.js"></script>
   <script type="text/javascript" src="javascripts/jquery.annotate.js"></script>
@@ -79,19 +79,23 @@
 
 
 <div class="header clearfix">
-  <div class="grid_8">
-    <h1>Peep My Fridge!</h1>
+  <div class="grid_8 alpha">
+    <h1><span class="header_peep">Peep</span> <span class="header_my">My</span> <span class="header_fridge">Fridge!</span></h1>
+	<br clear="all" />
 
     <h3>You are what you refrigerate.</h3>
   </div>
   <div class="grid_4 omega">
-    <div id="upload">
-      <h2>What's in your fridge?</h2>
-
-      <h2><a href="#">Upload photo</a></h2>
-      <h4>or email a photo to <em>new@pmf.us</em></h4>
-    </div>
+      <h5 class="header_whats">What's in your fridge?</h5>
+		<br clear="all" />
+      <div id="upload">
+		<h4><a href="upload.html">Upload a photo</a> <br />or email one to <em>new@pmyf.us</em></h4>
+	  </div>
   </div>
+</div>
+
+<div id="nav_bar" class="grid_12 clearfix">
+	1,247 fridge pics | <a href="#">see another one &#187;</a>
 </div>
 
 <div class="grid_8 alpha">
@@ -104,6 +108,12 @@
       <a href="#">Yum!</a> |
       <a href="#">Eww... gross!</a> |
       <a href="#">Total Bachelor</a> |
+      <a href="#">Very colorful!</a> |
+      <a href="#">Stocked for Armageddon</a> |
+      <a href="#">Extreme Locavore</a> |
+      <a href="#">Spicy city!</a> |
+      <a href="#">Health nut</a> |
+      <a href="#">Junk food junkie</a> |
     </p>
 
     <h2>Talk about it!</h2>
@@ -113,13 +123,11 @@
 
 <div class="grid_4 omega">
   <h2>Alon's fridge</h2>
-  <h4>added 9/24/10</h4>
-  <h4>23 views</h4>
-
-  <p>We cleaned the fridge Monday night so it's a little empty but everything in it looks so much more appetizing.</p>
-  <h4>Link: <a href="#">http://pmf.us/sle84d</a></h4>
-
-  <div class="sharethis">
+  <h4>added 9/24/10 by <a href="#">Alon Salant</a></h4>
+  <h4>"We cleaned the fridge Monday night so it's a little empty but everything in it looks so much more appetizing."</h4>
+  <hr />
+  <h4>Link: <a href="#">http://pmyf.us/sle84d</a> &nbsp;(23 views)</h4>
+  <div id="sharethis">
     <span class="st_facebook"></span>
     <span class="st_twitter"></span>
     <span class="st_digg"></span>
@@ -129,12 +137,15 @@
     <script type="text/javascript" src="http://w.sharethis.com/button/buttons.js"></script>
     <script type="text/javascript">stLight.options({publisher:'18e86a1b-6dbc-4078-96af-195e89f92e22'});</script>
   </div>
-
-  <h2>Details</h2>
+  <br />
+  <h2>What&rsquo;s inside the fridge</h2>
 
   <div id="note_details"></div>
-
-
 </div>
+
+<div id="footer" class="grid_12 clearfix">
+	&#169; 2010 PeepMyFridge&nbsp; |  &nbsp;<a href="#">About PeepMyFridge</a> &nbsp; |  &nbsp;<a href="#">Contact us</a>
+</div>
+
 </body>
 </html>
