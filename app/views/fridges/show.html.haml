@@ -4,6 +4,12 @@
 %p
   %b Description:
   = @fridge.description
+%p
+  %b Photo:
+  %p= @fridge.photo.url
+  %p= image_tag @fridge.photo.url(:large)
+  %p= image_tag @fridge.photo.url(:thumb)
+
 
 = link_to 'Edit', edit_fridge_path(@fridge)
 \|

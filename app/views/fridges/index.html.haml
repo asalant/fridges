@@ -10,9 +10,9 @@
 
   - @fridges.each do |fridge|
     %tr
-      %td= fridge.name
-      %td= fridge.description
-      %td= link_to 'Show', fridge
+      %td= link_to fridge.name, fridge
+      %td= link_to fridge.description, fridge
+      %td= link_to image_tag(fridge.photo.url(:thumb)), fridge
       %td= link_to 'Edit', edit_fridge_path(fridge)
       %td= link_to 'Destroy', fridge, :confirm => 'Are you sure?', :method => :delete
 
