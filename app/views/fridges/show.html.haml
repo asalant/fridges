@@ -1,0 +1,10 @@
+%p
+  %b Name:
+  = @fridge.name
+%p
+  %b Description:
+  = @fridge.description
+
+= link_to 'Edit', edit_fridge_path(@fridge)
+\|
+= link_to 'Back', fridges_path

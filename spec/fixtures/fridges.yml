@@ -1,0 +1,9 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+alon:
+  name: Alon's Fridge
+  description: We cleaned the fridge Monday night so it's a little empty but everything in it looks so much more appetizing.
+
+rob:
+  name: Rob's Fridge
+  description: I'm a total bachelor!! Look at all my beer.

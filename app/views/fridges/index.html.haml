@@ -1,0 +1,21 @@
+%h1 Listing fridges
+
+%table
+  %tr
+    %th Name
+    %th Description
+    %th
+    %th
+    %th
+
+  - @fridges.each do |fridge|
+    %tr
+      %td= fridge.name
+      %td= fridge.description
+      %td= link_to 'Show', fridge
+      %td= link_to 'Edit', edit_fridge_path(fridge)
+      %td= link_to 'Destroy', fridge, :confirm => 'Are you sure?', :method => :delete
+
+%br
+
+= link_to 'New fridge', new_fridge_path
