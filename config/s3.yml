@@ -1,0 +1,15 @@
+development:
+  bucket: fridges_development
+  access_key_id: <%= ENV['S3_KEY'] %>
+  secret_access_key: <%= ENV['S3_SECRET'] %>
+
+test:
+  bucket: fridges_test
+  access_key_id: <%= ENV['S3_KEY'] %>
+  secret_access_key: <%= ENV['S3_SECRET'] %>
+
+production:
+  bucket: fridges
+  access_key_id: <%= ENV['S3_KEY'] %>
+  secret_access_key: <%= ENV['S3_SECRET'] %>
+
