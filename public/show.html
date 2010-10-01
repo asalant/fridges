@@ -13,6 +13,7 @@
   <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
   <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.5/jquery-ui.min.js"></script>
   <script type="text/javascript" src="javascripts/jquery.annotate.js"></script>
+  <script type="text/javascript" src="javascripts/jquery.annotate_handler.js"></script>
 
   <script language="javascript">
     var notes = [
@@ -39,42 +40,10 @@
         "editable": true }
     ];
 
-    var note_count = notes.length + 1;
-
     $(window).load(function() {
-      var $image = $("#fridge_1");
-
-      $image.bind('notes_loaded', function(event, data) {
-        $.each(data.notes, function(index, value) {
-          $('#note_details').append(createNote(value));
-        });
-      });
-
-      $image.bind('note_added', function(event, data) {
-        data.note.id = note_count++;
-        $('#note_details').append(createNote(data.note));
-      });
-
-      $image.bind('note_updated', function(event, data) {
-        $('#note_' + data.note.id).replaceWith(createNote(data.note));
-      });
-
-      $image.bind('note_deleted', function(event, data) {
-        $('#note_' + data.note.id).remove();
-      });
-
-      $image.annotateImage({
-        editable: true,
-        notes: notes
-      });
-
-      function createNote(note) {
-        var image = $("<div class='note_image'/>").css('height', note.height).css('width', note.width)
-          .css('background-image', "url(" + $image.attr('src') + ")")
-          .css('background-position', ($image.width() - note.left) + "px " + ($image.height() - note.top) + "px");
-        var text = $("<p>" + note.text + "</p>");
-        return $("<div class='note_detail clearfix'/>").attr('id', 'note_' + note.id).append(image).append(text);
-      }
+      $("#fridge_photo")
+        .annotateHandler({ target: '#note_details' })
+        .annotateImage({ editable: true, notes: notes });
     });
   </script>
 </head>
@@ -122,7 +91,7 @@
 
 <div class="grid_8 alpha">
   <div class="photo">
-    <img id="fridge_1" src="images/fridges/alon-tall.jpg" width="600" height="803"/>
+    <img id="fridge_photo" src="images/fridges/alon-tall.jpg" width="600" height="803"/>
   </div>
   <div style="">
 

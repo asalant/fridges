@@ -1,16 +1,22 @@
-%p
-  %b Name:
-  = @fridge.name
-%p
-  %b Description:
-  = @fridge.description
-%p
-  %b Photo:
-  %p= @fridge.photo.url
-  %p= image_tag @fridge.photo.url(:large)
-  %p= image_tag @fridge.photo.url(:thumb)
+:javascript
+  $(window).load(function() {
+    $("#fridge_photo")
+      .annotateHandler({ target: '#note_details' })
+      .annotateImage({ editable: true, notes: [] });
+  });
+
+.grid_8.alpha
+  .photo
+    =image_tag @fridge.photo.url(:large), :id => 'fridge_photo'
 
 
-= link_to 'Edit', edit_fridge_path(@fridge)
-\|
-= link_to 'Back', fridges_path
+.grid_4.omega
+  %h2= @fridge.name
+  %h4= "Added #{@fridge.created_at.to_date}"
+  %h4= "\"#{@fridge.description}\""
+
+  %h2 What&rsquo;s inside the fridge
+  #note_details
+
+#footer.grid_12.clearfix
+  &#169; 2010 PeepMyFridge
