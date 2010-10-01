@@ -102,3 +102,11 @@ hr { margin: 10px 0; color: #ccc;}
   padding: 10px;
   background-color: #EFF4F8;
 }
+
+th, td {
+  padding: 4px;
+}
+
+th {
+  background-color: #eee;
+}
