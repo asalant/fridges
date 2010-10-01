@@ -17,7 +17,6 @@
     this.saveUrl = opts.saveUrl;
     this.deleteUrl = opts.deleteUrl;
     this.editable = opts.editable;
-    this.useAjax = opts.useAjax;
     this.notes = opts.notes;
 
     // Add the canvas
@@ -48,12 +47,7 @@
       $(this).hide();
     });
 
-    // load the notes
-    if (this.useAjax) {
-      $.fn.annotateImage.ajaxLoad(this);
-    } else {
-      $.fn.annotateImage.load(this);
-    }
+    $.fn.annotateImage.load(this);
 
     // Add the "Add a note" button
     if (this.editable) {
@@ -74,11 +68,7 @@
    * Plugin Defaults
    **/
   $.fn.annotateImage.defaults = {
-    getUrl: 'your-get.rails',
-    saveUrl: 'your-save.rails',
-    deleteUrl: 'your-delete.rails',
     editable: true,
-    useAjax: true,
     notes: new Array()
   };
 
@@ -92,17 +82,6 @@
     image.notes = new Array();
   };
 
-  $.fn.annotateImage.ajaxLoad = function(image) {
-    ///	<summary>
-    ///		Loads the annotations from the "getUrl" property passed in on the
-    ///     options object.
-    ///	</summary>
-    $.getJSON(image.getUrl + '?ticks=' + $.fn.annotateImage.getTicks(), function(data) {
-      image.notes = data;
-      $.fn.annotateImage.load(image);
-    });
-  };
-
   $.fn.annotateImage.load = function(image) {
     ///	<summary>
     ///		Loads the annotations from the notes property passed in on the
@@ -111,15 +90,8 @@
     for (var i = 0; i < image.notes.length; i++) {
       image.notes[image.notes[i]] = new $.fn.annotateView(image, image.notes[i]);
     }
-  };
 
-  $.fn.annotateImage.getTicks = function() {
-    ///	<summary>
-    ///		Gets a count og the ticks for the current date.
-    ///     This is used to ensure that URLs are always unique and not cached by the browser.
-    ///	</summary>
-    var now = new Date();
-    return now.getTime();
+    image.trigger("notes_loaded", { notes: image.notes });
   };
 
   $.fn.annotateImage.add = function(image) {
@@ -144,36 +116,21 @@
     var ok = $('<a class="image-annotate-edit-ok">OK</a>');
 
     ok.click(function() {
-      var form = $('#image-annotate-edit-form form');
       var text = $('#image-annotate-text').val();
-      $.fn.annotateImage.appendPosition(form, editable)
       image.mode = 'view';
-
-      // Save via AJAX
-      if (image.useAjax) {
-        $.ajax({
-          url: image.saveUrl,
-          data: form.serialize(),
-          error: function(e) {
-            alert("An error occured saving that note.")
-          },
-          success: function(data) {
-            if (data.annotation_id != undefined) {
-              editable.note.id = data.annotation_id;
-            }
-          },
-          dataType: "json"
-        });
-      }
 
       // Add to canvas
       if (note) {
         note.resetPosition(editable, text);
+
+        image.trigger('note_updated', { note: editable.note });
       } else {
         editable.note.editable = true;
         note = new $.fn.annotateView(image, editable.note)
         note.resetPosition(editable, text);
         image.notes.push(editable.note);
+
+        image.trigger('note_added', { note: editable.note });
       }
 
       editable.destroy();
@@ -191,23 +148,6 @@
       image.mode = 'view';
     });
     editable.form.append(cancel);
-  };
-
-  $.fn.annotateImage.saveAsHtml = function(image, target) {
-    var element = $(target);
-    var html = "";
-    for (var i = 0; i < image.notes.length; i++) {
-      html += $.fn.annotateImage.createHiddenField("text_" + i, image.notes[i].text);
-      html += $.fn.annotateImage.createHiddenField("top_" + i, image.notes[i].top);
-      html += $.fn.annotateImage.createHiddenField("left_" + i, image.notes[i].left);
-      html += $.fn.annotateImage.createHiddenField("height_" + i, image.notes[i].height);
-      html += $.fn.annotateImage.createHiddenField("width_" + i, image.notes[i].width);
-    }
-    element.html(html);
-  };
-
-  $.fn.annotateImage.createHiddenField = function(name, value) {
-    return '&lt;input type="hidden" name="' + name + '" value="' + value + '" /&gt;<br />';
   };
 
   $.fn.annotateEdit = function(image, note) {
@@ -384,41 +324,17 @@
       // Add the delete button
       var del = $('<a class="image-annotate-edit-delete">Delete</a>');
       del.click(function() {
-        var form = $('#image-annotate-edit-form form');
-
-        $.fn.annotateImage.appendPosition(form, editable)
-
-        if (annotation.image.useAjax) {
-          $.ajax({
-            url: annotation.image.deleteUrl,
-            data: form.serialize(),
-            error: function(e) {
-              alert("An error occured deleting that note.")
-            }
-          });
-        }
-
         annotation.image.mode = 'view';
         editable.destroy();
         annotation.destroy();
+
+        annotation.image.trigger('note_deleted', { note: annotation.note });
       });
       editable.form.append(del);
 
       $.fn.annotateImage.createCancelButton(editable, this.image);
     }
   };
-
-  $.fn.annotateImage.appendPosition = function(form, editable) {
-    ///	<summary>
-    ///		Appends the annotations coordinates to the given form that is posted to the server.
-    ///	</summary>
-    var areaFields = $('<input type="hidden" value="' + editable.area.height() + '" name="height"/>' +
-      '<input type="hidden" value="' + editable.area.width() + '" name="width"/>' +
-      '<input type="hidden" value="' + editable.area.position().top + '" name="top"/>' +
-      '<input type="hidden" value="' + editable.area.position().left + '" name="left"/>' +
-      '<input type="hidden" value="' + editable.note.id + '" name="id"/>');
-    form.append(areaFields);
-  }
 
   $.fn.annotateView.prototype.resetPosition = function(editable, text) {
     ///	<summary>
