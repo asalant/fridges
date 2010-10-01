@@ -14,4 +14,3 @@ gem 'heroku', :group => :development
 
 gem 'rspec-rails', '>= 2.0.0.beta.20', :group => [:test, :development]
 gem 'rspec_tag_matchers', :group => :test
-gem 'mocha', :group => :test

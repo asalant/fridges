@@ -1,5 +1,8 @@
 Fridges::Application.routes.draw do
-  resources :fridges
+
+  resources :fridges do
+    resources :notes
+  end
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

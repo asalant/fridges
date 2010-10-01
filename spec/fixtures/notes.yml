@@ -1,0 +1,17 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  top: 221,
+  left: 351,
+  width: 71,
+  height: 124,
+  text: Home made yoghurt. 1/2 gallon of whole Clover milk makes two jars overnight.,
+  fridge: alon
+
+two:
+  top: 245,
+  left: 171,
+  width: 148,
+  height: 39,
+  text: Ground beef from our 1/4 cow. Defrosted 2 weeks ago for burgers that never happened. Probably bad by now :(
+  fridge: alon

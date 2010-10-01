@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101001054759) do
+ActiveRecord::Schema.define(:version => 20101001215411) do
 
   create_table "fridges", :force => true do |t|
     t.string   "name"
@@ -22,5 +22,18 @@ ActiveRecord::Schema.define(:version => 20101001054759) do
     t.integer  "photo_file_size"
     t.datetime "photo_updated_at"
   end
+
+  create_table "notes", :force => true do |t|
+    t.integer  "top"
+    t.integer  "left"
+    t.integer  "width"
+    t.integer  "height"
+    t.text     "text"
+    t.integer  "fridge_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "notes", ["fridge_id"], :name => "index_notes_on_fridge_id"
 
 end
