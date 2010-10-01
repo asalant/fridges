@@ -35,25 +35,46 @@
         "width": 148,
         "height": 39,
         "text": "Ground beef from our 1/4 cow. Defrosted 2 weeks ago for burgers that never happened. Probably bad by now :(",
-        "id": "2",
+        "id": "3",
         "editable": true }
     ];
+
+    var note_count = notes.length + 1;
+
     $(window).load(function() {
       var $image = $("#fridge_1");
+
+      $image.bind('notes_loaded', function(event, data) {
+        $.each(data.notes, function(index, value) {
+          $('#note_details').append(createNote(value));
+        });
+      });
+
+      $image.bind('note_added', function(event, data) {
+        data.note.id = note_count++;
+        $('#note_details').append(createNote(data.note));
+      });
+
+      $image.bind('note_updated', function(event, data) {
+        $('#note_' + data.note.id).replaceWith(createNote(data.note));
+      });
+
+      $image.bind('note_deleted', function(event, data) {
+        $('#note_' + data.note.id).remove();
+      });
+
       $image.annotateImage({
         editable: true,
-        useAjax: false,
         notes: notes
       });
 
-
-      $.each(notes, function(index, value) {
-        var image = $("<div class='note_image'/>").css('height', value.height).css('width', value.width)
+      function createNote(note) {
+        var image = $("<div class='note_image'/>").css('height', note.height).css('width', note.width)
           .css('background-image', "url(" + $image.attr('src') + ")")
-          .css('background-position', ($image.width() - value.left) + "px " + ($image.height() - value.top) + "px");
-        var note = $("<p>" + value.text + "</p>");
-        $('#note_details').append($("<div class='note_detail clearfix'/>").append(image).append(note));
-      });
+          .css('background-position', ($image.width() - note.left) + "px " + ($image.height() - note.top) + "px");
+        var text = $("<p>" + note.text + "</p>");
+        return $("<div class='note_detail clearfix'/>").attr('id', 'note_' + note.id).append(image).append(text);
+      }
     });
   </script>
 </head>
@@ -81,21 +102,22 @@
 <div class="header clearfix">
   <div class="grid_8 alpha">
     <h1><span class="header_peep">Peep</span> <span class="header_my">My</span> <span class="header_fridge">Fridge!</span></h1>
-	<br clear="all" />
+    <br clear="all"/>
 
     <h3>You are what you refrigerate.</h3>
   </div>
   <div class="grid_4 omega">
-      <h5 class="header_whats">What's in your fridge?</h5>
-		<br clear="all" />
-      <div id="upload">
-		<h4><a href="upload.html">Upload a photo</a> <br />or email one to <em>new@pmyf.us</em></h4>
-	  </div>
+    <h5 class="header_whats">What's in your fridge?</h5>
+    <br clear="all"/>
+
+    <div id="upload">
+      <h4><a href="upload.html">Upload a photo</a> <br/>or email one to <em>new@pmyf.us</em></h4>
+    </div>
   </div>
 </div>
 
 <div id="nav_bar" class="grid_12 clearfix">
-	1,247 fridge pics | <a href="#">see another one &#187;</a>
+  1,247 fridge pics | <a href="#">see another one &#187;</a>
 </div>
 
 <div class="grid_8 alpha">
@@ -125,8 +147,9 @@
   <h2>Alon's fridge</h2>
   <h4>added 9/24/10 by <a href="#">Alon Salant</a></h4>
   <h4>"We cleaned the fridge Monday night so it's a little empty but everything in it looks so much more appetizing."</h4>
-  <hr />
+  <hr/>
   <h4>Link: <a href="#">http://pmyf.us/sle84d</a> &nbsp;(23 views)</h4>
+
   <div id="sharethis">
     <span class="st_facebook"></span>
     <span class="st_twitter"></span>
@@ -137,14 +160,15 @@
     <script type="text/javascript" src="http://w.sharethis.com/button/buttons.js"></script>
     <script type="text/javascript">stLight.options({publisher:'18e86a1b-6dbc-4078-96af-195e89f92e22'});</script>
   </div>
-  <br />
+  <br/>
+
   <h2>What&rsquo;s inside the fridge</h2>
 
   <div id="note_details"></div>
 </div>
 
 <div id="footer" class="grid_12 clearfix">
-	&#169; 2010 PeepMyFridge&nbsp; |  &nbsp;<a href="#">About PeepMyFridge</a> &nbsp; |  &nbsp;<a href="#">Contact us</a>
+  &#169; 2010 PeepMyFridge&nbsp; | &nbsp;<a href="#">About PeepMyFridge</a> &nbsp; | &nbsp;<a href="#">Contact us</a>
 </div>
 
 </body>

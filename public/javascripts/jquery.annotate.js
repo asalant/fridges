@@ -1,10 +1,13 @@
-/// <reference path="jquery-1.2.6-vsdoc.js" />
+/**
+ * Based on http://code.google.com/p/jquery-image-annotate/
+ * Also see http://www.flipbit.co.uk/jquery-image-annotation.html
+ */
 (function($) {
 
   $.fn.annotateImage = function(options) {
     ///	<summary>
     ///		Creates annotations on the given image.
-    ///     Images are loaded from the "getUrl" propety passed into the options.
+    ///     Images are loaded from the "getUrl" property passed into the options.
     ///	</summary>
     var opts = $.extend({}, $.fn.annotateImage.defaults, options);
     var image = this;
