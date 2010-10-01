@@ -65,6 +65,11 @@ hr { margin: 10px 0; color: #ccc;}
   background-color: #EFF4F8;
 }
 
+/** Hide the default image-annotate add button **/
+#image-annotate-add {
+  display: none;
+}
+
 .note_detail {
   clear: both;
   margin: 10px 0;

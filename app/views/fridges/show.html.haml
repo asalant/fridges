@@ -1,9 +1,10 @@
-:javascript
-  $(window).load(function() {
-    $("#fridge_photo")
-      .annotateHandler({ target: '#note_details' })
-      .annotateImage({ editable: true, notes: [] });
-  });
+- content_for :head do
+  :javascript
+    $(window).load(function() {
+      $("#fridge_photo")
+        .annotateHandler({ target: '#note_details' })
+        .annotateImage({ editable: true });
+    });
 
 .grid_8.alpha
   .photo
@@ -16,6 +17,7 @@
   %h4= "\"#{@fridge.description}\""
 
   %h2 What&rsquo;s inside the fridge
+  %a.image-annotate-add{:href => '#'} Add a note!
   #note_details
 
 #footer.grid_12.clearfix

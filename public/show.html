@@ -42,8 +42,9 @@
 
     $(window).load(function() {
       $("#fridge_photo")
+        .annotateImage({ editable: true })
         .annotateHandler({ target: '#note_details' })
-        .annotateImage({ editable: true, notes: notes });
+        .trigger('notes_available', { notes: notes });
     });
   </script>
 </head>
@@ -132,6 +133,8 @@
   <br/>
 
   <h2>What&rsquo;s inside the fridge</h2>
+
+  <a class="image-annotate-add" href="#">Add a note!</a>
 
   <div id="note_details"></div>
 </div>

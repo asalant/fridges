@@ -3,25 +3,26 @@
   $.fn.annotateHandler = function(options) {
     return this.each(function() {
       $image = $(this);
-      $image.bind('notes_loaded', function(event, data) {
+      var next_id = 0;
+      
+      $image.bind('notes_available', function(event, data) {
+        next_id = data.notes.length + 1;
         $.each(data.notes, function(index, value) {
           $(options.target).append(createNote($image, value));
         });
+      });
 
-        var note_count = data.notes.length + 1;
+      $image.bind('note_added', function(event, data) {
+        data.note.id = next_id++;
+        $(options.target).append(createNote($image, data.note));
+      });
 
-        $image.bind('note_added', function(event, data) {
-          data.note.id = note_count++;
-          $(options.target).append(createNote($image, data.note));
-        });
+      $image.bind('note_updated', function(event, data) {
+        $('#note_' + data.note.id).replaceWith(createNote($image, data.note));
+      });
 
-        $image.bind('note_updated', function(event, data) {
-          $('#note_' + data.note.id).replaceWith(createNote($image, data.note));
-        });
-
-        $image.bind('note_deleted', function(event, data) {
-          $('#note_' + data.note.id).remove();
-        });
+      $image.bind('note_deleted', function(event, data) {
+        $('#note_' + data.note.id).remove();
       });
 
       function createNote(image, note) {

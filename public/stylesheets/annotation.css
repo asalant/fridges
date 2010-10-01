@@ -1,4 +1,4 @@
-.image-annotate-add {
+#image-annotate-add {
     background: #fff url(../images/asterisk_yellow.png) no-repeat 3px 3px;
     border: solid 1px #ccc !important;
     color: #000 !important;
@@ -14,7 +14,7 @@
     width: 64px;
     text-decoration: none;
 }
-.image-annotate-add:hover {
+#image-annotate-add:hover {
     background-color: #eee;
 }
 .image-annotate-canvas {
