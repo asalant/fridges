@@ -40,12 +40,6 @@
       $(this).children('.image-annotate-view').hide();
     });
 
-    $image.canvas.children('.image-annotate-view').hover(function() {
-      $(this).show();
-    }, function() {
-      $(this).hide();
-    });
-
     // Add the "Add a note" button
     if ($image.editable) {
       $image.canvas.after('<a class="image-annotate-add" id="image-annotate-add" href="#">Add Note</a>');
@@ -230,6 +224,7 @@
 
     // Add the area
     this.area = $('<div class="image-annotate-area' + (this.editable ? ' image-annotate-area-editable' : '') + '"><div></div></div>');
+    this.area.attr('id', "data-image-annotate-id-" + note.id);
     image.canvas.children('.image-annotate-view').prepend(this.area);
 
     // Add the note
