@@ -20,4 +20,6 @@ group :test do
   gem 'rspec_tag_matchers'
 end
 
-gem 'rspec-rails', '>= 2.0.0.beta.20', :group => [:test, :development]
+group :test, :development do
+  gem 'rspec-rails', '>= 2.0.0.beta.20'
+end
