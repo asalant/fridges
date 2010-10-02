@@ -34,6 +34,7 @@
           ajaxDelete(fridge_id, updated_note, function() {
             ajaxCreate(fridge_id, updated_note, function(data) {
               $('#note_' + updated_note.id).replaceWith(createNoteDiv($image, data.note));
+              updated_note.id = data.note.id;
             });
           });
         }
