@@ -1,19 +1,8 @@
-%h1 Listing fridges
-
 %table
-  %tr
-    %th Name
-    %th Description
-    %th Thumb
-    %th
-
   - @fridges.each do |fridge|
     %tr
-      %td= link_to fridge.name, fridge
-      %td= link_to fridge.description, fridge
       %td= link_to image_tag(fridge.photo.url(:thumb)), fridge
-      %td= link_to 'Destroy', fridge, :confirm => 'Are you sure?', :method => :delete
+      %td= link_to fridge.name, fridge
+      %td= fridge.description
+      %td= link_to 'Delete', fridge, :method => :delete
 
-%br
-
-= link_to 'New fridge', new_fridge_path

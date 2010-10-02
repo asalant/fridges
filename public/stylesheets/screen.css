@@ -13,12 +13,14 @@ a {  color: #000099; }
 em { font-weight: bold; font-style: normal;}
 hr { margin: 10px 0; color: #ccc;}
 
+label { display: block }
+
 #page_container {
   width: 1150px;
   margin: 0 auto;
 }
 
-.header_peep, .header_my, .header_fridge, .header_whats {
+.peep, .my, .fridge, .whats {
   background: #EFF4F8;
   border: 1px solid #ccc;
   padding: 0px 10px 5px;
@@ -31,9 +33,9 @@ hr { margin: 10px 0; color: #ccc;}
   -ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=2, Direction=301, Color='#999')";  /* For IE 8 */
 } 
 
-.header_my {  margin-top: 3px;}
-.header_fridge { margin-top: -1px;}
-.header_whats { padding-bottom: 0px; margin-top: 10px;}
+.header .my {  margin-top: 3px;}
+.header .fridge { margin-top: -1px;}
+.header .whats { padding-bottom: 0px; margin-top: 10px;}
 
 .header {
   margin-top: 10px;
