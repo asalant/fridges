@@ -34,7 +34,20 @@
 .grid_4.omega
   %h2= @fridge.name
   %h4= "Added #{@fridge.created_at.to_date}"
-  %h4= "\"#{@fridge.description}\""
+  -if @fridge.description.present?
+    %h4= "\"#{@fridge.description}\""
+  %hr
+    
+  #sharethis
+    %span.st_facebook
+    %span.st_twitter
+    %span.st_digg
+    %span.st_gbuzz
+    %span.st_email
+    %span.st_sharethis
+    =javascript_include_tag "http://w.sharethis.com/button/buttons.js"
+    :javascript
+      stLight.options({publisher:'18e86a1b-6dbc-4078-96af-195e89f92e22'})
 
   %h2 What&rsquo;s inside the fridge
   %a.image-annotate-add{:href => '#'} Add a note!

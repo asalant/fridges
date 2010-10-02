@@ -25,6 +25,8 @@
         %h4= link_to "Upload a photo", new_fridge_path
         or email one to <em>new@pmyf.us</em>
 
-  #nav_bar.grid_12 1,247 fridge pics | <a href="#">see another one &#187;</a>
+  #nav_bar.grid_12
+    = "#{Fridge.count} fridge pics | "
+    <a href="#">see another one &#187;</a>
 
   = yield

@@ -5,4 +5,6 @@ class Fridge < ActiveRecord::Base
     :s3_credentials => "#{Rails.root}/config/s3.yml",
     :path => ":class/:style/:id_:filename"
 
+  validates_presence_of :name
+  validates_attachment_presence :photo
 end

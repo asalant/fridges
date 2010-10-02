@@ -1,7 +1,7 @@
 = form_for @fridge, :html => { :multipart => true } do |f|
   -if @fridge.errors.any?
     #errorExplanation
-      %h2= "#{pluralize(@fridge.errors.count, "error")} prohibited this fridge from being saved:"
+      %h3= "#{pluralize(@fridge.errors.count, "error")} prohibited this fridge from being saved:"
       %ul
         - @fridge.errors.full_messages.each do |msg|
           %li= msg
