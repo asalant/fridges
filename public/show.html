@@ -43,7 +43,7 @@
     $(window).load(function() {
       $("#fridge_photo")
         .annotateImage({ editable: true })
-        .annotateHandler({ target: '#note_details' })
+        .annotateHandler({ target: '#note_details', ajax: false })
         .trigger('notes_available', { notes: notes });
     });
   </script>

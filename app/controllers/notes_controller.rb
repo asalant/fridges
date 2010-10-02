@@ -5,7 +5,7 @@ class NotesController < ApplicationController
   end
 
   def create
-    @note = Note.new(params[:note])
+    @note = Note.new(params[:note].merge(:fridge_id => params[:fridge_id]))
 
     if @note.save
       render :json => @note

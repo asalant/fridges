@@ -2,13 +2,13 @@
   :javascript
     $(window).load(function() {
       $("#fridge_photo")
-        .annotateHandler({ target: '#note_details' })
+        .annotateHandler({ target: '#note_details', ajax: true })
         .annotateImage({ editable: true });
     });
 
 .grid_8.alpha
   .photo
-    =image_tag @fridge.photo.url(:large), :id => 'fridge_photo'
+    =image_tag @fridge.photo.url(:large), :id => 'fridge_photo', 'data-id' => @fridge.id
 
 
 .grid_4.omega

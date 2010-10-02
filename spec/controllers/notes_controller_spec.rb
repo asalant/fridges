@@ -3,14 +3,17 @@ require 'spec_helper'
 describe NotesController do
 
   describe "GET index" do
-    it "finds all notes for fridge" do
+    before do
       get :index, :fridge_id => fridges(:alon).id
+    end
+
+    it "finds all notes for fridge" do
       assigns(:notes).should have(2).items
     end
 
-      it "responds with json" do
-        response.body.should == assigns(:notes).to_json
-      end
+    it "responds with json" do
+      response.body.should == assigns(:notes).to_json
+    end
   end
 
   describe "POST create" do
