@@ -23,8 +23,8 @@
           });
         }
         else {
+          new_note.id = next_id++;
           $details.append(createNoteDiv($image, data.note));
-          data.note.id = next_id++;
         }
       });
 
