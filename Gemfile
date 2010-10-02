@@ -7,10 +7,17 @@ gem 'json'
 gem 'paperclip'
 gem 'aws-s3'
 
-gem "pg", :group => :production
+group :production do
+  gem "pg"
+end
 
-gem 'sqlite3-ruby', :require => 'sqlite3', :group => :development
-gem 'heroku', :group => :development
+group :development do
+  gem 'sqlite3-ruby', :require => 'sqlite3'
+  gem 'heroku'
+end
+
+group :test do
+  gem 'rspec_tag_matchers'
+end
 
 gem 'rspec-rails', '>= 2.0.0.beta.20', :group => [:test, :development]
-gem 'rspec_tag_matchers', :group => :test
