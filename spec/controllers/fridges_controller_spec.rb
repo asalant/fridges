@@ -14,6 +14,14 @@ describe FridgesController do
     end
   end
 
+  describe "GET any" do
+    it "redirects to show" do
+      Fridge.stub(:any) { fridges(:alon) }
+      get :any
+      response.should redirect_to(fridge_url(fridges(:alon)))
+    end
+  end
+
   describe "GET show" do
     it "assigns the requested fridge as @fridge" do
       Fridge.stub(:find).with("37") { mock_fridge }

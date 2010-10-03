@@ -26,7 +26,6 @@
         or email one to <em>new@pmyf.us</em>
 
   #nav_bar.grid_12
-    = "#{Fridge.count} fridge pics | "
-    = link_to 'see another one »', fridge_path(Fridge.any :except => @fridge)
+    = yield :subnav
 
   = yield

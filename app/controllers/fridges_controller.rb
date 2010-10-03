@@ -1,39 +1,22 @@
 class FridgesController < ApplicationController
-  # GET /fridges
-  # GET /fridges.xml
   def index
     @fridges = Fridge.all
-
-    respond_to do |format|
-      format.html # index.html.erb
-      format.xml  { render :xml => @fridges }
-    end
   end
 
-  # GET /fridges/1
-  # GET /fridges/1.xml
+  def any
+    redirect_to Fridge.any
+  end
+
   def show
     if (params[:key])
       @fridge = Fridge.find_by_key(params[:key])
     else
       @fridge = Fridge.find(params[:id])
     end
-
-    respond_to do |format|
-      format.html # show.html.erb
-      format.xml  { render :xml => @fridge }
-    end
   end
 
-  # GET /fridges/new
-  # GET /fridges/new.xml
   def new
     @fridge = Fridge.new
-
-    respond_to do |format|
-      format.html # new.html.erb
-      format.xml  { render :xml => @fridge }
-    end
   end
 
   # GET /fridges/1/edit

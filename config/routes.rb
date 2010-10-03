@@ -1,6 +1,9 @@
 Fridges::Application.routes.draw do
 
   resources :fridges do
+    collection do
+      get 'any'
+    end
     resources :notes
   end
 
@@ -55,7 +58,7 @@ Fridges::Application.routes.draw do
 
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
-  # root :to => "welcome#index"
+  root :to => "fridges#any"
 
   # See how all your routes lay out with "rake routes"
 

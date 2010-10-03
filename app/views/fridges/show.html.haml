@@ -24,6 +24,10 @@
     document.getElementById('fb-root').appendChild(e);
   }());
 
+- content_for :subnav do
+  = "#{Fridge.count} fridge pics | "
+  = link_to 'see another one »', fridge_path(Fridge.any :except => @fridge)
+
 .grid_8.alpha
   .photo
     =image_tag @fridge.photo.url(:large), :id => 'fridge_photo', 'data-id' => @fridge.id
