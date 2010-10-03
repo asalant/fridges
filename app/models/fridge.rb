@@ -30,7 +30,7 @@ class Fridge < ActiveRecord::Base
   private
 
   def generate_key
-    "#{self.class}:#{self.id}".hash.abs.to_s(36)[1..6]
+    "#{self.class.name}:#{self.id}".hash.abs.to_s(36)[1..6]
   end
 
 end
