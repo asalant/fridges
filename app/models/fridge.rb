@@ -21,6 +21,12 @@ class Fridge < ActiveRecord::Base
     update_attribute(:key, generate_key)
   end
 
+  def self.any(params = {})
+    where = { :offset => (Fridge.count * rand).to_i }
+    where.merge!({ :conditions => ['id not in (?)', params[:except]] }) if params[:except]
+    Fridge.first where
+  end
+
   private
 
   def generate_key

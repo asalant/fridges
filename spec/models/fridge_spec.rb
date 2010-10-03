@@ -1,6 +1,16 @@
 require 'spec_helper'
 
 describe Fridge do
+  describe "#any" do
+    it "should find any one" do
+      Fridge.any.should be_present
+    end
+
+    it "should not find exceptions" do
+      Fridge.any(:except => [fridges(:alon), fridges(:rob)]).should be_nil
+    end
+  end
+
   context "when creating" do
     before do
       @fridge = Fridge.new :name => "name", :photo => fixture_file_upload('spec/fixtures/fridge.jpg', 'image/jpeg')

@@ -27,6 +27,6 @@
 
   #nav_bar.grid_12
     = "#{Fridge.count} fridge pics | "
-    <a href="#">see another one &#187;</a>
+    = link_to 'see another one »', fridge_path(Fridge.any :except => @fridge)
 
   = yield
