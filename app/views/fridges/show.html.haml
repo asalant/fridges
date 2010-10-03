@@ -36,6 +36,9 @@
   %h4= "Added #{@fridge.created_at.to_date}"
   -if @fridge.description.present?
     %h4= "\"#{@fridge.description}\""
+  %h4
+    Link:
+    =link_to fridge_url(@fridge), fridge_path(@fridge)
   %hr
     
   #sharethis

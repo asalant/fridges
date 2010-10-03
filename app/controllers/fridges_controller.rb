@@ -13,7 +13,11 @@ class FridgesController < ApplicationController
   # GET /fridges/1
   # GET /fridges/1.xml
   def show
-    @fridge = Fridge.find(params[:id])
+    if (params[:key])
+      @fridge = Fridge.find_by_key(params[:key])
+    else
+      @fridge = Fridge.find(params[:id])
+    end
 
     respond_to do |format|
       format.html # show.html.erb

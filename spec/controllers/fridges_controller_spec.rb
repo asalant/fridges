@@ -20,6 +20,11 @@ describe FridgesController do
       get :show, :id => "37"
       assigns(:fridge).should be(mock_fridge)
     end
+
+    it "shows by key" do
+      get :show, :key => fridges(:alon).key
+      assigns(:fridge).should == fridges(:alon)
+    end
   end
 
   describe "GET new" do

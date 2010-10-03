@@ -4,6 +4,8 @@ Fridges::Application.routes.draw do
     resources :notes
   end
 
+  match ':key' => 'fridges#show', :as => 'fridge', :only => :get
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
