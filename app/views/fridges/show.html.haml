@@ -37,7 +37,7 @@
 
 .grid_4.omega
   %h2= @fridge.name
-  %h4= "Added #{@fridge.created_at.to_date}"
+  %h4= "added #{@fridge.created_at.to_date.to_s(:short)}"
   -if @fridge.description.present?
     %h4= "\"#{@fridge.description}\""
   %h4
