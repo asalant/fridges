@@ -27,12 +27,16 @@
 - content_for :subnav do
   = "#{Fridge.count} fridge pics | "
   - fridge = Fridge.any
-  =  link_to "see another one", fridge_path(fridge) if fridge
+  =  link_to "see another one »", fridge_path(fridge) if fridge
 
 .grid_8.alpha
   .photo
     =image_tag @fridge.photo.url(:large), :id => 'fridge_photo', 'data-id' => @fridge.id
+  
+  %br{:clear => 'all'}
+  
   %h2 Talk about it!
+  %br{:clear => 'all'}
   %fb:comments{ :numposts => 40, :width => 600}
 
 
@@ -57,6 +61,9 @@
     :javascript
       stLight.options({publisher:'18e86a1b-6dbc-4078-96af-195e89f92e22'})
 
+  %br{:clear => 'all'}
+  
   %h2 What&rsquo;s inside the fridge
+  %br{:clear => 'all'}
   %a.image-annotate-add{:href => '#'} Add a note!
   #note_details
