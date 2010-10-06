@@ -26,6 +26,7 @@ label { display: block }
   border: 1px solid #ccc;
   padding: 0px 10px 5px;
   margin: 0 4px 3px 0;
+  text-decoration: none;
   float: left;
   /* drop-shadow */
   -moz-box-shadow: 1px 1px 2px #999;
