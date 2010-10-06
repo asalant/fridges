@@ -20,7 +20,7 @@ label { display: block }
   margin: 0 auto;
 }
 
-.peep, .my, .fridge, .whats {
+.check, .out, .my, .fridge, .whats {
   color: #000;
   background: #EFF4F8;
   border: 1px solid #ccc;
@@ -34,8 +34,9 @@ label { display: block }
   -ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=2, Direction=301, Color='#999')";  /* For IE 8 */
 } 
 
-.header .my {  margin-top: 3px;}
-.header .fridge { margin-top: -1px;}
+.header .out { margin-top: 3px;}
+.header .my {  margin-top: -1px;}
+.header .fridge { margin-top: 2px;}
 .header .whats { padding-bottom: 0px; margin-top: 10px;}
 
 .header {

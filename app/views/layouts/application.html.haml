@@ -1,37 +1,38 @@
 !!!
 %html
   %head
-    %title Peep My Fridge!
+    %title Check Out My Fridge!
     = stylesheet_link_tag 'http://yui.yahooapis.com/2.8.1/build/reset/reset-min.css'
     = stylesheet_link_tag %w(text 960 annotation screen)
     = javascript_include_tag :defaults
     = javascript_include_tag %w(jquery.annotate jquery.annotate_handler)
     = csrf_meta_tag
-		:javascript
-			var _gaq = _gaq || [];
-		  _gaq.push(['_setAccount', 'UA-18942161-1']);
-		  _gaq.push(['_trackPageview']);
+    :javascript
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-18942161-1']);
+      _gaq.push(['_trackPageview']);
 
-		  (function() {
-		    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-		    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-		    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-		  })();
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
     = yield :head
   %body.container_12
 
   #feedback 
-    %a{:href => "javascript:void(0)", onclick => "window.open('https://spreadsheets.google.com/viewform?formkey=dHdoZ2Rlb0V3elJJSldPZUpuRDE1aFE6MQ', 'CheckOutMyFridge Feedback','width=650,height=650')"}
+    %a{:href => "javascript:void(0)", :onclick => "window.open('https://spreadsheets.google.com/viewform?formkey=dHdoZ2Rlb0V3elJJSldPZUpuRDE1aFE6MQ', 'CheckOutMyFridge Feedback','width=650,height=650')"}
       = image_tag('feedback.png')
 
   .header.clearfix
     .grid_8.alpha
       %h1.clearfix
         %a{:href => root_path}
-          %span.peep Peep
+          %span.check Check
+          %span.out Out
           %span.my My
           %span.fridge Fridge!
-      %h3 You are what you refrigerate.
+      %h3 You are what you refrigerate. Discuss.
 
     .grid_4.omega
       %h5.whats What's in your fridge?
@@ -46,5 +47,6 @@
 
   = yield
 
-	#footer.grid_12.clearfix
-	  &#169; 2010 PeepMyFridge
+  #footer.grid_12.clearfix
+    &#169; 2010 CheckOutMyFridge &nbsp;|&nbsp; 
+    = link_to "About Us", about_path
