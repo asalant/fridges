@@ -19,6 +19,11 @@
 		  })();
     = yield :head
   %body.container_12
+
+  #feedback 
+    %a{:href => "javascript:void(0)", onclick => "window.open('https://spreadsheets.google.com/viewform?formkey=dHdoZ2Rlb0V3elJJSldPZUpuRDE1aFE6MQ', 'CheckOutMyFridge Feedback','width=650,height=650')"}
+      = image_tag('feedback.png')
+
   .header.clearfix
     .grid_8.alpha
       %h1.clearfix
