@@ -26,7 +26,8 @@
 
 - content_for :subnav do
   = "#{Fridge.count} fridge pics | "
-  = link_to 'see another one »', fridge_path(Fridge.any :except => @fridge)
+  - fridge = Fridge.any
+  =  link_to "see another one", fridge_path(fridge) if fridge
 
 .grid_8.alpha
   .photo

@@ -6,6 +6,7 @@ gem "haml-rails"
 gem 'json'
 gem 'paperclip'
 gem 'aws-s3'
+gem 'koala'
 
 group :production do
   gem "pg"

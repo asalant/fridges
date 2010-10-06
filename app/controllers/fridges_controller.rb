@@ -4,7 +4,12 @@ class FridgesController < ApplicationController
   end
 
   def any
-    redirect_to Fridge.any
+    fridge = Fridge.any
+    if fridge
+      redirect_to fridge
+    else
+      redirect_to fridges_url
+    end
   end
 
   def show
@@ -32,10 +37,10 @@ class FridgesController < ApplicationController
     respond_to do |format|
       if @fridge.save
         format.html { redirect_to(@fridge, :notice => 'Fridge was successfully created.') }
-        format.xml  { render :xml => @fridge, :status => :created, :location => @fridge }
+        format.xml { render :xml => @fridge, :status => :created, :location => @fridge }
       else
         format.html { render :action => "new" }
-        format.xml  { render :xml => @fridge.errors, :status => :unprocessable_entity }
+        format.xml { render :xml => @fridge.errors, :status => :unprocessable_entity }
       end
     end
   end
@@ -48,10 +53,10 @@ class FridgesController < ApplicationController
     respond_to do |format|
       if @fridge.update_attributes(params[:fridge])
         format.html { redirect_to(@fridge, :notice => 'Fridge was successfully updated.') }
-        format.xml  { head :ok }
+        format.xml { head :ok }
       else
         format.html { render :action => "edit" }
-        format.xml  { render :xml => @fridge.errors, :status => :unprocessable_entity }
+        format.xml { render :xml => @fridge.errors, :status => :unprocessable_entity }
       end
     end
   end
@@ -64,7 +69,7 @@ class FridgesController < ApplicationController
 
     respond_to do |format|
       format.html { redirect_to(fridges_url) }
-      format.xml  { head :ok }
+      format.xml { head :ok }
     end
   end
 end

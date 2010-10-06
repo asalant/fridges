@@ -1,5 +1,6 @@
 - content_for :subnav do
-  = # link_to "#{Fridge.count} fridge pics", fridge_path(Fridge.any)
+  - fridge = Fridge.any
+  =  link_to "#{Fridge.count} fridge pics", fridge_path(fridge) if fridge
 
 .grid_8.alpha
   %h2 Thanks for stopping by!
