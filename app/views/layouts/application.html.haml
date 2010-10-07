@@ -18,35 +18,56 @@
         var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
       })();
     = yield :head
-  %body.container_12
+  %body.clearfix
 
-  #feedback 
-    %a{:href => "javascript:void(0)", :onclick => "window.open('https://spreadsheets.google.com/viewform?formkey=dHdoZ2Rlb0V3elJJSldPZUpuRDE1aFE6MQ', 'CheckOutMyFridge Feedback','width=650,height=650')"}
-      = image_tag('feedback.png')
+  #page_background.clearfix
+  
+    #page.container_12
+  
+      #feedback 
+        %a{:href => "javascript:void(0)", :onclick => "window.open('https://spreadsheets.google.com/viewform?formkey=dHdoZ2Rlb0V3elJJSldPZUpuRDE1aFE6MQ', 'CheckOutMyFridge Feedback','width=650,height=650')"}
+          = image_tag('feedback.png')
 
-  .header.clearfix
-    .grid_8.alpha
-      %h1.clearfix
-        %a.no_underline{:href => root_path}
-          %span.check Check
-          %span.out Out
-          %span.my My
-          %span.fridge Fridge!
-      %h3 You are what you refrigerate. Discuss.
+      .header.clearfix
+        .grid_8.alpha.left_gutter
+          %h1.clearfix
+            %a.no_underline{:href => root_path}
+              %span.check Check
+              %span.out Out
+              %span.my My
+              %span.fridge Fridge!
+          %h3 You are what you refrigerate. Discuss.
 
-    .grid_4.omega
-      %h5.whats What's in your fridge?
-      %br{:clear => 'all'}
+        .grid_2
+          %h5.whats What's in 
+          %br{:clear => 'all'}
+          %h5.whats your fridge?
+          %br{:clear => 'all'}
 
-      #upload
-        %h4= link_to "Upload a photo", new_fridge_path
-        or email one to <em>new@pmyf.us</em>
+          #upload
+            %h4= link_to "Upload a photo", new_fridge_path
+            %h6 or email one (from your phone) to <em>new@frdg.us</em>
 
-  #nav_bar.grid_12
-    = yield :subnav
+        .grid_2.omega.right_gutter
+          %h5.whats ...what about
+          %br{:clear => 'all'}
+          %h5.whats your friends'?
+          %br{:clear => 'all'}
 
-  = yield
+          #upload
+            %h4= link_to "Ask friends to see their fridges", "#"
+              
+      #nav_bar.clearfix
+        .grid_8.alpha.left_gutter
+          = "#{Fridge.count} fridge pics | "
+          - fridge = Fridge.any
+          =  link_to "see another one »", fridge_path(fridge) if fridge
+        .grid_4.omega.right_gutter
+          A place to talk about food and kitchen life.
 
-  #footer.grid_12.clearfix
-    &#169; 2010 CheckOutMyFridge &nbsp;|&nbsp; 
-    = link_to "About Us", about_path
+      #main_content.clearfix
+        = yield
+
+      #footer.grid_12.clearfix
+        &#169; 2010 CheckOutMyFridge &nbsp;|&nbsp; 
+        = link_to "About Us", about_path

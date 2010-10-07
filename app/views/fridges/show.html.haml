@@ -24,32 +24,14 @@
     document.getElementById('fb-root').appendChild(e);
   }());
 
-- content_for :subnav do
-  = "#{Fridge.count} fridge pics | "
-  - fridge = Fridge.any
-  =  link_to "see another one »", fridge_path(fridge) if fridge
-
-.grid_8.alpha
-  .photo
-    =image_tag @fridge.photo.url(:large), :id => 'fridge_photo', 'data-id' => @fridge.id
-  
-  %br{:clear => 'all'}
-  
-  %h2 Talk about it!
-  %br{:clear => 'all'}
-  %fb:comments{ :numposts => 40, :width => 600}
-
-
-.grid_4.omega
+#nameband.left_gutter.clearfix
+  .user_photo
+    = image_tag 'rob_face.png'
   %h2= @fridge.name
-  %h4= "added #{@fridge.created_at.to_date.to_s(:short)}"
-  -if @fridge.description.present?
-    %h4= "\"#{@fridge.description}\""
-  %h4
-    Link:
-    =link_to fridge_url(@fridge), fridge_path(@fridge)
-  %hr
-    
+  %h4= "San Francisco, CA  |  #{@fridge.created_at.to_date.to_s(:short)} | 2,423 views"
+  #sharelink
+    Share this fridge: 
+    = link_to fridge_url(@fridge), fridge_path(@fridge)
   #sharethis
     %span.st_facebook
     %span.st_twitter
@@ -60,9 +42,20 @@
     =javascript_include_tag "http://w.sharethis.com/button/buttons.js"
     :javascript
       stLight.options({publisher:'18e86a1b-6dbc-4078-96af-195e89f92e22'})
+  
+.grid_8.alpha.left_gutter
+  .photo
+    =image_tag @fridge.photo.url(:large), :id => 'fridge_photo', 'data-id' => @fridge.id
 
   %br{:clear => 'all'}
-  
+
+  %h2 Talk about it!
+  %br{:clear => 'all'}
+  %fb:comments{ :numposts => 40, :width => 600}
+
+
+.grid_4.omega.right_gutter
+
   %h2 What&rsquo;s inside the fridge
   %br{:clear => 'all'}
   %a.image-annotate-add{:href => '#'} Add a note!

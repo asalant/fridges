@@ -1,13 +1,27 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  height: 100%;
+}
+
 body {
-	font-family: Lucida Grande, verdana, sans-serif;
-	margin: 0px;
+	font-family: 'Lucida Grande', verdana, sans-serif;
+}
+
+#page_background {
+  min-height: 100%;
+  background-image: url('../images/bg.png');
 }
 
 h1 { font-size: 45px;  font-weight: normal;  margin: 0px; font-family: courier; line-height: 1em; text-decoration:none;}
-h2 { font-size: 20px;  margin: 0px;  font-weight: bold; }
-h3 { font-size: 20px;  margin: 0px; font-weight: normal; }
-h4 { font-size: 14px; color: #333; margin: 5px 0; font-weight: normal; }
+h2 { font-size: 20px;  margin: 0px 0px 5px;  font-weight: bold; line-height: 1em;}
+h3 { font-size: 20px;  margin: 10px 0px; font-weight: normal; }
+h4 { font-size: 14px; color: #333; margin: 0 0 5px; font-weight: normal; }
 h5 { font-size: 14px; font-family: courier; margin: 0px; font-weight: normal;}
+h6 { font-size: 11px; margin: 0; line-height: 1.1em;}
 
 a {  color: #000099;}
 .no_underline { text-decoration: none; }
@@ -15,11 +29,6 @@ em { font-weight: bold; font-style: normal;}
 hr { margin: 10px 0; color: #ccc;}
 
 label { display: block }
-
-#page_container {
-  width: 1150px;
-  margin: 0 auto;
-}
 
 .check, .out, .my, .fridge, .whats {
   color: #000;
@@ -38,36 +47,52 @@ label { display: block }
 .header .out { margin-top: 3px;}
 .header .my {  margin-top: -1px;}
 .header .fridge { margin-top: 2px;}
-.header .whats { padding-bottom: 0px; margin-top: 10px;}
+.header .whats { padding-bottom: 0px; margin-top: 3px;}
 
 .header {
-  margin-top: 10px;
+  padding: 10px 0px;
+  background-color: white;
+  float: left;
+}
+
+.header, #main_content {
+  /* drop-shadow */
+  -moz-box-shadow: 0px 0px 7px #555;
+  -webkit-box-shadow: 0px 0px 7px #555;
+  box-shadow: 0px 0px 7px #555;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=7, Direction=0, Color='#555')";  /* For IE 8 */
 }
 
 #nav_bar {
-  width: 100%;
-  padding: 3px 10px;
-  margin: 10px 0px 20px;
-  background: #e3e3e3; /* for non-css3 browsers */
+  padding: 8px 0px 4px;
+  float: left;
+  margin-bottom: 10px;
+  background: #d1e6f6; /* for non-css3 browsers */
+  background-image: url('../images/top-shadow.png');
+  background-repeat: repeat-x;
   border-width: 1px 0;
   border-style: solid;
   border-color: #e3e3e3;
+}
 
-  /* gradient */
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#f7f7f7', endColorstr='#e3e3e3'); /* for IE */
-  background: -webkit-gradient(linear, left top, left bottom, from(#f7f7f7), to(#e3e3e3)); /* for webkit browsers */
-  background: -moz-linear-gradient(top,  #f7f7f7,  #e3e3e3); /* for firefox 3.6+ */
+#main_content {
+  background-color: white;
+  float: left;
+  padding: 15px 0px;
 }
 
 #upload {
-  background: url('../images/upload_icon.png') no-repeat 0 0;
-  padding-left: 25px;
+}
+
+#sharelink {
+  float: left;
+  font-size: 11px; 
+  margin: 0; 
 }
 
 #sharethis {
-  margin: 10px 0;
-  padding: 2px 5px;
-  background-color: #EFF4F8;
+  float: left;
+  margin: -3px 0 0 10px;
 }
 
 /** Hide the default image-annotate add button **/
@@ -98,7 +123,6 @@ label { display: block }
 #footer {
   text-align: center;
   margin: 30px 0;
-  border-top: 1px solid #ccc;
   padding-top: 5px;
 }
 
@@ -131,4 +155,21 @@ th {
   position: fixed;
   top: 200px;
   z-index: 5;
+}
+
+.left_gutter {
+  padding-left: 20px;
+}
+
+.right_gutter {
+  padding-right: 20px;
+}
+
+.user_photo {
+  float: left;
+  margin-right: 10px;
+}
+
+#nameband {
+  margin-bottom: 15px;
 }
