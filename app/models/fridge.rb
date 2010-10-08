@@ -3,7 +3,7 @@ class Fridge < ActiveRecord::Base
   attr_protected :key
 
   has_attached_file :photo,
-    :styles          => {:large => "100%", :large => "100%"},
+    :styles          => {:large => "100%", :thumb => "100%"},
     :convert_options => {
       :large => "-auto-orient -geometry 600",
       :thumb => "-auto-orient -geometry 100x100#"},
