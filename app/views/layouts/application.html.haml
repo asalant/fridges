@@ -60,8 +60,7 @@
       #nav_bar.clearfix
         .grid_8.alpha.left_gutter
           = "#{Fridge.count} fridge pics | "
-          - fridge = Fridge.any
-          =  link_to "see another one »", fridge_path(fridge) if fridge
+          =  link_to "see another one »", any_fridges_path
         .grid_4.omega.right_gutter
           A place to talk about food and kitchen life.
 
