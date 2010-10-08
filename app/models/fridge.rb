@@ -3,10 +3,10 @@ class Fridge < ActiveRecord::Base
   attr_protected :key
 
   has_attached_file :photo,
-    :styles          => {:large => "100%", :thumb => "100%"},
+    :styles          => {:large => "100%", :thumb => "100x100#"},
     :convert_options => {
       :large => "-auto-orient -geometry 600",
-      :thumb => "-auto-orient -geometry 100x100#"},
+      :thumb => "-auto-orient"},
 
     :storage         => :s3,
     :s3_credentials  => "#{Rails.root}/config/s3.yml",

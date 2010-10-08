@@ -1,4 +1,6 @@
 class FridgesController < ApplicationController
+  include FridgesHelper
+  
   def index
     @fridges = Fridge.all
   end
