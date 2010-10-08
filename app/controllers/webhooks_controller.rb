@@ -1,4 +1,6 @@
 class WebhooksController < ApplicationController
+  skip_before_filter :verify_authenticity_token
+
   def sendgrid
     Rails.logger.info "Got incoming sendgrid email:\n#{params.inspect}"
 
