@@ -1,6 +1,7 @@
 require 'spec_helper'
 
 describe FridgesController do
+  include FridgesHelper
 
   def mock_fridge(stubs={})
     @mock_fridge ||= mock_model(Fridge, stubs).as_null_object
@@ -18,7 +19,7 @@ describe FridgesController do
     it "redirects to show" do
       Fridge.stub(:any) { fridges(:alon) }
       get :any
-      response.should redirect_to(fridge_url(fridges(:alon)))
+      response.should redirect_to(fridge_key_url(fridges(:alon)))
     end
   end
 

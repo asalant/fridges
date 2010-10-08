@@ -6,7 +6,7 @@ class FridgesController < ApplicationController
   def any
     fridge = Fridge.any
     if fridge
-      redirect_to fridge
+      redirect_to fridge_key_url(fridge)
     else
       redirect_to fridges_url
     end
