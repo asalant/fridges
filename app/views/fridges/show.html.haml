@@ -31,7 +31,7 @@
   %h4= "San Francisco, CA  |  #{@fridge.created_at.to_date.to_s(:short)} | 2,423 views"
   #sharelink
     Share this fridge: 
-    = link_to fridge_url(@fridge), fridge_path(@fridge)
+    = link_to fridge_key_url(@fridge), fridge_key_path(@fridge)
   #sharethis
     %span.st_facebook
     %span.st_twitter

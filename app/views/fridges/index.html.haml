@@ -1,8 +1,8 @@
 %table
   - @fridges.each do |fridge|
     %tr
-      %td= link_to image_tag(fridge.photo.url(:thumb)), fridge
-      %td= link_to fridge.name, fridge
+      %td= link_to image_tag(fridge.photo.url(:thumb)), fridge_key_path(fridge)
+      %td= link_to fridge.name, fridge_key_path(fridge)
       %td= fridge.description
       %td= link_to 'Delete', fridge, :method => :delete
 

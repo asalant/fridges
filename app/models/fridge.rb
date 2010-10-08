@@ -13,10 +13,6 @@ class Fridge < ActiveRecord::Base
 
   after_create :reset_key!
 
-  def to_param
-    self.key
-  end
-
   def reset_key!
     update_attribute(:key, generate_key)
   end

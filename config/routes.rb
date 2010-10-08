@@ -11,7 +11,7 @@ Fridges::Application.routes.draw do
 
   match '/about' => 'content#about'
 
-  match ':key' => 'fridges#show', :as => 'fridge', :only => :get  
+  match ':key' => 'fridges#show', :only => :get
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
