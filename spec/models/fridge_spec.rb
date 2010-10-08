@@ -25,10 +25,4 @@ describe Fridge do
       @fridge.key.length.should == 6
     end
   end
-
-  context "for urls" do
-    it "should return key for to_param" do
-      fridges(:alon).to_param.should == fridges(:alon).key
-    end
-  end
 end
