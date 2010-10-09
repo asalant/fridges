@@ -1,10 +1,8 @@
 %h2 User
 
-=@user.inspect
+=image_tag "http://graph.facebook.com/#{@user['id']}/picture" if @user
 
-%h2 OAuth
-
-=@oauth.inspect
+%p=@user.inspect
 
 %h2 Cookies
 
