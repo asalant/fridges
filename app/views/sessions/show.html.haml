@@ -1,36 +1,38 @@
-%h2 User
 
-=image_tag "http://graph.facebook.com/#{@user['id']}/picture" if @user
+-if logged_in?
+  %h2 User
+  =image_tag "http://graph.facebook.com/#{@facebook_user['id']}/picture"
 
-%p=@user.inspect
+  %p=@facebook_user.inspect
+-else
+  %h2 Login
+
+  #fb-root
+  %fb:login-button{:perms => "email"}
+
+  =javascript_include_tag "http://connect.facebook.net/en_US/all.js"
+  :javascript
+    function logResponse(eventName, response) {
+      console.log("Event: " + eventName)
+      console.log("  status: " + response.status);
+      console.log("  session: " + response.session);
+      console.log("  perms: " + response.perms);
+      for (p in response.session) {
+        console.log("  session." + p + ": " + response.session[p]);
+      }
+    }
+    FB.init({appId: '108930639170269', status: true, cookie: true, xfbml: true});
+    FB.Event.subscribe('auth.sessionChange', function(response) {
+      logResponse("auth.sessionChange", response);
+    });
+    FB.Event.subscribe('auth.login', function(response) {
+      logResponse("auth.login", response);
+      window.location.reload();
+    });
+    FB.Event.subscribe('auth.logout', function(response) {
+      logResponse("auth.logout", response);
+    });
 
 %h2 Cookies
 
 =cookies
-
-%h2 Login
-
-#fb-root
-%fb:login-button{:perms => "email"}
-
-=javascript_include_tag "http://connect.facebook.net/en_US/all.js"
-:javascript
-  function logResponse(eventName, response) {
-    console.log("Event: " + eventName)
-    console.log("  status: " + response.status);
-    console.log("  session: " + response.session);
-    console.log("  perms: " + response.perms);
-    for (p in response.session) {
-      console.log("  session." + p + ": " + response.session[p]);
-    }
-  }
-  FB.init({appId: '108930639170269', status: true, cookie: true, xfbml: true});
-  FB.Event.subscribe('auth.sessionChange', function(response) {
-    logResponse("auth.sessionChange", response);
-  });
-  FB.Event.subscribe('auth.login', function(response) {
-    logResponse("auth.login", response);
-  });
-  FB.Event.subscribe('auth.logout', function(response) {
-    logResponse("auth.logout", response);
-  });
