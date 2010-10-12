@@ -25,7 +25,7 @@
         console.log("  session." + p + ": " + response.session[p]);
       }
     }
-    FB.init({appId: '108930639170269', status: true, cookie: true, xfbml: true});
+    FB.init({appId: #{Facebook::APP_ID}, status: true, cookie: true, xfbml: true});
     FB.Event.subscribe('auth.sessionChange', function(response) {
       logResponse("auth.sessionChange", response);
     });
