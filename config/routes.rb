@@ -1,5 +1,7 @@
 Fridges::Application.routes.draw do
 
+  resources :users
+
   match "/webhooks/sendgrid" => 'webhooks#sendgrid', :only => :post
 
   resource :sessions

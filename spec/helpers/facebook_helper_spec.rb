@@ -14,6 +14,7 @@ describe FacebookHelper do
   context "with facebook cookies" do
     before do
       helper.stub!(:cookies).and_return({'fbs_108930639170269' => "\"access_token=108930639170269|2.KgSGonpvGpxT5IgaN228SA__.3600.1286863200-548504059|A_pAgTnEuwAcIelMj2H2Wyuufsw&base_domain=localhost.local&expires=1286863200&secret=2hOKs2SxhyioDkyLDSg34A__&session_key=2.KgSGonpvGpxT5IgaN228SA__.3600.1286863200-548504059&sig=c1cec187c7c23d68f9bc4411c49cf671&uid=548504059\""})
+      Time.should_receive(:now).any_number_of_times.and_return(Time.at(1286863200 - 100)) # For expires check by Koala
     end
 
     it "should find cookies" do

@@ -1,9 +1,13 @@
 
 -if logged_in?
-  %h2 User
+  %h2 Facebook User
   =image_tag "http://graph.facebook.com/#{@facebook_user['id']}/picture"
 
   %p=@facebook_user.inspect
+
+  %h2 Fridges User
+
+  %p=User.find_by_facebook_id(@facebook_user['id'])
 -else
   %h2 Login
 

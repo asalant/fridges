@@ -1,0 +1,23 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+alon:
+  first_name: Alon
+  last_name: Salant
+  gender: male
+  email: alon@salant.org
+  locale: en_US
+  timezone: -7
+  facebook_id: 548504059
+  facebook_link: http://www.facebook.com/asalant
+  facebook_updated_at: 2010-10-11 11:19:59
+
+rob:
+  first_name: Rob
+  last_name: Spiro
+  gender: male
+  email: robert.spiro@gmail.com
+  locale: en_US
+  timezone: -7
+  facebook_id:
+  facebook_link:
+  facebook_updated_at: 2010-10-11 22:32:18

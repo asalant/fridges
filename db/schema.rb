@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101003063022) do
+ActiveRecord::Schema.define(:version => 20101012053218) do
 
   create_table "fridges", :force => true do |t|
     t.string   "name"
@@ -38,5 +38,22 @@ ActiveRecord::Schema.define(:version => 20101003063022) do
   end
 
   add_index "notes", ["fridge_id"], :name => "index_notes_on_fridge_id"
+
+  create_table "users", :force => true do |t|
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "email"
+    t.string   "gender"
+    t.string   "locale"
+    t.integer  "timezone"
+    t.string   "facebook_id"
+    t.datetime "facebook_updated_at"
+    t.string   "facebook_link"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "users", ["email"], :name => "index_users_on_email"
+  add_index "users", ["facebook_id"], :name => "index_users_on_facebook_id"
 
 end
