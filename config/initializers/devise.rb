@@ -1,3 +1,5 @@
+require 'authentication_failure'
+
 # Use this hook to configure devise mailer, warden hooks and so forth. The first
 # four configuration values can also be set straight in your models.
 Devise.setup do |config|
@@ -177,4 +179,7 @@ Devise.setup do |config|
   #   manager.failure_app = AnotherApp
   #   manager.default_strategies(:scope => :user).unshift :some_external_strategy
   # end
+  config.warden do |manager|
+     manager.failure_app = Facebook::AuthenticationFailure
+  end
 end

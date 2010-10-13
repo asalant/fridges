@@ -16,6 +16,8 @@ end
 group :development do
   gem 'sqlite3-ruby', :require => 'sqlite3'
   gem 'heroku'
+  gem 'hpricot'
+  gem 'ruby_parser'
 end
 
 group :test do
