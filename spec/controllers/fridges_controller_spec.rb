@@ -37,6 +37,8 @@ describe FridgesController do
   end
 
   describe "GET new" do
+    before { sign_in users(:alon) }
+
     it "assigns a new fridge as @fridge" do
       Fridge.stub(:new) { mock_fridge }
       get :new
@@ -45,6 +47,8 @@ describe FridgesController do
   end
 
   describe "GET edit" do
+    before { sign_in users(:alon) }
+
     it "assigns the requested fridge as @fridge" do
       Fridge.stub(:find).with("37") { mock_fridge }
       get :edit, :id => "37"
@@ -53,6 +57,7 @@ describe FridgesController do
   end
 
   describe "POST create" do
+    before { sign_in users(:alon) }
 
     describe "with valid params" do
       it "assigns a newly created fridge as @fridge" do
@@ -85,6 +90,7 @@ describe FridgesController do
   end
 
   describe "PUT update" do
+    before { sign_in users(:alon) }
 
     describe "with valid params" do
       it "updates the requested fridge" do
@@ -123,6 +129,8 @@ describe FridgesController do
   end
 
   describe "DELETE destroy" do
+    before { sign_in users(:alon) }
+    
     it "destroys the requested fridge" do
       Fridge.should_receive(:find).with("37") { mock_fridge }
       mock_fridge.should_receive(:destroy)

@@ -1,5 +1,7 @@
 class FridgesController < ApplicationController
   include FridgesHelper
+
+  before_filter :authenticate_user!, :except => [:index, :any, :show]
   
   def index
     @fridges = Fridge.all

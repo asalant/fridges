@@ -8,8 +8,6 @@ alon:
   locale: en_US
   timezone: -7
   facebook_id: 548504059
-  facebook_link: http://www.facebook.com/asalant
-  facebook_updated_at: 2010-10-11 11:19:59
 
 rob:
   first_name: Rob
@@ -19,5 +17,3 @@ rob:
   locale: en_US
   timezone: -7
   facebook_id:
-  facebook_link:
-  facebook_updated_at: 2010-10-11 22:32:18

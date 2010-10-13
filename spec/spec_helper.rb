@@ -29,4 +29,7 @@ RSpec.configure do |config|
 
 #  config.include Paperclip::Shoulda::Matchers
   config.include ActionDispatch::TestProcess
+  config.include Devise::TestHelpers, :type => :controller
+
+  Devise::Oauth.test_mode!
 end

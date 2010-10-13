@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101012053218) do
+ActiveRecord::Schema.define(:version => 20101013032537) do
 
   create_table "fridges", :force => true do |t|
     t.string   "name"
@@ -40,20 +40,26 @@ ActiveRecord::Schema.define(:version => 20101012053218) do
   add_index "notes", ["fridge_id"], :name => "index_notes_on_fridge_id"
 
   create_table "users", :force => true do |t|
+    t.string   "email"
+    t.string   "encrypted_password",   :limit => 128, :default => "", :null => false
+    t.string   "reset_password_token"
+    t.datetime "remember_created_at"
+    t.integer  "sign_in_count",                       :default => 0
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.string   "current_sign_in_ip"
+    t.string   "last_sign_in_ip"
     t.string   "first_name"
     t.string   "last_name"
-    t.string   "email"
     t.string   "gender"
     t.string   "locale"
     t.integer  "timezone"
     t.string   "facebook_id"
-    t.datetime "facebook_updated_at"
-    t.string   "facebook_link"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "users", ["email"], :name => "index_users_on_email"
-  add_index "users", ["facebook_id"], :name => "index_users_on_facebook_id"
+  add_index "users", ["email"], :name => "index_users_on_email", :unique => true
+  add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
 
 end

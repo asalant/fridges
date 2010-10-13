@@ -1,6 +1,6 @@
 Fridges::Application.routes.draw do
 
-  resources :users
+  devise_for :users
 
   match "/webhooks/sendgrid" => 'webhooks#sendgrid', :only => :post
 
