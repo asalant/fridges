@@ -11,6 +11,10 @@ body {
 	font-family: 'Lucida Grande', verdana, sans-serif;
 }
 
+p {
+  margin: 6px 0;
+}
+
 #page_background {
   min-height: 100%;
   background-image: url('../images/bg.png');
@@ -29,6 +33,7 @@ em { font-weight: bold; font-style: normal;}
 hr { margin: 10px 0; color: #ccc;}
 
 label { display: block }
+.field { margin: 20px 0 }
 
 .check, .out, .my, .fridge, .whats {
   color: #000;

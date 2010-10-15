@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101013032537) do
+ActiveRecord::Schema.define(:version => 20101015050632) do
 
   create_table "fridges", :force => true do |t|
     t.string   "name"
@@ -22,9 +22,12 @@ ActiveRecord::Schema.define(:version => 20101013032537) do
     t.integer  "photo_file_size"
     t.datetime "photo_updated_at"
     t.string   "key"
+    t.integer  "user_id"
+    t.string   "location"
   end
 
   add_index "fridges", ["key"], :name => "index_fridges_on_key"
+  add_index "fridges", ["user_id"], :name => "index_fridges_on_user_id"
 
   create_table "notes", :force => true do |t|
     t.integer  "top"
@@ -57,6 +60,7 @@ ActiveRecord::Schema.define(:version => 20101013032537) do
     t.string   "facebook_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "location"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true

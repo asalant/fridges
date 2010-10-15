@@ -28,9 +28,9 @@
 
 #nameband.left_gutter.clearfix
   .user_photo
-    = image_tag 'rob_face.png'
-  %h2= @fridge.name
-  %h4= "San Francisco, CA  |  #{@fridge.created_at.to_date.to_s(:short)} | 2,423 views"
+    = image_tag profile_image_url(@fridge.user)
+  %h2= "Fridge by #{@fridge.user.short_name}"
+  %h4= "In #{location_for(@fridge)}  on  #{@fridge.created_at.to_date.to_s(:short)} | 2,423 views"
   #sharelink
     Share this fridge:
     = link_to fridge_key_url(@fridge), fridge_key_path(@fridge)
@@ -60,7 +60,15 @@
 .grid_4.omega.right_gutter
   %p="\"#{@fridge.description}\"" if !@fridge.description.blank?
 
-  %h2 What&rsquo;s inside the fridge
-  %br{:clear => 'all'}
-  %a.image-annotate-add{:href => '#'} Add a note!
+  -if @fridge.owned_by? current_user
+    %h3 What&rsquo;s inside your fridge?
+    -if @fridge.notes.empty?
+      %p Tell us about your fridge by <a class='image-annotate-add' href='#'>adding a note</a> or by commenting below.
+      %p What's that on the top shelf?
+    -else
+      %a.image-annotate-add{:href => '#'} Add a note!
+  -elsif !@fridge.notes.empty?
+    %h3 What&rsquo;s inside the fridge
+
+
   #note_details

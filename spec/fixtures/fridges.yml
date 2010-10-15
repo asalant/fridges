@@ -8,8 +8,11 @@ alon:
   photo_content_type: image/jpg
   photo_file_size:
   photo_updated_at:
+  location: San Francisco
+  user: alon
 
 rob:
   key: aaa112
   name: Rob's Fridge
   description: I'm a total bachelor!! Look at all my beer.
+  user: rob

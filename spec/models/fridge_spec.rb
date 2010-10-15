@@ -17,12 +17,38 @@ describe Fridge do
     end
   end
 
+
+
+
+  describe "#owned_by?" do
+    context "when existing" do
+      subject { fridges(:alon) }
+      it { should be_owned_by(users(:alon)) }
+      it { should_not be_owned_by(nil) }
+    end
+    context "when new" do
+      subject { Fridge.new }
+      it { should_not be_owned_by(users(:alon)) }
+      it { should_not be_owned_by(nil) }
+    end
+  end
+
   context "when creating" do
-    subject { Fridge.create :name => "name", :photo => fixture_file_upload('spec/fixtures/fridge.jpg', 'image/jpeg') }
+    subject { Fridge.create :photo => fixture_file_upload('spec/fixtures/fridge.jpg', 'image/jpeg') }
     it { should be_valid }
     it "generates key" do
       subject.key.should be_present
       subject.key.length.should == 6
+    end
+  end
+
+
+  context "when creating with user" do
+    subject { Fridge.create :user => users(:alon), :location=> 'location', :photo => fixture_file_upload('spec/fixtures/fridge.jpg', 'image/jpeg') }
+    it { should be_valid }
+
+    it "copies location to user" do
+      subject.user.location.should == 'location'
     end
   end
 end

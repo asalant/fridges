@@ -7,13 +7,10 @@
           %li= msg
 
   .field
-    = f.label :name
-    = f.text_field :name
-  .field
-    = f.label :description
-    = f.text_area :description, :rows => 3
-  .field
     = f.label :photo
     = f.file_field :photo
+  .field
+    = f.label "Where are you?"
+    = f.text_field :location, :value => @fridge.location || current_user.location
   .actions
-    = f.submit 'Save'
+    = f.submit 'Upload'

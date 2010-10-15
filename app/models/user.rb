@@ -24,6 +24,10 @@ class User < ActiveRecord::Base
     [first_name, last_name].join(" ")
   end
 
+  def short_name
+    [first_name, "#{last_name[0,1]}."].join(" ")
+  end
+
   private
 
   def self.attributes_from_facebook(user_info)

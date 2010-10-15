@@ -65,6 +65,7 @@ describe FridgesController do
 
       it "creates the fridge" do
         assigns(:fridge).should_not be_new_record
+        assigns(:fridge).user.should == users(:alon)
       end
 
       it "redirects to the created fridge" do
@@ -103,7 +104,7 @@ describe FridgesController do
 
     describe "with invalid params" do
       before do
-        put :update, :id => fridges(:alon), :fridge => {'name' => ''}
+        put :update, :id => fridges(:alon), :fridge => {'photo_file_name' => ''}
       end
 
       it "re-renders the 'edit' template" do
