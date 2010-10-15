@@ -16,7 +16,7 @@ class Fridge < ActiveRecord::Base
 
   validates_attachment_presence :photo
 
-  after_create :reset_key!, :copy_location_to_user
+  after_create :copy_location_to_user,  :email_user, :reset_key!
 
   def reset_key!
     update_attribute(:key, generate_key)
@@ -41,6 +41,12 @@ class Fridge < ActiveRecord::Base
   def copy_location_to_user
     if location.present? && user.present?
       user.update_attribute :location, location
+    end
+  end
+
+  def email_user
+    if user.present?
+      UserMailer.fridge_created(self).deliver
     end
   end
 
