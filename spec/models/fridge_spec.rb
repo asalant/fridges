@@ -18,8 +18,6 @@ describe Fridge do
   end
 
 
-
-
   describe "#owned_by?" do
     context "when existing" do
       subject { fridges(:alon) }
@@ -44,11 +42,18 @@ describe Fridge do
 
 
   context "when creating with user" do
+    before do
+      UserMailer.expects("fridge_created").with do |fridge|
+        fridge.key.should be_present
+      end.returns(stub(:deliver))
+    end
+
     subject { Fridge.create :user => users(:alon), :location=> 'location', :photo => fixture_file_upload('spec/fixtures/fridge.jpg', 'image/jpeg') }
     it { should be_valid }
 
     it "copies location to user" do
       subject.user.location.should == 'location'
     end
+
   end
 end
