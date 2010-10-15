@@ -5,7 +5,12 @@ describe WebhooksController do
   describe "POST sendgrid" do
     before do
       file = File.new('spec/fixtures/fridge.jpg')
-      Fridge.should_receive(:create!).with hash_including(:name => 'Subject', :description => "Text", :photo => file)
+      Fridge.expects(:create!).with do |hash|
+        hash[:name].should == 'Subject'
+        hash[:description].should == "Text"
+        hash[:photo].should == file
+      end
+
       params = {
         "from"=>"alon@salant.org", "to"=>"upload@frdg.us\n", "dkim"=>"none",
         "subject"=>"Subject", "text"=>"Text",

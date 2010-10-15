@@ -1,6 +1,6 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
-one:
+alon_one:
   top: 221,
   left: 351,
   width: 71,
@@ -8,7 +8,7 @@ one:
   text: Home made yoghurt. 1/2 gallon of whole Clover milk makes two jars overnight.,
   fridge: alon
 
-two:
+alon_two:
   top: 245,
   left: 171,
   width: 148,

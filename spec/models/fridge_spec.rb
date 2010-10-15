@@ -1,6 +1,12 @@
 require 'spec_helper'
 
 describe Fridge do
+  before do
+    AWS::S3::Base.stubs(:establish_connection!)
+    Fridge.any_instance.stubs(:save_attached_files)
+    Fridge.any_instance.stubs(:destroy_attached_files)
+  end
+
   describe "#any" do
     it "should find any one" do
       Fridge.any.should be_present
@@ -12,17 +18,11 @@ describe Fridge do
   end
 
   context "when creating" do
-    before do
-      @fridge = Fridge.new :name => "name", :photo => fixture_file_upload('spec/fixtures/fridge.jpg', 'image/jpeg')
-      @fridge.stub!(:save_attached_files).and_return true
-    end
-
-    subject { @fridge }
+    subject { Fridge.create :name => "name", :photo => fixture_file_upload('spec/fixtures/fridge.jpg', 'image/jpeg') }
     it { should be_valid }
     it "generates key" do
-      @fridge.save!
-      @fridge.key.should be_present
-      @fridge.key.length.should == 6
+      subject.key.should be_present
+      subject.key.length.should == 6
     end
   end
 end

@@ -20,7 +20,7 @@ describe NotesController do
 
     describe "with valid params" do
       before do
-        post :create, :fridge_id => fridges(:alon).id, :note => {}
+        post :create, :fridge_id => fridges(:alon), :note => {}
       end
 
       it "creates note" do
@@ -33,19 +33,15 @@ describe NotesController do
       end
     end
 
-    describe "with invalid params" do
-
-    end
-
   end
 
   describe "DELETE destroy" do
     before do
-      Note.should_receive(:find).with("37") { Note.new }
+      delete :destroy, :fridge_id => fridges(:alon), :id => notes(:alon_one)
     end
 
     it "destroys the note" do
-      delete :destroy, :fridge_id => fridges(:alon).id, :id => "37"
+      lambda { Note.find notes(:alon_one) }.should raise_exception(ActiveRecord::RecordNotFound)
       response.should be_success
     end
   end

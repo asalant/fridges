@@ -3,21 +3,23 @@ require 'spec_helper'
 describe FridgesController do
   include FridgesHelper
 
-  def mock_fridge(stubs={})
-    @mock_fridge ||= mock_model(Fridge, stubs).as_null_object
+  before do
+    AWS::S3::Base.stubs(:establish_connection!)
+    Fridge.any_instance.stubs(:save_attached_files)
+    Fridge.any_instance.stubs(:destroy_attached_files)
   end
 
   describe "GET index" do
     it "assigns all fridges as @fridges" do
-      Fridge.stub(:all) { [mock_fridge] }
+      Fridge.stubs(:all).returns [fridges(:alon)]
       get :index
-      assigns(:fridges).should eq([mock_fridge])
+      assigns(:fridges).should == [fridges(:alon)]
     end
   end
 
   describe "GET any" do
     it "redirects to show" do
-      Fridge.stub(:any) { fridges(:alon) }
+      Fridge.stubs(:any).returns fridges(:alon)
       get :any
       response.should redirect_to(fridge_key_url(fridges(:alon)))
     end
@@ -25,9 +27,8 @@ describe FridgesController do
 
   describe "GET show" do
     it "assigns the requested fridge as @fridge" do
-      Fridge.stub(:find).with("37") { mock_fridge }
-      get :show, :id => "37"
-      assigns(:fridge).should be(mock_fridge)
+      get :show, :id => fridges(:alon)
+      assigns(:fridge).should == fridges(:alon)
     end
 
     it "shows by key" do
@@ -40,9 +41,8 @@ describe FridgesController do
     before { sign_in users(:alon) }
 
     it "assigns a new fridge as @fridge" do
-      Fridge.stub(:new) { mock_fridge }
       get :new
-      assigns(:fridge).should be(mock_fridge)
+      assigns(:fridge).should be_new_record
     end
   end
 
@@ -50,9 +50,8 @@ describe FridgesController do
     before { sign_in users(:alon) }
 
     it "assigns the requested fridge as @fridge" do
-      Fridge.stub(:find).with("37") { mock_fridge }
-      get :edit, :id => "37"
-      assigns(:fridge).should be(mock_fridge)
+      get :edit, :id => fridges(:alon)
+      assigns(:fridge).should == fridges(:alon)
     end
   end
 
@@ -60,29 +59,25 @@ describe FridgesController do
     before { sign_in users(:alon) }
 
     describe "with valid params" do
-      it "assigns a newly created fridge as @fridge" do
-        Fridge.stub(:new).with({'these' => 'params'}) { mock_fridge(:save => true) }
-        post :create, :fridge => {'these' => 'params'}
-        assigns(:fridge).should be(mock_fridge)
+      before do
+        post :create, :fridge => { :name => 'Name', :photo => fixture_file_upload('spec/fixtures/fridge.jpg', 'image/jpeg')}
+      end
+
+      it "creates the fridge" do
+        assigns(:fridge).should_not be_new_record
       end
 
       it "redirects to the created fridge" do
-        Fridge.stub(:new) { mock_fridge(:save => true) }
-        post :create, :fridge => {}
-        response.should redirect_to(fridge_url(mock_fridge))
+        response.should redirect_to(fridge_url(assigns(:fridge)))
       end
     end
 
     describe "with invalid params" do
-      it "assigns a newly created but unsaved fridge as @fridge" do
-        Fridge.stub(:new).with({'these' => 'params'}) { mock_fridge(:save => false) }
-        post :create, :fridge => {'these' => 'params'}
-        assigns(:fridge).should be(mock_fridge)
+      before do
+        post :create, :fridge => {}
       end
 
       it "re-renders the 'new' template" do
-        Fridge.stub(:new) { mock_fridge(:save => false) }
-        post :create, :fridge => {}
         response.should render_template("new")
       end
     end
@@ -93,35 +88,25 @@ describe FridgesController do
     before { sign_in users(:alon) }
 
     describe "with valid params" do
-      it "updates the requested fridge" do
-        Fridge.should_receive(:find).with("37") { mock_fridge }
-        mock_fridge.should_receive(:update_attributes).with({'these' => 'params'})
-        put :update, :id => "37", :fridge => {'these' => 'params'}
+      before do
+        put :update, :id => fridges(:alon), :fridge => {'name' => 'new'}
       end
 
-      it "assigns the requested fridge as @fridge" do
-        Fridge.stub(:find) { mock_fridge(:update_attributes => true) }
-        put :update, :id => "1"
-        assigns(:fridge).should be(mock_fridge)
+      it "updates the requested fridge" do
+        assigns(:fridge).name.should == 'new'
       end
 
       it "redirects to the fridge" do
-        Fridge.stub(:find) { mock_fridge(:update_attributes => true) }
-        put :update, :id => "1"
-        response.should redirect_to(fridge_url(mock_fridge))
+        response.should redirect_to(fridge_url(fridges(:alon)))
       end
     end
 
     describe "with invalid params" do
-      it "assigns the fridge as @fridge" do
-        Fridge.stub(:find) { mock_fridge(:update_attributes => false) }
-        put :update, :id => "1"
-        assigns(:fridge).should be(mock_fridge)
+      before do
+        put :update, :id => fridges(:alon), :fridge => {'name' => ''}
       end
 
       it "re-renders the 'edit' template" do
-        Fridge.stub(:find) { mock_fridge(:update_attributes => false) }
-        put :update, :id => "1"
         response.should render_template("edit")
       end
     end
@@ -129,17 +114,16 @@ describe FridgesController do
   end
 
   describe "DELETE destroy" do
-    before { sign_in users(:alon) }
-    
+    before do
+      sign_in users(:alon)
+      delete :destroy, :id => fridges(:alon)
+    end
+
     it "destroys the requested fridge" do
-      Fridge.should_receive(:find).with("37") { mock_fridge }
-      mock_fridge.should_receive(:destroy)
-      delete :destroy, :id => "37"
+      lambda { Fridge.find fridges(:alon) }.should raise_exception(ActiveRecord::RecordNotFound)
     end
 
     it "redirects to the fridges list" do
-      Fridge.stub(:find) { mock_fridge }
-      delete :destroy, :id => "1"
       response.should redirect_to(fridges_url)
     end
   end

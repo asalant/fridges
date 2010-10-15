@@ -4,6 +4,10 @@ alon:
   key: aaa111
   name: Alon's Fridge
   description: We cleaned the fridge Monday night so it's a little empty but everything in it looks so much more appetizing.
+  photo_file_name: fridge.jpg
+  photo_content_type: image/jpg
+  photo_file_size:
+  photo_updated_at:
 
 rob:
   key: aaa112

@@ -22,6 +22,7 @@ end
 
 group :test do
   gem 'rspec_tag_matchers'
+  gem 'mocha'
 end
 
 group :test, :development do
