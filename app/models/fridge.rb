@@ -23,6 +23,8 @@ class Fridge < ActiveRecord::Base
     where(:key => key)
   }
 
+  scope :owned, :conditions => 'user_id is not null'
+
   def reset_key
     until Fridge.with_key(key = ActiveSupport::SecureRandom.hex(3)).empty? do; end
     self.key = key
@@ -33,9 +35,7 @@ class Fridge < ActiveRecord::Base
   end
 
   def self.any(params = {})
-    where = {:offset => (Fridge.count * rand).to_i}
-    where.merge!({:conditions => ['id not in (?)', params[:except]]}) if params[:except]
-    Fridge.first where
+    owned.offset((Fridge.count * rand).to_i).where(['id not in (?)', params[:except] || '']).first
   end
 
   def claim_by(user)

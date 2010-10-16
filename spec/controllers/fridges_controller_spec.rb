@@ -33,6 +33,11 @@ describe FridgesController do
       get :show, :key => fridges(:alon).key
       assigns(:fridge).should == fridges(:alon)
     end
+
+    it "responds with not found for unknown key" do
+      get :show, :key => 'unknown'
+      response.should be_not_found
+    end
   end
 
   describe "GET claim" do
