@@ -13,7 +13,12 @@ class WebhooksController < ApplicationController
       end
       Fridge.create! attributes
     rescue Exception => e
-      Rails.logger.error "Error creating fridge from sendgrid webhook: #{e.message}, #{e.backtrace}"
+      Rails.logger.error "Error creating fridge from SendGrid webhook: #{e.message}, #{e.backtrace}"
+      HoptoadNotifier.notify(
+        :error_class   => "SendGrid Webhook Error",
+        :error_message => "#{e.message}",
+        :parameters    => params
+      )
     end
 
     render :status => :ok, :nothing =>  true
