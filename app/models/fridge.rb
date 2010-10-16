@@ -16,6 +16,7 @@ class Fridge < ActiveRecord::Base
 
   validates_attachment_presence :photo
 
+  after_initialize :set_defaults
   before_create :reset_key
   after_create :copy_location_to_user, :send_email
 
@@ -31,7 +32,7 @@ class Fridge < ActiveRecord::Base
   end
 
   def reset_claim_token!
-    update_attribute(:claim_token, ActiveSupport::SecureRandom.hex(8))
+    update_attribute :claim_token, ActiveSupport::SecureRandom.hex(8)
   end
 
   def self.any(params = {})
@@ -47,8 +48,17 @@ class Fridge < ActiveRecord::Base
     self.user.present? && (self.user == user)
   end
 
+  def count_view!
+    update_attribute :view_count, view_count + 1
+
+  end
+
   private
 
+  def set_defaults
+    self.view_count ||= 0
+  end
+  
   def generate_key
     ActiveSupport::SecureRandom.hex(3)
   end

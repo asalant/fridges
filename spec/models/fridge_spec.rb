@@ -17,6 +17,18 @@ describe Fridge do
     end
   end
 
+  describe "#count_view!" do
+    context "when new" do
+      its(:view_count) { should == 0 }
+    end
+
+    subject { fridges(:alon) }
+    it "should increment view_count" do
+      fridges(:alon).count_view!
+      fridges(:alon).view_count.should == 1
+    end
+  end
+
 
   describe "#owned_by?" do
     context "when existing" do

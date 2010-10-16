@@ -38,6 +38,28 @@ describe FridgesController do
       get :show, :key => 'unknown'
       response.should be_not_found
     end
+
+    it "should increment view count" do
+      get :show, :id => fridges(:alon)
+      assigns(:fridge).view_count.should == 1
+    end
+
+    context "when logged in as fridge owner" do
+      before do
+        sign_in users(:alon)
+      end
+
+      it "should increment view count if not yet viewed" do
+        get :show, :id => fridges(:alon)
+        assigns(:fridge).view_count.should == 1
+      end
+
+      it "should not increment view count if already viewed" do
+        fridges(:alon).update_attribute(:view_count, 10)
+        get :show, :id => fridges(:alon)
+        assigns(:fridge).view_count.should == 10
+      end
+    end
   end
 
   describe "GET claim" do

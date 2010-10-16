@@ -19,9 +19,14 @@ class FridgesController < ApplicationController
       @fridge = Fridge.find_by_key(params[:key])
       if !@fridge
         render :action => 'not_found', :status => :not_found
+        return
       end
     else
       @fridge = Fridge.find(params[:id])
+    end
+
+    if !@fridge.owned_by?(current_user) || @fridge.view_count == 0
+      @fridge.count_view!
     end
   end
 
