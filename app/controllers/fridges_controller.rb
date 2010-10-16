@@ -18,7 +18,7 @@ class FridgesController < ApplicationController
     if (params[:key])
       @fridge = Fridge.find_by_key(params[:key])
       if !@fridge
-        render :status => :not_found, :file => "#{Rails.root}/public/404.html"
+        render :action => 'not_found', :status => :not_found
       end
     else
       @fridge = Fridge.find(params[:id])
@@ -28,7 +28,7 @@ class FridgesController < ApplicationController
   def claim
     @fridge = Fridge.find_by_claim_token(params[:token])
     if !@fridge
-      render :status => :not_found, :file => "#{Rails.root}/public/404.html"
+      render :action => 'not_found', :status => :not_found
     else
       @fridge.claim_by current_user
       redirect_to(fridge_key_url(@fridge.key), :notice => 'Fridge claimed!')
