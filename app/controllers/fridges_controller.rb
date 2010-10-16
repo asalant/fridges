@@ -1,6 +1,4 @@
 class FridgesController < ApplicationController
-  include FridgesHelper
-
   before_filter :authenticate_user!, :except => [:index, :any, :show]
 
   def index
@@ -10,7 +8,7 @@ class FridgesController < ApplicationController
   def any
     fridge = Fridge.any
     if fridge
-      redirect_to fridge_key_url(fridge)
+      redirect_to fridge_key_url(fridge.key)
     else
       redirect_to fridges_url
     end
@@ -21,6 +19,16 @@ class FridgesController < ApplicationController
       @fridge = Fridge.find_by_key(params[:key])
     else
       @fridge = Fridge.find(params[:id])
+    end
+  end
+
+  def claim
+    @fridge = Fridge.find_by_claim_token(params[:token])
+    if !@fridge
+      render :status => :not_found, :text => 'That fridge does not exist or has already been claimed.'
+    else
+      @fridge.claim_by current_user
+      redirect_to(fridge_key_url(@fridge.key), :notice => 'Fridge claimed!')
     end
   end
 
@@ -37,7 +45,7 @@ class FridgesController < ApplicationController
     @fridge.user = current_user
 
     if @fridge.save
-      redirect_to(@fridge, :notice => 'Fridge was successfully created.')
+      redirect_to(fridge_key_url(@fridge.key), :notice => 'Fridge created!')
     else
       render :action => "new"
     end
@@ -47,7 +55,7 @@ class FridgesController < ApplicationController
     @fridge = Fridge.find(params[:id])
 
     if @fridge.update_attributes(params[:fridge])
-      redirect_to(@fridge, :notice => 'Fridge was successfully updated.')
+      redirect_to(fridge_key_url(@fridge.key), :notice => 'Fridge updated!')
     else
       render :action => "edit"
     end

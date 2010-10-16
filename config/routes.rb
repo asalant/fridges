@@ -2,8 +2,6 @@ Fridges::Application.routes.draw do
 
   devise_for :users
 
-  match "/webhooks/sendgrid" => 'webhooks#sendgrid', :only => :post
-
   resource :sessions
 
   resources :fridges do
@@ -14,8 +12,9 @@ Fridges::Application.routes.draw do
   end
 
   match '/about' => 'content#about'
-
-  match ':key' => 'fridges#show', :only => :get
+  match "/webhooks/sendgrid" => 'webhooks#sendgrid', :only => :post
+  match "/claim/:token" => 'fridges#claim', :as => 'fridge_claim', :only => :get
+  match ':key' => 'fridges#show', :as => 'fridge_key', :only => :get
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

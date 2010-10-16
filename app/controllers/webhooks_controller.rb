@@ -5,7 +5,13 @@ class WebhooksController < ApplicationController
     Rails.logger.info "Got incoming sendgrid email:\n#{params.inspect}"
 
     begin
-      Fridge.create!(:photo => params['attachment1'], :name => params['subject'], :description => params['text'])
+      attributes = { :photo => params['attachment1'], :name => params['subject'], :description => params['text'] }
+      if user = User.find_by_email(params[:from])
+        attributes[:user] = user
+      else
+        attributes[:email_from] = params[:from]
+      end
+      Fridge.create! attributes
     rescue Exception => e
       Rails.logger.error "Error creating fridge from sendgrid webhook: #{e.message}, #{e.backtrace}"
     end

@@ -1,8 +1,6 @@
 require 'spec_helper'
 
 describe FridgesController do
-  include FridgesHelper
-
   before do
     AWS::S3::Base.stubs(:establish_connection!)
     Fridge.any_instance.stubs(:save_attached_files)
@@ -21,12 +19,12 @@ describe FridgesController do
     it "redirects to show" do
       Fridge.stubs(:any).returns fridges(:alon)
       get :any
-      response.should redirect_to(fridge_key_url(fridges(:alon)))
+      response.should redirect_to(fridge_key_url(fridges(:alon).key))
     end
   end
 
   describe "GET show" do
-    it "assigns the requested fridge as @fridge" do
+    it "shows by id" do
       get :show, :id => fridges(:alon)
       assigns(:fridge).should == fridges(:alon)
     end
@@ -34,6 +32,36 @@ describe FridgesController do
     it "shows by key" do
       get :show, :key => fridges(:alon).key
       assigns(:fridge).should == fridges(:alon)
+    end
+  end
+
+  describe "GET claim" do
+    before { sign_in users(:alon) }
+
+    context "for unclaimed fridge" do
+      before do
+        get :claim, :token => fridges(:unclaimed).claim_token
+      end
+
+      it "claims the fridge for the logged in user" do
+        assigns(:fridge).should == fridges(:unclaimed)
+        assigns(:fridge).user.should == users(:alon)
+      end
+
+      it "redirects to show" do
+        response.should redirect_to fridge_key_url(assigns(:fridge).key)
+      end
+
+    end
+
+    context "for unknown token" do
+      before do
+        get :claim, :token => 'unknown'
+      end
+
+      it "responds with not found" do
+        response.should be_not_found
+      end
     end
   end
 
@@ -60,7 +88,7 @@ describe FridgesController do
 
     describe "with valid params" do
       before do
-        post :create, :fridge => { :name => 'Name', :photo => fixture_file_upload('spec/fixtures/fridge.jpg', 'image/jpeg')}
+        post :create, :fridge => {:name => 'Name', :photo => fixture_file_upload('spec/fixtures/fridge.jpg', 'image/jpeg')}
       end
 
       it "creates the fridge" do
@@ -69,7 +97,7 @@ describe FridgesController do
       end
 
       it "redirects to the created fridge" do
-        response.should redirect_to(fridge_url(assigns(:fridge)))
+        response.should redirect_to(fridge_key_url(assigns(:fridge).key))
       end
     end
 
@@ -98,7 +126,7 @@ describe FridgesController do
       end
 
       it "redirects to the fridge" do
-        response.should redirect_to(fridge_url(fridges(:alon)))
+        response.should redirect_to(fridge_key_url(assigns(:fridge).key))
       end
     end
 

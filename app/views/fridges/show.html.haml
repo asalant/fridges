@@ -33,7 +33,7 @@
   %h4= "In #{location_for(@fridge)}  on  #{@fridge.created_at.to_date.to_s(:short)} | 2,423 views"
   #sharelink
     Share this fridge:
-    = link_to fridge_key_url(@fridge), fridge_key_path(@fridge)
+    = link_to fridge_key_url(@fridge.key), fridge_key_path(@fridge.key)
   #sharethis
     %span.st_facebook
     %span.st_twitter

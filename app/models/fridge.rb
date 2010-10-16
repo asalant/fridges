@@ -16,16 +16,31 @@ class Fridge < ActiveRecord::Base
 
   validates_attachment_presence :photo
 
-  after_create :copy_location_to_user,  :email_user, :reset_key!
+  before_create :reset_key
+  after_create :copy_location_to_user, :send_email
 
-  def reset_key!
-    update_attribute(:key, generate_key)
+  scope :with_key, lambda { |key|
+    where(:key => key)
+  }
+
+  def reset_key
+    until Fridge.with_key(key = ActiveSupport::SecureRandom.hex(3)).empty? do; end
+    self.key = key
+  end
+
+  def reset_claim_token!
+    update_attribute(:claim_token, ActiveSupport::SecureRandom.hex(8))
   end
 
   def self.any(params = {})
     where = {:offset => (Fridge.count * rand).to_i}
     where.merge!({:conditions => ['id not in (?)', params[:except]]}) if params[:except]
     Fridge.first where
+  end
+
+  def claim_by(user)
+    update_attributes!(:user => user, :claim_token => nil)
+    send_email
   end
 
   def owned_by?(user)
@@ -35,7 +50,7 @@ class Fridge < ActiveRecord::Base
   private
 
   def generate_key
-    "#{self.class.name}:#{self.id}".hash.abs.to_s(36)[1..6]
+    ActiveSupport::SecureRandom.hex(3)
   end
 
   def copy_location_to_user
@@ -44,9 +59,12 @@ class Fridge < ActiveRecord::Base
     end
   end
 
-  def email_user
+  def send_email
     if user.present?
-      UserMailer.fridge_created(self).deliver
+      UserMailer.your_fridge(self).deliver
+    elsif email_from.present?
+      reset_claim_token!
+      UserMailer.claim_fridge(self).deliver
     end
   end
 

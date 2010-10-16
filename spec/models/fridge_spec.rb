@@ -31,6 +31,16 @@ describe Fridge do
     end
   end
 
+  describe "#claim_by" do
+    before do
+      UserMailer.expects("your_fridge").returns(stub(:deliver))
+      fridges(:unclaimed).claim_by(users(:alon))
+    end
+    subject { fridges(:unclaimed) }
+    its(:claim_token) { should be_nil }
+    it { should be_owned_by(users(:alon)) }
+  end
+
   context "when creating" do
     subject { Fridge.create :photo => fixture_file_upload('spec/fixtures/fridge.jpg', 'image/jpeg') }
     it { should be_valid }
@@ -40,10 +50,9 @@ describe Fridge do
     end
   end
 
-
   context "when creating with user" do
     before do
-      UserMailer.expects("fridge_created").with do |fridge|
+      UserMailer.expects("your_fridge").with do |fridge|
         fridge.key.should be_present
       end.returns(stub(:deliver))
     end
@@ -54,6 +63,18 @@ describe Fridge do
     it "copies location to user" do
       subject.user.location.should == 'location'
     end
+  end
 
+
+  context "when creating from email" do
+    before do
+      UserMailer.expects("claim_fridge").with do |fridge|
+        fridge.claim_token.should be_present
+      end.returns(stub(:deliver))
+    end
+
+    subject { Fridge.create :email_from => 'from@example.com', :photo => File.new('spec/fixtures/fridge.jpg') }
+    it { should be_valid }
+    its(:claim_token) { should be_present }
   end
 end

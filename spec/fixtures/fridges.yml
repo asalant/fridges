@@ -16,3 +16,10 @@ rob:
   name: Rob's Fridge
   description: I'm a total bachelor!! Look at all my beer.
   user: rob
+
+unclaimed:
+  key: aaa111
+  email_from: from@example.com
+  claim_token: abc123
+  photo_file_name: fridge.jpg
+  photo_content_type: image/jpg

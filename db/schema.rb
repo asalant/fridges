@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101015050632) do
+ActiveRecord::Schema.define(:version => 20101015170127) do
 
   create_table "fridges", :force => true do |t|
     t.string   "name"
@@ -24,6 +24,8 @@ ActiveRecord::Schema.define(:version => 20101015050632) do
     t.string   "key"
     t.integer  "user_id"
     t.string   "location"
+    t.string   "email_from"
+    t.string   "claim_token"
   end
 
   add_index "fridges", ["key"], :name => "index_fridges_on_key"
