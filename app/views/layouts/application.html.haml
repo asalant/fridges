@@ -18,67 +18,66 @@
         var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
       })();
     = yield :head
-  %body.clearfix
+  %body
+    #background
+      #page.container_12.clearfix
 
-  #page_background.clearfix
-  
-    #page.container_12
-  
-      #feedback 
-        %a{:href => "javascript:void(0)", :onclick => "window.open('https://spreadsheets.google.com/viewform?formkey=dHdoZ2Rlb0V3elJJSldPZUpuRDE1aFE6MQ', 'CheckOutMyFridge Feedback','width=650,height=650')"}
-          = image_tag('feedback.png')
+        #feedback
+          %a{:href => "javascript:void(0)", :onclick => "window.open('https://spreadsheets.google.com/viewform?formkey=dHdoZ2Rlb0V3elJJSldPZUpuRDE1aFE6MQ', 'CheckOutMyFridge Feedback','width=650,height=650')"}
+            = image_tag('feedback.png')
 
-      .header.clearfix
-        .grid_8.alpha.left_gutter
-          %h1.clearfix
-            %a.no_underline{:href => root_path}
-              %span.check Check
-              %span.out Out
-              %span.my My
-              %span.fridge Fridge!
-          %h3 You are what you refrigerate. Discuss.
+        #header.clearfix
+          .grid_8.alpha
+            %h1.clearfix
+              %a.no_underline{:href => root_path}
+                %span.check Check
+                %span.out Out
+                %span.my My
+                %span.fridge Fridge!
+            %h3 You are what you refrigerate. Discuss.
 
-        .grid_2
-          %h5.whats What's in 
-          %br{:clear => 'all'}
-          %h5.whats your fridge?
-          %br{:clear => 'all'}
+          .grid_2
+            %h5.whats What's in
+            %br{:clear => 'all'}
+            %h5.whats your fridge?
+            %br{:clear => 'all'}
 
-          #upload
-            %h4= link_to "Upload a photo", new_fridge_path
-            %h6 or email one (from your phone) to <em>new@frdg.us</em>
+            #upload
+              %h4= link_to "Upload a photo", new_fridge_path
+              %h6 or email one (from your phone) to <em>new@frdg.us</em>
 
-        .grid_2.omega.right_gutter
-          %h5.whats ...what about
-          %br{:clear => 'all'}
-          %h5.whats your friends'?
-          %br{:clear => 'all'}
+          .grid_2.omega
+            %h5.whats ...what about
+            %br{:clear => 'all'}
+            %h5.whats your friends'?
+            %br{:clear => 'all'}
 
-          #upload
-            %h4= link_to "Ask friends to see their fridges", "#"
-              
-      #nav_bar.clearfix
-        .grid_8.alpha.left_gutter
-          = "#{Fridge.count} fridge pics | "
-          =  link_to "see another one »", any_fridges_path
-        .grid_4.omega.right_gutter
-          A place to talk about food and kitchen life.
+            #upload
+              %h4= link_to "Ask friends to see their fridges", "#"
 
-      #flash.grid_12.alpha.omega
-        .notice= notice
-        .alert= alert
+        #nav_bar
+          .grid_8.alpha
+            = "#{Fridge.count} fridge pics | "
+            =  link_to "see another one »", any_fridges_path
+          .grid_4.omega
+            A place to talk about food and kitchen life.
 
-      #main_content.clearfix
-        = yield
+        #main_content
 
-      #footer.grid_12.clearfix
-        &#169; 2010 CheckOutMyFridge
-        |
-        =link_to "About Us", about_path
-        |
-        -if user_signed_in?
-          ="Logged in as #{current_user.full_name}"
+          #flash
+            .notice= notice
+            .alert= alert
+
+          = yield
+
+        #footer.grid_12
+          &#169; 2010 CheckOutMyFridge
           |
-          =link_to "Log out", destroy_user_session_path
-        -else
-          = link_to "Sign in with Facebook", user_oauth_authorize_url(:facebook)
+          =link_to "About Us", about_path
+          |
+          -if user_signed_in?
+            ="Logged in as #{current_user.full_name}"
+            |
+            =link_to "Log out", destroy_user_session_path
+          -else
+            = link_to "Sign in with Facebook", user_oauth_authorize_url(:facebook)

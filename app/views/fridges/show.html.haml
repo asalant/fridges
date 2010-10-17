@@ -10,7 +10,7 @@
 :javascript
   window.fbAsyncInit = function() {
     FB.init({
-      appId  : '150522451651925',
+      appId  : '#{Facebook::APP_ID}',
       status : true, // check login status
       cookie : true, // enable cookies to allow the server to access the session
       xfbml  : true  // parse XFBML
@@ -25,15 +25,14 @@
   }());
 
 
-
-#nameband.left_gutter.clearfix
+#nameband
   .user_photo
     = image_tag profile_image_url(@fridge.user)
   %h2= "Fridge by #{@fridge.user.short_name}"
   %h4= "In #{location_for(@fridge)}  on  #{@fridge.created_at.to_date.to_s(:short)} | #{number_with_delimiter @fridge.view_count} views"
   #sharelink
     Share this fridge:
-    = link_to fridge_key_url(@fridge.key), fridge_key_path(@fridge.key)
+    = link_to fridge_key_url(@fridge.key, :host => 'frdg.us'), fridge_key_path(@fridge.key)
   #sharethis
     %span.st_facebook
     %span.st_twitter
@@ -45,7 +44,7 @@
     :javascript
       stLight.options({publisher:'18e86a1b-6dbc-4078-96af-195e89f92e22'})
 
-.grid_8.alpha.left_gutter
+.grid_8.alpha
 
   .photo
     =image_tag @fridge.photo.url(:large), :id => 'fridge_photo', 'data-id' => @fridge.id
@@ -54,10 +53,10 @@
 
   %h2 Talk about it!
   %br{:clear => 'all'}
-  %fb:comments{ :numposts => 40, :width => 600}
+  %fb:comments{:numposts => 40, :width => 600}
 
 
-.grid_4.omega.right_gutter
+.grid_4.omega
   %p="\"#{@fridge.description}\"" if !@fridge.description.blank?
 
   -if @fridge.owned_by? current_user
