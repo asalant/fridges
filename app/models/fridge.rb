@@ -39,7 +39,7 @@ class Fridge < ActiveRecord::Base
     owned.offset((Fridge.count * rand).to_i).where(['id not in (?)', params[:except] || 0]).first
   end
 
-  def claim_by(user)
+  def claim_by!(user)
     update_attributes!(:user => user, :claim_token => nil)
     send_email
   end
@@ -50,7 +50,6 @@ class Fridge < ActiveRecord::Base
 
   def count_view!
     update_attribute :view_count, view_count + 1
-
   end
 
   private

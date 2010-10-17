@@ -43,10 +43,10 @@ describe Fridge do
     end
   end
 
-  describe "#claim_by" do
+  describe "#claim_by!" do
     before do
       UserMailer.expects("your_fridge").returns(stub(:deliver))
-      fridges(:unclaimed).claim_by(users(:alon))
+      fridges(:unclaimed).claim_by!(users(:alon))
     end
     subject { fridges(:unclaimed) }
     its(:claim_token) { should be_nil }

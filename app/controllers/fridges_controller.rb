@@ -35,7 +35,7 @@ class FridgesController < ApplicationController
     if !@fridge
       render :action => 'not_found', :status => :not_found
     else
-      @fridge.claim_by current_user
+      @fridge.claim_by! current_user
       redirect_to(fridge_key_url(@fridge.key), :notice => 'Fridge claimed!')
     end
   end
