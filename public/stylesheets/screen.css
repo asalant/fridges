@@ -95,6 +95,11 @@ label { display: block }
   float: left;
 }
 
+#flash {
+  float: left;
+  width: 100%;
+}
+
 #footer {
   text-align: center;
   margin: 10px 0 30px 0;
@@ -139,22 +144,6 @@ label { display: block }
   margin-top: 3px;
 }
 
-.upload_form div {
-  font-size: 14px;
-  padding: 10px 0;
-}
-
-.upload_form input {
-  font-size: 16px;
-  padding: 5px;
-}
-
-.upload_form .btn {
-  font-size: 20px;
-  padding: 10px;
-  background-color: #EFF4F8;
-}
-
 
 #feedback {
   left: 0;
@@ -170,4 +159,6 @@ label { display: block }
 
 #nameband {
   margin-bottom: 15px;
+  float: left;
+  width: 100%;
 }
