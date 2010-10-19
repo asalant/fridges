@@ -57,7 +57,7 @@
 
 
 .grid_4.omega
-  %p="\"#{@fridge.description}\"" if !@fridge.description.blank?
+  -#%p="\"#{@fridge.description}\"" if !@fridge.description.blank?
 
   -if @fridge.owned_by? current_user
     %h3 What&rsquo;s inside your fridge?
