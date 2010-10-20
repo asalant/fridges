@@ -26,3 +26,9 @@ Fridges::Application.configure do
   config.action_dispatch.best_standards_support = :builtin
 end
 
+# TODO: Why does Rob get this error in development?
+#   OpenSSL::SSL::SSLError in Devise/oauth callbacksController#facebook
+#   SSL_connect returned=1 errno=0 state=SSLv3 read server certificate B: certificate verify failed
+# Hacky fix from http://situated.wordpress.com/2008/06/10/opensslsslsslerror-certificate-verify-failed-open-uri/
+require 'openssl'
+OpenSSL::SSL::VERIFY_PEER = OpenSSL::SSL::VERIFY_NONE
