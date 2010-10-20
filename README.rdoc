@@ -16,6 +16,7 @@ DNS is managed in ZoneEdit under Alon's account.
 
   git clone git@github.com:asalant/fridges.git
   cd fridges
+  bundle
   rake db:migrate
   rake spec
 
