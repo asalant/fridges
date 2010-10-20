@@ -168,3 +168,20 @@ label { display: block }
 .italic {
   font-style: italic;
 }
+
+#loading {
+  background-color: #fff;
+  border: 1px solid #eee;
+  filter:alpha(opacity=80);
+  opacity:0.9;
+  display: none;
+  position: absolute;
+  top: 100px;
+  left: 200px;
+  text-align: center;
+  padding: 40px;
+}
+
+#loading img {
+  margin: 40px 0;
+}

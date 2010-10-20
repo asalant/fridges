@@ -1,3 +1,16 @@
+-content_for :head do
+  :javascript
+    $(function(){
+      $('#new_fridge').submit(function() {
+        $('#loading').show().fixedCenter();
+      });
+    });
+
+
+#loading
+  =image_tag 'loading.gif'
+  %p Uploading and processing your fridge...
+
 = form_for @fridge, :html => { :multipart => true } do |f|
   -if @fridge.errors.any?
     #errorExplanation
