@@ -1,6 +1,6 @@
-== Fridges
+= Fridges
 
-= DNS
+== DNS
 
 DNS is managed in ZoneEdit under Alon's account.
 
