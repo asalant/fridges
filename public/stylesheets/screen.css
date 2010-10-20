@@ -121,8 +121,9 @@ label { display: block }
 }
 
 .image-annotate-add {
-  background-color: #EFF4F8;
+  background-color: #ffffcc;
   padding: 4px 12px;
+  border: 1px solid #ccc;
 }
 
 .note_detail {
@@ -158,11 +159,12 @@ label { display: block }
   float: left;
   width: 100%;
 }
-/*
-.left_gutter { padding-left: 20px;}
-.right_gutter { padding-right: 20px;}
-*/
+
 #header, #main_content, #nav_bar, #footer { 
   width: 980px;
   padding: 10px;
   }
+  
+.italic {
+  font-style: italic;
+}

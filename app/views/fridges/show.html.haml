@@ -59,15 +59,15 @@
 .grid_4
   -#%p="\"#{@fridge.description}\"" if !@fridge.description.blank?
 
-  -if @fridge.owned_by? current_user
+  -#if @fridge.owned_by? current_user
     %h3 What&rsquo;s inside your fridge?
-    -if @fridge.notes.empty?
-      %p Tell us about your fridge by <a class='image-annotate-add' href='#'>adding a note</a> or by commenting below.
-      %p What's that on the top shelf?
-    -else
+    -#if @fridge.notes.empty?
+      .image-annotate-add
+        %p <a href='#'>Add a note</a> to highlight stuff inside your fridge!
+        %p.italic What&rsquo;s that on the top shelf?
+    -#else
       %a.image-annotate-add{:href => '#'} Add a note!
-  -elsif !@fridge.notes.empty?
+  -#elsif !@fridge.notes.empty?
     %h3 What&rsquo;s inside the fridge
-
 
   #note_details
