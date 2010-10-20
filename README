@@ -1,7 +1,11 @@
 == Fridges
 
-This is a simple Rails app.
+= DNS
 
-All static files are in the public/ folder including the Peep My Fridge prototype in public/show.html.
+DNS is managed in ZoneEdit under Alon's account.
 
-This app is currently deployed at http://fridges.heroku.com with the prototype at http://fridges.heroku.com/show.html.
+* All web traffic to frdg.us is redirected to checkoutmyfridge.com.
+* www.checkoutmyfridge.com redirects to checkoutmyfridge.com
+* hello@checkoutmyfridge.com goes to Rob, everything else to Alon
+* new@frdg.us forwards to new@upload.checkoutmyfridge.com, everything else to Alon
+* Everything @upload.checkoutmyfridge.com is handled by SendGrid which calls a webhook in the Rails app
