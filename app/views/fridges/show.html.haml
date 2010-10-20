@@ -25,7 +25,7 @@
   }());
 
 
-#nameband
+#nameband.grid_12
   .user_photo
     = image_tag profile_image_url(@fridge.user)
   %h2= "Fridge by #{@fridge.user.short_name}"
@@ -44,7 +44,7 @@
     :javascript
       stLight.options({publisher:'18e86a1b-6dbc-4078-96af-195e89f92e22'})
 
-.grid_8.alpha
+.grid_8
 
   .photo
     =image_tag @fridge.photo.url(:large), :id => 'fridge_photo', 'data-id' => @fridge.id
@@ -56,7 +56,7 @@
   %fb:comments{:numposts => 40, :width => 600}
 
 
-.grid_4.omega
+.grid_4
   -#%p="\"#{@fridge.description}\"" if !@fridge.description.blank?
 
   -if @fridge.owned_by? current_user

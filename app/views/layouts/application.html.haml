@@ -27,7 +27,7 @@
             = image_tag('feedback.png')
 
         #header.clearfix
-          .grid_8.alpha
+          .grid_8
             %h1.clearfix
               %a.no_underline{:href => root_path}
                 %span.check Check
@@ -46,7 +46,7 @@
               %h4= link_to "Upload a photo", new_fridge_path
               %h6 or email one (from your phone) to <em>new@frdg.us</em>
 
-          .grid_2.omega
+          .grid_2
             %h5.whats ...what about
             %br{:clear => 'all'}
             %h5.whats your friends'?
@@ -56,10 +56,10 @@
               %h4= link_to "Ask friends to see their fridges", "#"
 
         #nav_bar
-          .grid_8.alpha
+          .grid_8
             = "#{Fridge.count} fridge pics | "
             =  link_to "see another one »", any_fridges_path
-          .grid_4.omega
+          .grid_4
             A place to talk about food and kitchen life.
 
         #main_content
