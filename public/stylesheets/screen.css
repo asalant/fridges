@@ -75,7 +75,7 @@ label { display: block }
   -ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=7, Direction=0, Color='#555')";  /* For IE 8 */
 }
 
-#nav_bar {
+#nav_bar, #promo_bar {
   float: left;
   margin-bottom: 10px;
   background: #d1e6f6; /* for non-css3 browsers */
@@ -160,7 +160,7 @@ label { display: block }
   width: 100%;
 }
 
-#header, #main_content, #nav_bar, #footer { 
+#header, #main_content, #nav_bar, #footer, #promo_bar { 
   width: 980px;
   padding: 10px;
   }

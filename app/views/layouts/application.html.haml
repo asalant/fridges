@@ -70,6 +70,13 @@
 
           = yield
 
+        -if !user_signed_in?
+          #promo_bar
+            People want to know: what&rsquo;s in <em>your</em> fridge?  
+            %br
+            Take a picture with your phone and send it to <em>new@frdg.us</em> &hellip; or
+            = link_to "upload a picture here", new_fridge_path
+              
         #footer.grid_12
           &#169; 2010 CheckOutMyFridge
           |
