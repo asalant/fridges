@@ -19,7 +19,10 @@ DNS is managed in ZoneEdit under Alon's account.
   rake db:migrate
   rake spec
 
-To run locally, you must create a file config/heroku_env.rb with credentials for S3 storage:
+To run locally, you must create a file config/heroku_env.rb with credentials for S3 storage.
+
+These values are set as Heroku config variables on Heroku per the strategy defined at
+http://tammersaleh.com/posts/managing-heroku-environment-variables-for-local-development.
 
   # This file contains the ENV vars necessary to run the app locally.
   # Some of these values are sensitive, and some are developer specific.
@@ -29,5 +32,7 @@ To run locally, you must create a file config/heroku_env.rb with credentials for
   ENV['S3_KEY']            = 'key here'
   ENV['S3_SECRET']         = 'secret here'
 
-These values are set as Heroku config variables on Heroku per the strategy defined at
-http://tammersaleh.com/posts/managing-heroku-environment-variables-for-local-development.
+Then:
+
+  rails s
+  open http://localhost:3000
