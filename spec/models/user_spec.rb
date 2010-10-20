@@ -10,5 +10,29 @@ describe User do
     its(:password) { should be_present }
     its(:new_record?) { should be_false }
     its(:facebook_id) { should == @facebook_attributes['id'] }
+
+    context "with location" do
+      before do
+        @facebook_attributes.merge!({
+          'location' => {"id" => "114952118516947", "name" => "San Francisco, California"},
+          'hometown' => {"id" => "114952118516947", "name" => "Boston, Massachusetts"}
+        })
+        puts @facebook_attributes.inspect
+      end
+
+      subject { User.create_from_facebook(@facebook_attributes) }
+      its(:location) { should == @facebook_attributes['location']['name'] }
+    end
+
+    context "with hometown" do
+      before do
+        @facebook_attributes.merge!({
+          'hometown' => {"id" => "114952118516947", "name" => "Boston, Massachusetts"}
+        })
+      end
+
+      subject { User.create_from_facebook(@facebook_attributes) }
+      its(:location) { should == @facebook_attributes['hometown']['name'] }
+    end
   end
 end

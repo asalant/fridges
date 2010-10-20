@@ -5,10 +5,11 @@ class User < ActiveRecord::Base
 
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, :remember_me
-  attr_accessible :first_name, :last_name, :gender, :locale, :timezone, :facebook_id
+  attr_accessible :first_name, :last_name, :gender, :locale, :timezone, :location, :facebook_id
 
   def self.find_for_facebook_oauth(access_token, signed_in_resource=nil)
     data = ActiveSupport::JSON.decode(access_token.get('https://graph.facebook.com/me?'))
+#    Rails.logger.debug "User#find_for_facebook_oauth data: #{data.inspect}"
     if user = User.find_by_email(data["email"])
       user
     else # Create an user with a stub password.
@@ -31,8 +32,13 @@ class User < ActiveRecord::Base
   private
 
   def self.attributes_from_facebook(user_info)
-    attributes = { :facebook_id                => user_info['id'] }
+    attributes = { :facebook_id => user_info['id'] }
     %w(first_name last_name email gender locale timezone).each { |key| attributes[key] = user_info[key] }
+    if user_info['location']
+      attributes[:location] = user_info['location']['name']
+    elsif user_info['hometown']
+      attributes[:location] = user_info['hometown']['name']
+    end
     attributes
   end
 end

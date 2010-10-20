@@ -71,10 +71,6 @@ describe Fridge do
 
     subject { Fridge.create :user => users(:alon), :location=> 'location', :photo => fixture_file_upload('spec/fixtures/fridge.jpg', 'image/jpeg') }
     it { should be_valid }
-
-    it "copies location to user" do
-      subject.user.location.should == 'location'
-    end
   end
 
 

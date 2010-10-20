@@ -9,8 +9,5 @@
   .field
     = f.label :photo
     = f.file_field :photo
-  .field
-    = f.label "Where are you?"
-    = f.text_field :location, :value => @fridge.location || current_user.location
   .actions
     = f.submit 'Upload'

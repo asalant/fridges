@@ -18,7 +18,7 @@ class Fridge < ActiveRecord::Base
 
   after_initialize :set_defaults
   before_create :reset_key
-  after_create :copy_location_to_user, :send_email
+  after_create :send_email
 
   scope :with_key, lambda { |key|
     where(:key => key)
@@ -60,12 +60,6 @@ class Fridge < ActiveRecord::Base
   
   def generate_key
     ActiveSupport::SecureRandom.hex(3)
-  end
-
-  def copy_location_to_user
-    if location.present? && user.present?
-      user.update_attribute :location, location
-    end
   end
 
   def send_email
