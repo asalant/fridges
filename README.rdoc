@@ -1,5 +1,7 @@
 = Fridges
 
+Project home is https://github.com/asalant/fridges with the app deployed on Heroku at http://checkoutmyfridge.com.
+
 == DNS
 
 DNS is managed in ZoneEdit under Alon's account.
@@ -9,3 +11,23 @@ DNS is managed in ZoneEdit under Alon's account.
 * hello@checkoutmyfridge.com goes to Rob, everything else to Alon
 * new@frdg.us forwards to new@upload.checkoutmyfridge.com, everything else to Alon
 * Everything @upload.checkoutmyfridge.com is handled by SendGrid which calls a webhook in the Rails app
+
+== Developers
+
+  git clone git@github.com:asalant/fridges.git
+  cd fridges
+  rake db:migrate
+  rake spec
+
+To run locally, you must create a file config/heroku_env.rb with credentials for S3 storage:
+
+  # This file contains the ENV vars necessary to run the app locally.
+  # Some of these values are sensitive, and some are developer specific.
+  #
+  # DO NOT CHECK THIS FILE INTO VERSION CONTROL
+
+  ENV['S3_KEY']            = 'key here'
+  ENV['S3_SECRET']         = 'secret here'
+
+These values are set as Heroku config variables on Heroku per the strategy defined at
+http://tammersaleh.com/posts/managing-heroku-environment-variables-for-local-development.
