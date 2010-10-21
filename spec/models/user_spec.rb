@@ -17,7 +17,6 @@ describe User do
           'location' => {"id" => "114952118516947", "name" => "San Francisco, California"},
           'hometown' => {"id" => "114952118516947", "name" => "Boston, Massachusetts"}
         })
-        puts @facebook_attributes.inspect
       end
 
       subject { User.create_from_facebook(@facebook_attributes) }

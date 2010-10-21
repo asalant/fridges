@@ -5,14 +5,12 @@ class Fridge < ActiveRecord::Base
   attr_protected :key
 
   has_attached_file :photo,
-    :styles          => {:large => "100%", :thumb => "100x100#"},
-    :convert_options => {
-      :large => "-auto-orient -geometry 600",
-      :thumb => "-auto-orient"},
-
-    :storage         => :s3,
-    :s3_credentials  => "#{Rails.root}/config/s3.yml",
-    :path            => ":class/:style/:id_:filename"
+    {
+      :styles            => {:large => "100%", :thumb => "100x100#"},
+      :convert_options   => {
+        :large => "-auto-orient -geometry 600",
+        :thumb => "-auto-orient"}
+    }.merge(PAPERCLIP_STORAGE_OPTIONS)
 
   validates_attachment_presence :photo
 
@@ -27,7 +25,9 @@ class Fridge < ActiveRecord::Base
   scope :owned, :conditions => 'user_id is not null'
 
   def reset_key
-    until Fridge.with_key(key = ActiveSupport::SecureRandom.hex(3)).empty? do; end
+    until Fridge.with_key(key = ActiveSupport::SecureRandom.hex(3)).empty? do
+      ;
+    end
     self.key = key
   end
 
@@ -57,7 +57,7 @@ class Fridge < ActiveRecord::Base
   def set_defaults
     self.view_count ||= 0
   end
-  
+
   def generate_key
     ActiveSupport::SecureRandom.hex(3)
   end

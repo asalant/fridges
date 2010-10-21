@@ -35,3 +35,6 @@ Fridges::Application.configure do
   # Print deprecation notices to the stderr
   config.active_support.deprecation = :stderr
 end
+
+# Local storage in test
+PAPERCLIP_STORAGE_OPTIONS = {}
