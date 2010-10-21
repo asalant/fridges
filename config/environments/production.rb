@@ -57,5 +57,5 @@ end
 PAPERCLIP_STORAGE_OPTIONS = {
   :storage                                    => :s3,
   :s3_credentials                             => "#{Rails.root}/config/s3.yml",
-  :path                                       => ":class/:style/:key_:filename"
+  :path                                       => ":class/:style/:id_:filename"
 }
