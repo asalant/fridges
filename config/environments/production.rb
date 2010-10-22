@@ -53,7 +53,7 @@ Fridges::Application.configure do
   config.active_support.deprecation             = :notify
 end
 
-# Local storage in development
+# S3 storage in production
 PAPERCLIP_STORAGE_OPTIONS = {
   :storage                                    => :s3,
   :s3_credentials                             => "#{Rails.root}/config/s3.yml",
