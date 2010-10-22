@@ -169,7 +169,7 @@ Devise.setup do |config|
     :site              => 'https://graph.facebook.com/',
     :authorize_path    => '/oauth/authorize',
     :access_token_path => '/oauth/access_token',
-    :scope             => %w(email) #offline too?
+    :scope             => %w(email)
 
   # ==> Warden configuration
   # If you want to use other strategies, that are not supported by Devise, or
@@ -180,6 +180,6 @@ Devise.setup do |config|
   #   manager.default_strategies(:scope => :user).unshift :some_external_strategy
   # end
   config.warden do |manager|
-     manager.failure_app = Facebook::AuthenticationFailure
+    manager.failure_app = Facebook::AuthenticationFailure
   end
 end

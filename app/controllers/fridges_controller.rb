@@ -1,5 +1,5 @@
 class FridgesController < ApplicationController
-  before_filter :authenticate_user!, :except => [:index, :any, :show]
+  before_filter :ensure_access_token, :authenticate_user!, :except => [:index, :any, :show]
 
   def index
     @fridges = Fridge.all
@@ -74,5 +74,11 @@ class FridgesController < ApplicationController
     @fridge.destroy
 
     redirect_to(fridges_url)
+  end
+
+  private
+
+  def ensure_access_token
+    
   end
 end

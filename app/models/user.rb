@@ -3,18 +3,21 @@ class User < ActiveRecord::Base
   # :token_authenticatable, :encryptable, :confirmable, :lockable, :timeoutable and :oauthable
   devise :database_authenticatable, :rememberable, :trackable, :oauthable
 
+  attr_accessor :facebook_access_token
+
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, :remember_me
   attr_accessible :first_name, :last_name, :gender, :locale, :timezone, :location, :facebook_id
 
   def self.find_for_facebook_oauth(access_token, signed_in_resource=nil)
     data = ActiveSupport::JSON.decode(access_token.get('https://graph.facebook.com/me?'))
-#    Rails.logger.debug "User#find_for_facebook_oauth data: #{data.inspect}"
-    if user = User.find_by_email(data["email"])
-      user
-    else # Create an user with a stub password.
-      self.create_from_facebook(data)
+    Rails.logger.debug "User#find_for_facebook_oauth data: #{data.inspect}"
+    unless user = User.find_by_email(data["email"])
+      # Create an user with a stub password.
+      user = self.create_from_facebook(data)
     end
+    user.facebook_access_token = access_token
+    user
   end
 
   def self.create_from_facebook(data)
