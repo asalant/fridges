@@ -1,38 +1,18 @@
 -content_for :head do
+  =javascript_include_tag 'jquery.facebook'
   :javascript
     $(function(){
       $('#new_fridge').submit(function() {
         $('#loading').show().fixedCenter();
       });
+
+      $('#facebook').hide();
+      $('body').facebook('#{Facebook::CONFIG['app_id']}').bind('auth.sessionChange.loggedIn', function(event, data) {
+        $('#access_token').val(data.access_token);
+        $('#facebook').show();
+      });
     });
 
-#fb-root
-:javascript
-  window.fbAsyncInit = function() {
-    FB.init({
-      appId  : '#{Facebook::CONFIG['app_id']}',
-      status : true, // check login status
-      cookie : true, // enable cookies to allow the server to access the session
-      xfbml  : true  // parse XFBML
-    });
-
-    FB.getLoginStatus(function(response) {
-      if (response.session) {
-        for (p in response.session) {
-          console.log(p + " = " + response.session[p])
-        }
-      } else {
-        // no user session available, someone you dont know
-      }
-    });
-  };
-
-  (function() {
-    var e = document.createElement('script');
-    e.src = document.location.protocol + '//connect.facebook.net/en_US/all.js';
-    e.async = true;
-    document.getElementById('fb-root').appendChild(e);
-  }());
 
 #loading
   =image_tag 'loading.gif'
@@ -49,5 +29,11 @@
   .field
     = f.label :photo
     = f.file_field :photo
+
+  #facebook.field
+    = hidden_field_tag :access_token
+    = check_box_tag :post_to_facebook, true, :checked => 'checked'
+    Share my fridge on Facebook
+
   .actions
     = f.submit 'Upload'
