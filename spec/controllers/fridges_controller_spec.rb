@@ -113,8 +113,9 @@ describe FridgesController do
   describe "POST create" do
     before { sign_in users(:alon) }
 
-    describe "with valid params" do
+    context "with valid params" do
       before do
+        controller.expects(:post_to_facebook).never
         post :create, :fridge => {:name => 'Name', :photo => fixture_file_upload('spec/fixtures/fridge.jpg', 'image/jpeg')}
       end
 
@@ -126,9 +127,20 @@ describe FridgesController do
       it "redirects to the created fridge" do
         response.should redirect_to(fridge_key_url(assigns(:fridge).key))
       end
+
+      context "with facebook token" do
+        it "posts to facebook" do
+          controller.expects(:post_to_facebook)
+
+          post :create,
+            :fridge                        => {:photo => fixture_file_upload('spec/fixtures/fridge.jpg', 'image/jpeg')},
+            :access_token                  => 'access_token',
+            :post_to_facebook              => 'true'
+        end
+      end
     end
 
-    describe "with invalid params" do
+    context "with invalid params" do
       before do
         post :create, :fridge => {}
       end
