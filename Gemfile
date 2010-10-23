@@ -9,6 +9,7 @@ gem 'aws-s3'
 gem 'devise', :git => "http://github.com/plataformatec/devise.git"
 gem 'oauth2'
 gem 'hoptoad_notifier'
+gem 'koala'
 
 group :production do
   gem "pg"

@@ -1,5 +1,5 @@
 class FridgesController < ApplicationController
-  before_filter :ensure_access_token, :authenticate_user!, :except => [:index, :any, :show]
+  before_filter :authenticate_user!, :except => [:index, :any, :show]
 
   def index
     @fridges = Fridge.all
@@ -53,6 +53,9 @@ class FridgesController < ApplicationController
     @fridge.user = current_user
 
     if @fridge.save
+      if params[:post_to_facebook] && params[:access_token]
+        post_to_facebook(params[:access_token], @fridge)
+      end
       redirect_to(fridge_key_url(@fridge.key), :notice => 'Fridge uploaded!')
     else
       render :action => "new"
@@ -78,7 +81,15 @@ class FridgesController < ApplicationController
 
   private
 
-  def ensure_access_token
-    
+  def post_to_facebook(access_token, fridge)
+    post = {
+      :message => "Check out my fridge!",
+      :picture => fridge.photo.url(:large).gsub(%r(^/system/), "http://localhost:300/system/"), # for development
+      :link    => fridge_key_url(fridge.key, :host => 'frdg.us')
+      }
+    Rails.logger.debug "Posting to Facebook: #{post.inspect}"
+    graph = Koala::Facebook::GraphAPI.new(access_token)
+    graph.put_object("me", "feed", post)
+
   end
 end
