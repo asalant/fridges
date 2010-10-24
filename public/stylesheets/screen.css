@@ -94,6 +94,10 @@ label { display: block }
 #flash {
   float: left;
   width: 100%;
+  background-color: #ffffcc;
+  text-align: center;
+  padding: 5px 0;
+  margin-bottom: 10px;
 }
 
 #footer {

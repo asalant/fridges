@@ -53,7 +53,7 @@ class FridgesController < ApplicationController
     @fridge.user = current_user
 
     if @fridge.save
-      redirect_to(fridge_key_url(@fridge.key), :notice => 'Fridge created!')
+      redirect_to(fridge_key_url(@fridge.key), :notice => 'Fridge uploaded!')
     else
       render :action => "new"
     end
