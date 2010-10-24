@@ -1,5 +1,5 @@
 class UserMailer < ActionMailer::Base
-  default :from => "contact@checkoutmyfridge.com"
+  default :from => "fridges@checkoutmyfridge.com"
   add_template_helper(FridgesHelper)
   default_url_options[:host] = 'frdg.us'
 
