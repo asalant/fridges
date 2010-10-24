@@ -9,7 +9,7 @@
 
 #loading
   =image_tag 'loading.gif'
-  %p Uploading and processing your fridge...
+  %p Uploading a picture of your fridge for you to share...
 
 = form_for @fridge, :html => { :multipart => true } do |f|
   -if @fridge.errors.any?
