@@ -6,7 +6,7 @@
       });
 
       $('#facebook').hide();
-      $('body').facebook('#{Facebook::CONFIG['app_id']}').bind('auth.sessionChange.loggedIn', function(event, data) {
+      $('body').facebook('#{Facebook::CONFIG['app_id']}').bind('facebook.loggedIn', function(event, data) {
         $('#access_token').val(data.access_token);
         $('#facebook').show();
       });

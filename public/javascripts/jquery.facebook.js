@@ -8,7 +8,6 @@
         attr('async', true));
 
       window.fbAsyncInit = function() {
-        console.log("window.fbAsyncInit called")
         FB.init({
           appId  : application_id,
           status : false, // check login status
@@ -17,16 +16,11 @@
         });
 
         FB.getLoginStatus(function(response) {
-          console.log('auth.sessionChange: response = ' + response);
-          $root.trigger('auth.sessionChange', { response: response });
           if (response.session) {
-            for (p in response.session) {
-              console.log(p + ' = ' + response.session[p]);
-            }
-            $root.trigger('auth.sessionChange.loggedIn', { response: response, access_token: response.session.access_token });
+            $root.trigger('facebook.loggedIn', { response: response, access_token: response.session.access_token });
           }
           else {
-            $root.trigger('auth.sessionChange.loggedOut', { response: response });
+            $root.trigger('facebook.loggedOut', { response: response });
           }
         });
       };
