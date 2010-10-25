@@ -92,8 +92,6 @@ label { display: block }
 }
 
 #flash {
-  float: left;
-  width: 100%;
   background-color: #ffffcc;
   text-align: center;
   padding: 5px 0;
@@ -159,9 +157,8 @@ label { display: block }
 }
 
 #nameband {
+  margin-top: 5px;
   margin-bottom: 15px;
-  float: left;
-  width: 100%;
 }
 
 #header, #main_content, #nav_bar, #footer, #promo_bar { 

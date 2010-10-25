@@ -64,9 +64,10 @@
 
         #main_content
 
-          #flash
-            .notice= notice
-            .alert= alert
+          -if notice || alert
+            #flash.grid_12
+              .notice= notice
+              .alert= alert
 
           = yield
 
