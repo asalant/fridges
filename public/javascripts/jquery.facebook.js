@@ -11,12 +11,12 @@
         console.log("window.fbAsyncInit called")
         FB.init({
           appId  : application_id,
-          status : true, // check login status
+          status : false, // check login status
           cookie : true, // enable cookies to allow the server to access the session
           xfbml  : true  // parse XFBML
         });
 
-        FB.Event.subscribe('auth.sessionChange', function(response) {
+        FB.getLoginStatus(function(response) {
           console.log('auth.sessionChange: response = ' + response);
           $root.trigger('auth.sessionChange', { response: response });
           if (response.session) {
