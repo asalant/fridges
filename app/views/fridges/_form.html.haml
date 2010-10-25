@@ -8,6 +8,7 @@
       $('#facebook').hide();
       $('body').facebook('#{Facebook::CONFIG['app_id']}').bind('facebook.loggedIn', function(event, data) {
         $('#access_token').val(data.access_token);
+        $('#post_to_facebook').attr('checked','checked')
         $('#facebook').show();
       });
     });
@@ -31,7 +32,7 @@
 
   #facebook.field
     = hidden_field_tag :access_token
-    = check_box_tag :post_to_facebook, true, :checked => 'checked'
+    = check_box_tag :post_to_facebook, true
     =label_tag :post_to_facebook, 'Share my fridge on Facebook', :style => 'display: inline;'
 
   .actions
