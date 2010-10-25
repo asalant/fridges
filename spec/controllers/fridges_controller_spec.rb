@@ -35,7 +35,7 @@ describe FridgesController do
     end
 
     it "responds with not found for unknown key" do
-      get :show, :key => 'unknown'
+      get :show, :key => 'nofrdg'
       response.should be_not_found
     end
 
