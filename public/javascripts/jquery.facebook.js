@@ -8,6 +8,7 @@
         attr('async', true));
 
       window.fbAsyncInit = function() {
+        console.log("window.fbAsyncInit called")
         FB.init({
           appId  : application_id,
           status : true, // check login status
