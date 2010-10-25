@@ -16,8 +16,12 @@
         });
 
         FB.Event.subscribe('auth.sessionChange', function(response) {
+          console.log('auth.sessionChange: response = ' + response);
           $root.trigger('auth.sessionChange', { response: response });
           if (response.session) {
+            for (p in response.session) {
+              console.log(p + ' = ' + response.session[p]);
+            }
             $root.trigger('auth.sessionChange.loggedIn', { response: response, access_token: response.session.access_token });
           }
           else {
