@@ -34,4 +34,10 @@ require 'openssl'
 OpenSSL::SSL::VERIFY_PEER = OpenSSL::SSL::VERIFY_NONE
 
 # Local storage in development. See production.rb for settings to enable in development
-PAPERCLIP_STORAGE_OPTIONS = {}
+#PAPERCLIP_STORAGE_OPTIONS = {}
+
+PAPERCLIP_STORAGE_OPTIONS = {
+  :storage                                    => :s3,
+  :s3_credentials                             => "#{Rails.root}/config/s3.yml",
+  :path                                       => ":class/:style/:id_:filename"
+}

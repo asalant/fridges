@@ -32,7 +32,7 @@
   #facebook.field
     = hidden_field_tag :access_token
     = check_box_tag :post_to_facebook, true, :checked => 'checked'
-    Share my fridge on Facebook
+    =label_tag :post_to_facebook, 'Share my fridge on Facebook', :style => 'display: inline;'
 
   .actions
     = f.submit 'Upload'
