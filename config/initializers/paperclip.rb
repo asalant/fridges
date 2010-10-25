@@ -1,8 +1,9 @@
 class Timer
   def self.timer(what)
+    Rails.logger.info "#{what} started"
     start = Time.now
     yield
-    Rails.logger.info "#{what} executed in #{Time.now - start} sec"
+    Rails.logger.info "  #{what} executed in #{Time.now - start} sec"
   end
 end
 
@@ -38,4 +39,18 @@ module AWS::S3
 
     end
   end
+
+  class Base
+    class << self
+      def request_with_timing(verb, path, options = {}, body = nil, attempts = 0, &block)
+        Timer.timer("AWS::S3::Base#request") do
+          request_without_timing(verb, path, options = {}, body = nil, attempts = 0, &block)
+        end
+      end
+
+      alias_method_chain :request, :timing
+
+    end
+  end
 end
+
