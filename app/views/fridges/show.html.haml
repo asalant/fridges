@@ -1,12 +1,15 @@
 - content_for :head do
   :javascript
+    $(function(){
+      $('body').facebook('#{Facebook::CONFIG['app_id']}');
+    });
+
     $(window).load(function() {
       $("#fridge_photo")
         .annotateHandler({ target: '#note_details', ajax: true })
         .annotateImage({ editable: true });
     });
 
-    $('body').facebook('#{Facebook::APP_ID}');
 
 #nameband.grid_12
   .user_photo

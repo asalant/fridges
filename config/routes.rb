@@ -14,7 +14,7 @@ Fridges::Application.routes.draw do
   match '/about' => 'content#about'
   match "/webhooks/sendgrid" => 'webhooks#sendgrid', :only => :post
   match "/claim/:token" => 'fridges#claim', :as => 'fridge_claim', :only => :get
-  match ':key' => 'fridges#show', :as => 'fridge_key', :only => :get
+  match ':key' => 'fridges#show', :as => 'fridge_key', :only => :get, :constraints => {:key => /\w{6}/}
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
