@@ -186,3 +186,9 @@ label { display: block }
 #loading img {
   margin: 40px 0;
 }
+
+.stButton a {
+  overflow: hidden;
+  text-indent: -999px;
+  margin-left: 5px;
+}

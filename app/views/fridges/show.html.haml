@@ -1,4 +1,5 @@
 - content_for :head do
+  =stylesheet_link_tag 'http://w.sharethis.com/button/css/buttons.css'
   :javascript
     $(function(){
       $('body').facebook('#{Facebook::CONFIG['app_id']}');
@@ -12,23 +13,20 @@
 
 
 #nameband.grid_12
+  - share_url = fridge_key_url(@fridge.key, :host => 'frdg.us')
   .user_photo
     = image_tag profile_image_url(@fridge.user)
   %h2= "#{@fridge.user.first_name}'s fridge"
   %h4= "In #{location_for(@fridge)}  on  #{@fridge.created_at.to_date.to_s(:short)} | #{number_with_delimiter @fridge.view_count} views"
   #sharelink
     Share this fridge:
-    = link_to fridge_key_url(@fridge.key, :host => 'frdg.us'), fridge_key_path(@fridge.key)
-  #sharethis
-    %span.st_facebook
-    %span.st_twitter
-    %span.st_digg
-    %span.st_gbuzz
-    %span.st_email
-    %span.st_sharethis
-    =javascript_include_tag "http://w.sharethis.com/button/buttons.js"
-    :javascript
-      stLight.options({publisher:'18e86a1b-6dbc-4078-96af-195e89f92e22'})
+    = link_to share_url
+  .stButton
+    %a.chicklets.facebook{:target => '_blank', :href => "http://www.facebook.com/sharer.php?u=#{share_url}", :title => 'Share this on Facebook'} Facebook
+    %a.chicklets.twitter{:target => '_blank', :href => "http://twitter.com/share?text=Check Out My Fridge!&url=#{share_url}&via=checkoutmyfridge", :title => 'Tweet this'} Twitter
+    %a.chicklets.digg{:target => '_blank', :href => "http://digg.com/submit?style=no&url=#{share_url}&title=Check Out My Fridge!", :title => 'Digg this'} Digg
+    %a.chicklets.gbuzz{:target => 'blank', :href => "http://www.google.com/buzz/post?message=Check Out My Fridge!&url=#{share_url}&imageurl=#{@fridge.photo.url(:large)}", :title => 'Share this on Google Buzz'} Buzz
+    %a.chicklets.email{:href => "mailto:?subject=Check Out My Fridge!&body=Check out this fridge at #{share_url}.", :title => 'Share this by email'} Email
 
 .grid_8
 
