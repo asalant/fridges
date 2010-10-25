@@ -1,7 +1,7 @@
 class Timer
   def self.timer(what)
-    Rails.logger.info "#{what} started"
     start = Time.now
+    Rails.logger.info "#{what} started at #{start}"
     yield
     Rails.logger.info "  #{what} executed in #{Time.now - start} sec"
   end
@@ -19,7 +19,7 @@ module Paperclip::Storage::S3
   def flush_writes_with_timing
     Timer.timer("Paperclip::Storage::S3#flush_writes") do
       flush_writes_without_timing
-    end
+      end
   end
 
   alias_method_chain :flush_writes, :timing
@@ -30,7 +30,7 @@ module AWS::S3
   class S3Object
     class << self
       def store_with_timing(key, data, bucket = nil, options = {})
-        Timer.timer("AWS::S3::S3Object#store") do
+        Timer.timer("AWS::S3::S3Object#store(#{key},#{data.class}(#{data.size}),#{bucket},#{options.inspect}") do
           store_without_timing(key, data, bucket, options)
         end
       end
@@ -40,17 +40,5 @@ module AWS::S3
     end
   end
 
-  class Base
-    class << self
-      def request_with_timing(verb, path, options = {}, body = nil, attempts = 0, &block)
-        Timer.timer("AWS::S3::Base#request") do
-          request_without_timing(verb, path, options = {}, body = nil, attempts = 0, &block)
-        end
-      end
-
-      alias_method_chain :request, :timing
-
-    end
-  end
 end
 

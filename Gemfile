@@ -4,7 +4,7 @@ gem 'rails', '3.0.0'
 gem 'haml'
 gem "haml-rails"
 gem 'json'
-gem 'paperclip'
+gem 'paperclip', :git => "http://github.com/thoughtbot/paperclip.git"
 gem 'aws-s3'
 gem 'devise', :git => "http://github.com/plataformatec/devise.git"
 gem 'oauth2'
