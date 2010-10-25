@@ -28,9 +28,9 @@ require 'aws/s3'
 module AWS::S3
   class S3Object
     class << self
-      def store_with_timing(options = {})
+      def store_with_timing(key, data, bucket = nil, options = {})
         Timer.timer("AWS::S3::S3Object#store") do
-          store_without_timing(options)
+          store_without_timing(key, data, bucket, options)
         end
       end
 
