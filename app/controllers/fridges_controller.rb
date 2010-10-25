@@ -86,9 +86,7 @@ class FridgesController < ApplicationController
       :message => "Check out my fridge!",
       :picture => fridge.photo.url(:large).gsub(%r(^/system/), "http://localhost:300/system/"), # for development
       :link    => fridge_key_url(fridge.key, :host => 'frdg.us'),
-      :name => 'The link name',
-      :caption => 'The link caption',
-      :description => 'The link description'
+      :description => 'You are what you refrigerate. Do you agree?\n\nPost your own so I can see!'
       }
     Rails.logger.debug "Posting to Facebook: #{post.inspect}"
     graph = Koala::Facebook::GraphAPI.new(access_token)
