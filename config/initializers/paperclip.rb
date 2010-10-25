@@ -2,7 +2,7 @@ module Paperclip
   module Storage
     module S3
       def create_bucket_with_timing
-        timer(:flush_writes) do
+        timer(:create_bucket) do
           create_bucket_without_timing
         end
       end
@@ -18,7 +18,7 @@ module Paperclip
       def timer(what)
         start = Time.now
         yield
-        Rails.logger.debug "#{what} executed in #{Time.now - start} sec"
+        Rails.logger.info "#{what} executed in #{Time.now - start} sec"
       end
 
     end
