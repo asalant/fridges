@@ -8,6 +8,7 @@
   
   =stylesheet_link_tag 'http://w.sharethis.com/button/css/buttons.css'
   :javascript
+    var signedIn = #{user_signed_in?};
     $(function(){
       $('body').facebook('#{Facebook::CONFIG['app_id']}');
     });
@@ -15,7 +16,10 @@
     $(window).load(function() {
       $("#fridge_photo")
         .annotateHandler({ target: '#note_details', ajax: true })
-        .annotateImage({ editable: true });
+        .annotateImage({ editable: signedIn });
+      if (signedIn) {
+        $("#fridge_photo").trigger('add_note');
+      }
     });
 
 
@@ -54,10 +58,8 @@
     %h3 What&rsquo;s inside your fridge?
     -if @fridge.notes.empty?
       .image-annotate-add
-        %p <a href='javascript:void(0);'>Add a note</a> to highlight stuff inside your fridge!
+        %p Add a note by clicking on something in your fridge!
         %p.italic What&rsquo;s that on the top shelf?
-    -else
-      %a.image-annotate-add{:href => 'javascript:void(0);'} Add a note!
   -elsif !@fridge.notes.empty?
     %h3 What&rsquo;s inside the fridge
   -else

@@ -108,8 +108,8 @@ label { display: block }
 
 #sharelink {
   float: left;
-  font-size: 11px; 
-  margin: 0; 
+  font-size: 11px;
+  margin: 0;
 }
 
 #sharethis {
@@ -126,6 +126,22 @@ label { display: block }
   background-color: #ffffcc;
   padding: 4px 12px;
   border: 1px solid #ccc;
+}
+
+.image-annotate-canvas.adding {
+  cursor: crosshair;
+}
+
+.image-annotate-canvas .image-annotate-prompt {
+  float: right;
+  background-color: #ffffcc;
+  padding: 4px 12px;
+  border: 1px solid #ccc;
+  display:none;
+}
+
+.image-annotate-canvas.adding .image-annotate-prompt {
+  display: block;
 }
 
 .note_detail {

@@ -1,5 +1,5 @@
 /**
- * Based on http://code.google.com/p/jquery-image-annotate/
+ * Based on http://code.google.com/p/jquery-image-annotate/ with many modifications.
  * Also see http://www.flipbit.co.uk/jquery-image-annotation.html
  */
 (function($) {
@@ -19,7 +19,7 @@
     $image.editable = opts.editable;
 
     // Add the canvas
-    $image.canvas = $('<div class="image-annotate-canvas"><div class="image-annotate-view"></div><div class="image-annotate-edit"><div class="image-annotate-edit-area"></div></div></div>');
+    $image.canvas = $('<div class="image-annotate-canvas"><div class="image-annotate-prompt">Click image to add a note</div><div class="image-annotate-view"/><div class="image-annotate-edit"/></div>');
     $image.canvas.children('.image-annotate-edit').hide();
     $image.canvas.children('.image-annotate-view').hide();
     $image.image.after($image.canvas);
@@ -53,7 +53,14 @@
       $.fn.annotateImage.load($image, data.notes);
     });
     $image.bind('add_note', function(event, data) {
-      $.fn.annotateImage.add($image);
+      $image.canvas.addClass('adding');
+    });
+    $image.canvas.bind('click', function(event) {
+      if (!$image.canvas.hasClass('adding')) {
+        return;
+      }
+      var position = {top: event.pageY - $image.canvas.position().top, left: event.pageX - $image.canvas.position().left };
+      $.fn.annotateImage.add($image, position);
     });
     $image.bind('cancel_note', function(event, data) {
       data.editable.destroy();
@@ -97,15 +104,17 @@
     image.trigger("notes_loaded", { notes: notes });
   };
 
-  $.fn.annotateImage.add = function(image) {
+  $.fn.annotateImage.add = function(image, position) {
     ///	<summary>
     ///		Adds a note to the image.
     ///	</summary>
-    if (image.mode == 'view') {
+    if (image.mode == 'view')
+    {
       image.mode = 'edit';
 
       // Create/prepare the editable note elements
-      var editable = new $.fn.annotateEdit(image);
+      var editable = new $.fn.annotateEdit(image, null, position);
+      image.editable = editable;
 
       $.fn.annotateImage.createSaveButton(editable, image);
       $.fn.annotateImage.createCancelButton(editable, image);
@@ -135,7 +144,7 @@
     editable.form.append(cancel);
   };
 
-  $.fn.annotateEdit = function(image, note) {
+  $.fn.annotateEdit = function(image, note, position) {
     ///	<summary>
     ///		Defines an editable annotation area.
     ///	</summary>
@@ -146,16 +155,16 @@
     } else {
       var newNote = new Object();
       newNote.id = "new";
-      newNote.top = 30;
-      newNote.left = 30;
-      newNote.width = 30;
-      newNote.height = 30;
+      newNote.width = 100;
+      newNote.height = 100;
+      newNote.top = position.top - newNote.width / 2;
+      newNote.left = position.left - newNote.height / 2;
       newNote.text = "";
       this.note = newNote;
     }
 
     // Set area
-    var area = image.canvas.children('.image-annotate-edit').children('.image-annotate-edit-area');
+    var area = $('<div class="image-annotate-edit-area"/>').appendTo(image.canvas.children('.image-annotate-edit'));
     this.area = area;
     this.area.css('height', this.note.height + 'px');
     this.area.css('width', this.note.width + 'px');
@@ -173,6 +182,8 @@
     $('body').append(this.form);
     this.form.css('left', this.area.offset().left + 'px');
     this.form.css('top', (parseInt(this.area.offset().top) + parseInt(this.area.height()) + 7) + 'px');
+    $('textarea', form).focus();
+
 
     // Set the area as a draggable/resizable element contained in the image canvas.
     // Would be better to use the containment option for resizable but buggy
@@ -203,12 +214,7 @@
     ///		Destroys an editable annotation area.
     ///	</summary>
     this.image.canvas.children('.image-annotate-edit').hide();
-    this.area.resizable('destroy');
-    this.area.draggable('destroy');
-    this.area.css('height', '');
-    this.area.css('width', '');
-    this.area.css('left', '');
-    this.area.css('top', '');
+    this.area.remove();
     this.form.remove();
   };
 
