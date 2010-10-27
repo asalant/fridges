@@ -1,6 +1,6 @@
 .bundle
 .idea
-config/heroku_env.rb
+config/local_env.rb
 db/*.sqlite3
 log/*.log
 tmp/**/*

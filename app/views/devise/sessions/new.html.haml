@@ -1,4 +1,24 @@
 .grid_12.alpha.omega
+
   %p Let's make this simple. Just connect with Facebook to add your fridge.
 
   = link_to "Sign in with Facebook", user_oauth_authorize_url(:facebook)
+
+  - if ENV['DATABASE_AUTHENTICATABLE']
+    %p or sign in locally (in development):
+
+    = form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f|
+      .field
+        = f.label :email
+        = f.email_field :email
+
+      .field
+        = f.label :password
+        = f.password_field :password
+
+      - if devise_mapping.rememberable?
+        .field
+          = f.check_box :remember_me, :checked => 'checked'
+          = f.label :remember_me, :style => 'display:inline'
+
+      = f.submit "Sign in"

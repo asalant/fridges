@@ -4,4 +4,6 @@
 require File.expand_path('../config/application', __FILE__)
 require 'rake'
 
+ENV['FIXTURES_PATH'] ||= "spec/fixtures"
+
 Fridges::Application.load_tasks

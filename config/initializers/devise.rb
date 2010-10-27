@@ -1,11 +1,10 @@
-require 'authentication_failure'
 
 # Use this hook to configure devise mailer, warden hooks and so forth. The first
 # four configuration values can also be set straight in your models.
 Devise.setup do |config|
   # ==> Mailer Configuration
   # Configure the e-mail address which will be shown in DeviseMailer.
-  config.mailer_sender              = "info@checkoutmyfridge.com"
+  config.mailer_sender              = "hello@checkoutmyfridge.com"
 
   # Configure the class responsible to send e-mails.
   # config.mailer = "Devise::Mailer"
@@ -180,6 +179,8 @@ Devise.setup do |config|
   #   manager.default_strategies(:scope => :user).unshift :some_external_strategy
   # end
   config.warden do |manager|
+    # Redirects authentication failure directly to Facebook login
+    require 'authentication_failure'
     manager.failure_app = Facebook::AuthenticationFailure
-  end
+  end if ENV['DATABASE_AUTHENTICATABLE']
 end

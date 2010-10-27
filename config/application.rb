@@ -50,10 +50,11 @@ module Fridges
     end
 
     config.before_configuration do
-      # Load heroku vars from local file
-      heroku_env = File.join(Rails.root, 'config', 'heroku_env.rb')
-      load(heroku_env) if File.exists?(heroku_env)
+      # Load local environment vars from local file
+      local_env = File.join(Rails.root, 'config', 'local_env.rb')
+      load(local_env) if File.exists?(local_env)
     end
+    
 
   end
 end

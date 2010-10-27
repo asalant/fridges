@@ -2,7 +2,7 @@
 
 Project home is https://github.com/asalant/fridges with the app deployed on Heroku at http://checkoutmyfridge.com.
 
-== DNS
+== DNS, Host Names and Email Addresses
 
 DNS is managed in ZoneEdit under Alon's account.
 
@@ -20,7 +20,17 @@ DNS is managed in ZoneEdit under Alon's account.
   rake db:migrate
   rake spec
 
-To run locally, you must create a file config/heroku_env.rb with credentials for S3 storage.
+Then:
+
+  rails s
+  open http://localhost:3000
+
+== S3
+
+To use S3 in development, you must:
+
+1. Enable S3 storage in config/environments/development.rb. See the comments there.
+2. Create a file config/local_env.rb with credentials for S3 storage.
 
 These values are set as Heroku config variables on Heroku per the strategy defined at
 http://tammersaleh.com/posts/managing-heroku-environment-variables-for-local-development.
@@ -33,7 +43,15 @@ http://tammersaleh.com/posts/managing-heroku-environment-variables-for-local-dev
   ENV['S3_KEY']            = 'key here'
   ENV['S3_SECRET']         = 'secret here'
 
-Then:
+== Local Sign In (not Facebook)
 
-  rails s
-  open http://localhost:3000
+If you want to be able to log in without Facebook:
+
+  rake db:fixtures:load
+  rake users:reset_password
+
+Then add another environment configuration to config/local_env.rb:
+
+  ENV['DATABASE_AUTHENTICATABLE'] = 'true'
+
+The users in spec/fixtures/users.yml will be available with all their passwords set to 'password'.
