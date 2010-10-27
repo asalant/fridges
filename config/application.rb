@@ -32,10 +32,16 @@ module Fridges
     # config.i18n.default_locale = :de
 
     # JavaScript files you want as :defaults (application.js is always included).
-    config.action_view.javascript_expansions[:defaults] = [
-      'http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js',
+    config.action_view.javascript_expansions[:defaults] =
+      Rails.env == 'development' ?
+      [ 'lib/jquery-1.4.2',
+        'lib/jquery-ui-1.8.5',
+        'lib/jquery.rails'
+      ] :
+      [ 'http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js',
         'http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.5/jquery-ui.min.js',
-        'jquery.rails']
+        'lib/jquery.rails'
+      ]
 
 
     # Configure the default encoding used in templates for Ruby 1.9.
@@ -54,7 +60,7 @@ module Fridges
       local_env = File.join(Rails.root, 'config', 'local_env.rb')
       load(local_env) if File.exists?(local_env)
     end
-    
+
 
   end
 end
