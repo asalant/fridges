@@ -182,5 +182,5 @@ Devise.setup do |config|
     # Redirects authentication failure directly to Facebook login
     require 'authentication_failure'
     manager.failure_app = Facebook::AuthenticationFailure
-  end if ENV['DATABASE_AUTHENTICATABLE']
+  end if !ENV['DATABASE_AUTHENTICATABLE']
 end
