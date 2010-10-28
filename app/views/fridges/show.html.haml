@@ -8,7 +8,7 @@
   
   =stylesheet_link_tag 'http://w.sharethis.com/button/css/buttons.css'
   :javascript
-    var signedIn = #{user_signed_in?};
+    var isOwner = #{user_signed_in? && current_user == @fridge.user};
     $(function(){
       $('body').facebook('#{Facebook::CONFIG['app_id']}');
     });
@@ -16,8 +16,8 @@
     $(window).load(function() {
       $("#fridge_photo")
         .annotateHandler({ target: '#note_details', ajax: true })
-        .annotateImage({ editable: signedIn });
-      if (signedIn) {
+        .annotateImage({ editable: isOwner });
+      if (isOwner) {
         $("#fridge_photo").trigger('add_note');
       }
     });

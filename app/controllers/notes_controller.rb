@@ -1,4 +1,5 @@
 class NotesController < ApplicationController
+  before_filter :authenticate_user!, :except => [:index]
   def index
     @notes = Note.find_all_by_fridge_id(params[:fridge_id])
     render :json => @notes
