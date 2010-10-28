@@ -17,6 +17,7 @@ describe NotesController do
   end
 
   describe "POST create" do
+    before { sign_in users(:alon) }
 
     describe "with valid params" do
       before do
@@ -37,6 +38,7 @@ describe NotesController do
 
   describe "DELETE destroy" do
     before do
+      sign_in users(:alon)
       delete :destroy, :fridge_id => fridges(:alon), :id => notes(:alon_one)
     end
 

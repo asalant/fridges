@@ -15,7 +15,7 @@ class FridgesController < ApplicationController
       render_forbidden
       return
     end
-    @fridges.order('created_at DESC')
+    @fridges = @fridges.order('created_at DESC')
   end
 
   def any
