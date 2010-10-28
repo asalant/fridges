@@ -46,6 +46,20 @@ describe WebhooksController do
       subject { response }
       it { should be_success }
     end
+
+    context "from formatted user email address" do
+      before do
+        @params['from'] = "Alon <#{users(:alon).email}>"
+        Fridge.expects(:create!).with do |hash|
+          hash[:user].should == users(:alon)
+        end
+
+        post :sendgrid, @params
+      end
+
+      subject { response }
+      it { should be_success }
+    end
   end
 
 end

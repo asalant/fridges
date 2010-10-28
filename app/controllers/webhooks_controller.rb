@@ -6,10 +6,11 @@ class WebhooksController < ApplicationController
 
     begin
       attributes = { :photo => params['attachment1'], :name => params['subject'], :description => params['text'] }
-      if user = User.find_by_email(params[:from])
+      from = params[:from] =~ /<([\w@\.]+?)>/ ? $1 : params[:from]
+      if user = User.find_by_email(from)
         attributes[:user] = user
       else
-        attributes[:email_from] = params[:from]
+        attributes[:email_from] = from
       end
       Fridge.create! attributes
     rescue Exception => e
