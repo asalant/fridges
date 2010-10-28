@@ -110,6 +110,6 @@ class FridgesController < ApplicationController
   end
 
   def render_forbidden
-    head :forbidden
+    head :forbidden, :text => 'You are not allowed to do that.'
   end
 end
