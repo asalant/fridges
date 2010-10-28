@@ -23,3 +23,9 @@ unclaimed:
   claim_token: abc123
   photo_file_name: fridge.jpg
   photo_content_type: image/jpg
+
+admin:
+  key: aaa114
+  photo_file_name: fridge.jpg
+  photo_content_type: image/jpg
+  user: admin

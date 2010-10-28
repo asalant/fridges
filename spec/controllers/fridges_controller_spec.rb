@@ -1,6 +1,8 @@
 require 'spec_helper'
 
 describe FridgesController do
+  render_views
+
   before do
     AWS::S3::Base.stubs(:establish_connection!)
     Fridge.any_instance.stubs(:save_attached_files)
@@ -8,10 +10,45 @@ describe FridgesController do
   end
 
   describe "GET index" do
-    it "assigns all fridges as @fridges" do
-      Fridge.stubs(:all).returns [fridges(:alon)]
-      get :index
-      assigns(:fridges).should == [fridges(:alon)]
+    context "when not logged in" do
+      it "requires log in" do
+        get :index
+        response.should be_redirect
+      end
+    end
+
+    context "when logged in" do
+      before do
+        sign_in users(:alon)
+      end
+
+      it "shows fridges for user" do
+        get :index, :user_id => users(:alon).id
+        assigns(:fridges).should == [fridges(:alon)]
+        assigns(:user).should == users(:alon)
+      end
+
+      it "forbids viewing fridges for other user" do
+        get :index, :user_id => users(:rob).id
+        response.should be_forbidden
+      end
+    end
+
+    context "when logged in as admin" do
+      before do
+        sign_in users(:admin)
+      end
+
+      it "shows all fridges" do
+        get :index
+        assigns(:fridges).should == Fridge.all
+      end
+
+      it "shows fridges for user" do
+        get :index, :user_id => users(:rob).id
+        assigns(:fridges).should == [fridges(:rob)]
+        assigns(:user).should == users(:rob)
+      end
     end
   end
 

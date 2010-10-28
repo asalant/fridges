@@ -1,6 +1,7 @@
 Fridges::Application.routes.draw do
 
   devise_for :users
+  match '/users/:user_id/fridges' => "fridges#index", :as => 'user_fridges', :only => :get
 
   resource :sessions
 

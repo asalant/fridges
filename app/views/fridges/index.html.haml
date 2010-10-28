@@ -1,8 +1,24 @@
-%table
-  - @fridges.each do |fridge|
-    %tr
-      %td= link_to image_tag(fridge.photo.url(:thumb)), fridge_key_path(fridge.key)
-      %td= link_to fridge.name, fridge_key_path(fridge.key)
-      %td= fridge.description
-      %td= link_to 'Delete', fridge, :method => :delete
+.grid_12
+
+  -if @fridges.empty?
+    You don't have any fridges here. #{link_to 'Add one now!', new_fridge_path }.
+
+  %ul#fridges
+    - @fridges.each do |fridge|
+      %li
+        .grid_2.alpha= link_to image_tag(fridge.photo.url(:thumb)), fridge_key_path(fridge.key)
+        
+        .grid_6
+          -if fridge.user
+            .user_photo
+              = image_tag profile_image_url(fridge.user)
+            %h4= link_to "#{fridge.user.first_name}'s fridge", fridge_key_path(fridge.key)
+            %p In #{location_for(fridge)}  on  #{fridge.created_at.to_date.to_s(:short)} | #{number_with_delimiter fridge.view_count} views
+          -else
+            %h4= link_to "Unclaimed", fridge_key_path(fridge.key)
+            %p From #{fridge.email_from} on #{fridge.created_at.to_date.to_s(:short)}
+
+
+        .grid_4.omega
+          = link_to 'Delete', fridge, :method => :delete
 

@@ -3,4 +3,9 @@ namespace :users do
   task :reset_password => :environment do
     User.all.each { |user| user.update_attribute :password, 'password' }
   end
+
+  desc 'Make a user an admin. Use EMAIL=[email] to specify user.'
+  task :enable_admin => :environment do
+    User.find_by_email(ENV['EMAIL']).update_attribute(:role, 'admin')
+  end
 end

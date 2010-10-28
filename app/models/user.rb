@@ -1,4 +1,5 @@
 class User < ActiveRecord::Base
+  has_many :fridges
   # Include default devise modules. Others available are:
   # :token_authenticatable, :encryptable, :confirmable, :lockable, :timeoutable and :oauthable
   devise :database_authenticatable, :rememberable, :trackable, :oauthable
@@ -30,6 +31,10 @@ class User < ActiveRecord::Base
 
   def short_name
     [first_name, "#{last_name[0,1]}."].join(" ")
+  end
+
+  def admin?
+    role == 'admin'
   end
 
   private

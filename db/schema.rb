@@ -10,60 +10,61 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101016232458) do
+ActiveRecord::Schema.define(:version => 20101028203447) do
 
   create_table "fridges", :force => true do |t|
-    t.string   "name"
-    t.text     "description"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.string   "photo_file_name"
-    t.string   "photo_content_type"
-    t.integer  "photo_file_size"
-    t.datetime "photo_updated_at"
-    t.string   "key"
-    t.integer  "user_id"
-    t.string   "location"
-    t.string   "email_from"
-    t.string   "claim_token"
-    t.integer  "view_count"
+    t.string    "name"
+    t.text      "description"
+    t.timestamp "created_at"
+    t.timestamp "updated_at"
+    t.string    "photo_file_name"
+    t.string    "photo_content_type"
+    t.integer   "photo_file_size"
+    t.timestamp "photo_updated_at"
+    t.string    "key"
+    t.integer   "user_id"
+    t.string    "location"
+    t.string    "email_from"
+    t.string    "claim_token"
+    t.integer   "view_count"
   end
 
   add_index "fridges", ["key"], :name => "index_fridges_on_key"
   add_index "fridges", ["user_id"], :name => "index_fridges_on_user_id"
 
   create_table "notes", :force => true do |t|
-    t.integer  "top"
-    t.integer  "left"
-    t.integer  "width"
-    t.integer  "height"
-    t.text     "text"
-    t.integer  "fridge_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.integer   "top"
+    t.integer   "left"
+    t.integer   "width"
+    t.integer   "height"
+    t.text      "text"
+    t.integer   "fridge_id"
+    t.timestamp "created_at"
+    t.timestamp "updated_at"
   end
 
   add_index "notes", ["fridge_id"], :name => "index_notes_on_fridge_id"
 
   create_table "users", :force => true do |t|
-    t.string   "email"
-    t.string   "encrypted_password",   :limit => 128, :default => "", :null => false
-    t.string   "reset_password_token"
-    t.datetime "remember_created_at"
-    t.integer  "sign_in_count",                       :default => 0
-    t.datetime "current_sign_in_at"
-    t.datetime "last_sign_in_at"
-    t.string   "current_sign_in_ip"
-    t.string   "last_sign_in_ip"
-    t.string   "first_name"
-    t.string   "last_name"
-    t.string   "gender"
-    t.string   "locale"
-    t.integer  "timezone"
-    t.string   "facebook_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.string   "location"
+    t.string    "email"
+    t.string    "encrypted_password",   :limit => 128, :default => "", :null => false
+    t.string    "reset_password_token"
+    t.timestamp "remember_created_at"
+    t.integer   "sign_in_count",                       :default => 0
+    t.timestamp "current_sign_in_at"
+    t.timestamp "last_sign_in_at"
+    t.string    "current_sign_in_ip"
+    t.string    "last_sign_in_ip"
+    t.string    "first_name"
+    t.string    "last_name"
+    t.string    "gender"
+    t.string    "locale"
+    t.integer   "timezone"
+    t.string    "facebook_id"
+    t.timestamp "created_at"
+    t.timestamp "updated_at"
+    t.string    "location"
+    t.string    "role"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true

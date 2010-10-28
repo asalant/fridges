@@ -208,3 +208,12 @@ label { display: block }
   text-indent: -999px;
   margin-left: 5px;
 }
+
+/** /fridges index page **/
+
+#fridges > li {
+  float: left;
+  background-color: #EFF4F8;
+  margin: 10px 0;
+}
+

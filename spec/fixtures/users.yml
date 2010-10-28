@@ -1,5 +1,11 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
+admin:
+  first_name: Andy
+  last_name: Admin
+  email: admin@example.org
+  role: admin
+
 alon:
   first_name: Alon
   last_name: Salant
