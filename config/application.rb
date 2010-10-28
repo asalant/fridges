@@ -36,9 +36,11 @@ module Fridges
       Rails.env == 'development' ?
       [ 'lib/jquery-1.4.2',
         'lib/jquery-ui-1.8.5',
+        'lib/jquery.rails'
       ] :
       [ 'http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js',
         'http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.5/jquery-ui.min.js',
+        'lib/jquery.rails'
       ]
 
 
