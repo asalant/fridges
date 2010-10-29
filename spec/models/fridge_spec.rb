@@ -13,7 +13,7 @@ describe Fridge do
     end
 
     it "should not find exceptions" do
-      Fridge.any(:except => [fridges(:alon), fridges(:rob)]).should be_nil
+      Fridge.any(:except => [fridges(:alon), fridges(:rob), fridges(:admin)]).should be_nil
     end
   end
 

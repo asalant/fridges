@@ -21,7 +21,7 @@ describe NotesController do
 
     describe "with valid params" do
       before do
-        post :create, :fridge_id => fridges(:alon), :note => {}
+        post :create, :fridge_id => fridges(:alon).id, :note => {}
       end
 
       it "creates note" do
