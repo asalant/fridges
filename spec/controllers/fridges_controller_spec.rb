@@ -53,10 +53,40 @@ describe FridgesController do
   end
 
   describe "GET any" do
-    it "redirects to show" do
-      Fridge.stubs(:any).returns fridges(:alon)
-      get :any
-      response.should redirect_to(fridge_key_url(fridges(:alon).key))
+    context "when not logged in" do
+      before do
+        session[:viewed_fridges] = [fridges(:rob).id]
+        Fridge.expects(:any).with { |params| params[:exclude].should == [fridges(:rob).id] }.returns fridges(:alon)
+        get :any
+      end
+
+      it { should redirect_to(fridge_key_url(fridges(:alon).key)) }
+    end
+
+    context "when logged in" do
+      before do
+        sign_in users(:alon)
+      end
+
+      it "ignores current user's fridges" do
+        Fridge.expects(:any).with { |params| params[:exclude_users].should == users(:alon) }.returns(fridges(:rob))
+        get :any
+      end
+    end
+
+    context "when all fridges have been viewed" do
+      before do
+        session[:viewed_fridges] = Fridge.all.collect &:id
+        get :any
+      end
+
+      it "resets viewed_fridges" do
+        session[:viewed_fridges].should == []
+      end
+
+      it "finds a redirects to a fridge" do
+        request.should redirect_to fridge_key_path(assigns(:fridge).key)
+      end
     end
   end
 

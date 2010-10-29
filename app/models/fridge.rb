@@ -36,7 +36,10 @@ class Fridge < ActiveRecord::Base
   end
 
   def self.any(params = {})
-    owned.offset((Fridge.count * rand).to_i - 1).where(['id not in (?)', params[:except] || 0]).first
+    any = owned
+    any = any.where(['id not in (?)', params[:exclude]]) if params[:exclude] && params[:exclude] != []
+    any = any.where(['user_id not in (?)', params[:exclude_users]]) if params[:exclude_users]
+    any.offset((any.count * rand).to_i).first
   end
 
   def claim_by!(user)

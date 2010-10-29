@@ -13,7 +13,12 @@ describe Fridge do
     end
 
     it "should not find exceptions" do
-      Fridge.any(:except => [fridges(:alon), fridges(:rob), fridges(:admin)]).should be_nil
+      Fridge.any(:exclude => [fridges(:alon), fridges(:rob), fridges(:admin)]).should be_nil
+    end
+
+    it "should ignore user" do
+      Fridge.any(:exclude_users => users(:alon), :exclude => []).should_not be_nil
+      Fridge.any(:exclude_users => users(:alon), :exclude => [fridges(:rob), fridges(:admin)]).should be_nil
     end
   end
 

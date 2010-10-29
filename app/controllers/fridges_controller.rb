@@ -19,9 +19,14 @@ class FridgesController < ApplicationController
   end
 
   def any
-    fridge = Fridge.any
-    if fridge
-      redirect_to fridge_key_url(fridge.key)
+    @fridge = Fridge.any :exclude => viewed_fridges, :exclude_users => current_user
+    if !@fridge
+      viewed_fridges.reject! {true}
+      @fridge = Fridge.any :exclude_users => current_user
+    end
+
+    if @fridge
+      redirect_to fridge_key_url(@fridge.key)
     else
       redirect_to fridges_url
     end
@@ -37,6 +42,8 @@ class FridgesController < ApplicationController
     else
       @fridge = Fridge.find(params[:id])
     end
+
+    viewed_fridges << @fridge.id
 
     if !@fridge.owned_by?(current_user) || @fridge.view_count == 0
       @fridge.count_view!
@@ -111,5 +118,10 @@ class FridgesController < ApplicationController
 
   def render_forbidden
     render :status => :forbidden, :text => 'You are not allowed to do that.'
+  end
+
+  def viewed_fridges
+    session[:viewed_fridges] ||= []
+    session[:viewed_fridges]
   end
 end
