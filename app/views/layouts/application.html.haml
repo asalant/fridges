@@ -39,24 +39,22 @@
                 %span.fridge Fridge!
             %h3 You are what you refrigerate. Discuss.
 
-          .grid_2
-            %h5.whats What's in
-            %br{:clear => 'all'}
-            %h5.whats your fridge?
+          .grid_4
+            %h5.whats What's in your fridge?
             %br{:clear => 'all'}
 
             #upload
               %h4= link_to "Upload a photo", new_fridge_path
-              %h6 or email one (from your phone) to <em>new@frdg.us</em>
-
-          .grid_2
-            %h5.whats ...what about
-            %br{:clear => 'all'}
-            %h5.whats your friends'?
-            %br{:clear => 'all'}
-
-            #upload
-              %h4= link_to "Ask friends to see their fridges", "#"
+              or email one (from your phone) <br>to <em>new@frdg.us</em>
+          -#
+          -#.grid_2
+          -#  %h5.whats ...what about
+          -#  %br{:clear => 'all'}
+          -#  %h5.whats your friends'?
+          -#  %br{:clear => 'all'}
+          -#
+          -#  #upload
+          -#    %h4= link_to "Ask friends to see their fridges", "#"
 
         #nav_bar
           .grid_8
