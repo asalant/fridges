@@ -56,6 +56,7 @@ class Fridge < ActiveRecord::Base
 
   def set_defaults
     self.view_count ||= 0
+    self.notes_count ||= 0
   end
 
   def generate_key

@@ -10,23 +10,24 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101028203447) do
+ActiveRecord::Schema.define(:version => 20101029123531) do
 
   create_table "fridges", :force => true do |t|
-    t.string    "name"
-    t.text      "description"
-    t.timestamp "created_at"
-    t.timestamp "updated_at"
-    t.string    "photo_file_name"
-    t.string    "photo_content_type"
-    t.integer   "photo_file_size"
-    t.timestamp "photo_updated_at"
-    t.string    "key"
-    t.integer   "user_id"
-    t.string    "location"
-    t.string    "email_from"
-    t.string    "claim_token"
-    t.integer   "view_count"
+    t.string   "name"
+    t.text     "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "photo_file_name"
+    t.string   "photo_content_type"
+    t.integer  "photo_file_size"
+    t.datetime "photo_updated_at"
+    t.string   "key"
+    t.integer  "user_id"
+    t.string   "location"
+    t.string   "email_from"
+    t.string   "claim_token"
+    t.integer  "view_count"
+    t.integer  "notes_count"
   end
 
   add_index "fridges", ["key"], :name => "index_fridges_on_key"

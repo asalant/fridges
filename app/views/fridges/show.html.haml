@@ -25,8 +25,7 @@
 
 #nameband.grid_12
   - share_url = fridge_key_url(@fridge.key, :host => 'frdg.us')
-  .user_photo
-    = image_tag profile_image_url(@fridge.user)
+  = image_tag profile_image_url(@fridge.user), :class => 'user_photo'
   %h2= "#{@fridge.user.first_name}'s fridge"
   %h4= "In #{location_for(@fridge)}  on  #{@fridge.created_at.to_date.to_s(:short)} | #{number_with_delimiter @fridge.view_count} views"
   #sharelink

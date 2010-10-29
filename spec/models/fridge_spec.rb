@@ -60,6 +60,8 @@ describe Fridge do
       subject.key.should be_present
       subject.key.length.should == 6
     end
+
+    its(:notes_count) { should == 0 }
   end
 
   context "when creating with user" do

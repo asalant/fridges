@@ -6,19 +6,25 @@
   %ul#fridges
     - @fridges.each do |fridge|
       %li
-        .grid_2.alpha= link_to image_tag(fridge.photo.url(:thumb)), fridge_key_path(fridge.key)
-        
+        .grid_2.alpha
+          .content= link_to image_tag(fridge.photo.url(:thumb)), fridge_key_path(fridge.key)
+
         .grid_6
-          -if fridge.user
-            .user_photo
-              = image_tag profile_image_url(fridge.user)
-            %h4= link_to "#{fridge.user.first_name}'s fridge", fridge_key_path(fridge.key)
-            %p In #{location_for(fridge)}  on  #{fridge.created_at.to_date.to_s(:short)} | #{number_with_delimiter fridge.view_count} views
-          -else
-            %h4= link_to "Unclaimed", fridge_key_path(fridge.key)
-            %p From #{fridge.email_from} on #{fridge.created_at.to_date.to_s(:short)}
+          .content
+            -if fridge.user
+              = image_tag profile_image_url(fridge.user), :class => 'user_photo'
+              .details
+                %h4= link_to "#{fridge.user.first_name}'s fridge", fridge_key_path(fridge.key)
+                %p In #{location_for(fridge)}  on  #{fridge.created_at.to_date.to_s(:short)}
+                %p #{number_with_delimiter fridge.view_count} views | #{pluralize fridge.notes_count, 'note'}
+            -else
+              .user_photo
+              .details
+                %h4= link_to "Unclaimed", fridge_key_path(fridge.key)
+                %p From #{fridge.email_from} on #{fridge.created_at.to_date.to_s(:short)}
 
 
         .grid_4.omega
-          = link_to 'Delete', fridge, :method => :delete
+          .content
+            = link_to 'Delete', fridge, :method => :delete
 
