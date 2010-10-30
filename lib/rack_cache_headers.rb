@@ -4,6 +4,7 @@ class RackCacheHeaders
   def initialize(app, patterns)
     @app = app
     @patterns = patterns
+    puts "Initialized RackCacheHeaders with #{patterns.inspect}"
   end
 
   def call(env)
