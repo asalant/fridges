@@ -52,6 +52,24 @@ label { display: block }
   -ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=2, Direction=301, Color='#999')";  /* For IE 8 */
 }
 
+ul {
+  list-style-type: circle;
+}
+
+input.button {
+  border: 1px solid #000099;
+  background-color: #d1e6f6;
+  padding: 5px 20px;
+  font-size: 20px;
+  cursor: pointer;
+  margin-bottom: 50px;
+}
+
+.upload_photo_button {
+  background-color: #e2e2e2;
+  padding: 5px;
+}
+
 #background {
   background-image: url('/images/bg.png');
   min-height: 100%;

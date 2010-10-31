@@ -28,7 +28,7 @@
 
   .field
     = f.label :photo
-    = f.file_field :photo
+    = f.file_field :photo, :class => 'upload_photo_button'
 
   #facebook.field
     = hidden_field_tag :access_token
@@ -36,4 +36,4 @@
     =label_tag :post_to_facebook, 'Share my fridge on Facebook', :style => 'display: inline;'
 
   .actions
-    = f.submit 'Upload'
+    = f.submit 'Upload', :class => 'button'
