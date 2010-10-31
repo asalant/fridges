@@ -164,7 +164,7 @@
     }
 
     // Set area
-    var area = $('<div class="image-annotate-edit-area"/>').appendTo(image.canvas.children('.image-annotate-edit'));
+    var area = $('<div class="image-annotate-edit-area"><div class="image-annotate-edit-internal"></div>').appendTo(image.canvas.children('.image-annotate-edit'));
     this.area = area;
     this.area.css('height', this.note.height + 'px');
     this.area.css('width', this.note.width + 'px');

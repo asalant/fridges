@@ -131,6 +131,12 @@
     top: 10px;
     width: 60px;
 }
+.image-annotate-edit-area .image-annotate-edit-internal {
+    border: 1px solid #FFFFFF;
+    display: block;
+    height: 99%;
+}
+
 .image-annotate-edit-area .ui-resizable-handle {
     opacity: 0.8;
 }
