@@ -86,7 +86,7 @@
           |
           -if user_signed_in?
             ="Logged in as #{current_user.full_name} | "
-            ="Your #{link_to "#{current_user.fridges.count} fridges", user_fridges_path(current_user)} |".html_safe if !current_user.fridges.empty?
+            ="Your #{link_to pluralize(current_user.fridges.count, 'fridge'), user_fridges_path(current_user)} |".html_safe if !current_user.fridges.empty?
             =link_to "Sign out", destroy_user_session_path
           -else
             - if ENV['DATABASE_AUTHENTICATABLE']
