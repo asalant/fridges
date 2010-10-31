@@ -8,7 +8,7 @@ class FridgesController < ApplicationController
         render_forbidden
         return
       end
-      @fridges = Fridge.where(:user_id => @user)
+      @fridges  = Fridge.where(:user_id => @user)
     elsif current_user.admin?
       @fridges = Fridge.scoped
     else
@@ -21,7 +21,7 @@ class FridgesController < ApplicationController
   def any
     @fridge = Fridge.any :exclude => viewed_fridges, :exclude_users => current_user
     if !@fridge
-      viewed_fridges.reject! {true}
+      viewed_fridges.reject! { true }
       @fridge = Fridge.any :exclude_users => current_user
     end
 
@@ -96,7 +96,11 @@ class FridgesController < ApplicationController
     @fridge = Fridge.find(params[:id])
     @fridge.destroy
 
-    redirect_to(fridges_url)
+    if current_user.admin?
+      redirect_to(fridges_url)
+    else
+      redirect_to(user_fridges_url current_user)
+    end
   end
 
   private
