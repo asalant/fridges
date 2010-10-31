@@ -33,17 +33,17 @@
     border: 1px solid #000000;
     position: absolute;
 }
-.image-annotate-area div {
+.image-annotate-area div.inner {
     border: 1px solid #FFFFFF;
     display: block;
 }
-.image-annotate-area-hover div {
+.image-annotate-area-hover div.inner {
     border-color: yellow !important;
 }
 .image-annotate-area-editable {
     cursor: pointer;
 }
-.image-annotate-area-editable-hover div {
+.image-annotate-area-editable-hover div.inner {
     border-color: #00AD00 !important;
 }
 .image-annotate-note {
@@ -131,10 +131,9 @@
     top: 10px;
     width: 60px;
 }
-.image-annotate-edit-area .image-annotate-edit-internal {
+.image-annotate-edit-area div.inner {
     border: 1px solid #FFFFFF;
     display: block;
-    height: 99%;
 }
 
 .image-annotate-edit-area .ui-resizable-handle {
