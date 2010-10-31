@@ -5,11 +5,11 @@ class UserMailer < ActionMailer::Base
 
   def your_fridge(fridge)
     @fridge = fridge
-    mail(:to => fridge.user.email,  :subject => "Check out your fridge!")
+    mail(:to => fridge.user.email,  :subject => "Check Out Your Fridge!")
   end
 
   def claim_fridge(fridge)
     @fridge = fridge
-    mail(:to => fridge.email_from,  :subject => "Claim your fridge!")
+    mail(:to => fridge.email_from,  :subject => "Claim Your Fridge!")
   end
 end

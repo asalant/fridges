@@ -1,9 +1,11 @@
+- share_url = fridge_key_url(@fridge.key, :host => 'frdg.us')
+- whos = @fridge.owned_by?(current_user) ? 'My' : "#{@fridge.user.first_name}'s"
 - content_for :head do
-  %meta{:property => "og:title", :content => "Check Out My Fridge!"}
+  %meta{:property => "og:title", :content => "Check Out #{whos} Fridge!"}
   %meta{:property => "og:type", :content => "article"}
-  %meta{:property => "og:url", :content => "#{fridge_key_url(@fridge.key, :host => 'frdg.us')}"}
+  %meta{:property => "og:url", :content => share_url}
   %meta{:property => "og:image", :content => "#{@fridge.photo.url(:large)}"}
-  %meta{:property => "og:site_name", :content => "checkoutmyfridge.com"}
+  %meta{:property => "og:site_name", :content => "Check Out My Fridge!"}
   %meta{:property => "og:description", :content => "You are what you refrigerate. Discuss."}
   
   =stylesheet_link_tag 'http://w.sharethis.com/button/css/buttons.css'
@@ -24,7 +26,6 @@
 
 
 #nameband.grid_12
-  - share_url = fridge_key_url(@fridge.key, :host => 'frdg.us')
   = image_tag profile_image_url(@fridge.user), :class => 'user_photo'
   %h2= "#{@fridge.user.first_name}'s fridge"
   %h4= "In #{location_for(@fridge)}  on  #{@fridge.created_at.to_date.to_s(:short)} | #{number_with_delimiter @fridge.view_count} views"
@@ -33,10 +34,10 @@
     = link_to share_url
   .stButton
     %a.chicklets.facebook{:target => '_blank', :href => "http://www.facebook.com/sharer.php?u=#{share_url}", :title => 'Share this on Facebook'} Facebook
-    %a.chicklets.twitter{:target => '_blank', :href => "http://twitter.com/share?text=Check Out My Fridge!&url=#{share_url}&via=checkoutmyfridge", :title => 'Tweet this'} Twitter
-    %a.chicklets.digg{:target => '_blank', :href => "http://digg.com/submit?style=no&url=#{share_url}&title=Check Out My Fridge!", :title => 'Digg this'} Digg
-    %a.chicklets.stumbleupon{:target => 'blank', :href => "http://www.stumbleupon.com/submit?title=Check Out My Fridge!&url=#{share_url}", :title => 'StumbleUpon this'} StumbleUpon
-    %a.chicklets.email{:href => "mailto:?subject=Check Out My Fridge!&body=Check out this fridge at #{share_url}.", :title => 'Share this by email'} Email
+    %a.chicklets.twitter{:target => '_blank', :href => "http://twitter.com/share?text=Check Out #{whos} Fridge!&url=#{share_url}&via=checkoutmyfridge", :title => 'Tweet this'} Twitter
+    %a.chicklets.digg{:target => '_blank', :href => "http://digg.com/submit?style=no&url=#{share_url}&title=Check Out #{whos} Fridge!", :title => 'Digg this'} Digg
+    %a.chicklets.stumbleupon{:target => 'blank', :href => "http://www.stumbleupon.com/submit?title=Check Out #{whos} Fridge!&url=#{share_url}", :title => 'StumbleUpon this'} StumbleUpon
+    %a.chicklets.email{:href => "mailto:?subject=Check Out #{whos} Fridge!&body=Check out this fridge at #{share_url}.", :title => 'Share this by email'} Email
 
 .grid_8
 
