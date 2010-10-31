@@ -34,38 +34,38 @@ ActiveRecord::Schema.define(:version => 20101029123531) do
   add_index "fridges", ["user_id"], :name => "index_fridges_on_user_id"
 
   create_table "notes", :force => true do |t|
-    t.integer   "top"
-    t.integer   "left"
-    t.integer   "width"
-    t.integer   "height"
-    t.text      "text"
-    t.integer   "fridge_id"
-    t.timestamp "created_at"
-    t.timestamp "updated_at"
+    t.integer  "top"
+    t.integer  "left"
+    t.integer  "width"
+    t.integer  "height"
+    t.text     "text"
+    t.integer  "fridge_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   add_index "notes", ["fridge_id"], :name => "index_notes_on_fridge_id"
 
   create_table "users", :force => true do |t|
-    t.string    "email"
-    t.string    "encrypted_password",   :limit => 128, :default => "", :null => false
-    t.string    "reset_password_token"
-    t.timestamp "remember_created_at"
-    t.integer   "sign_in_count",                       :default => 0
-    t.timestamp "current_sign_in_at"
-    t.timestamp "last_sign_in_at"
-    t.string    "current_sign_in_ip"
-    t.string    "last_sign_in_ip"
-    t.string    "first_name"
-    t.string    "last_name"
-    t.string    "gender"
-    t.string    "locale"
-    t.integer   "timezone"
-    t.string    "facebook_id"
-    t.timestamp "created_at"
-    t.timestamp "updated_at"
-    t.string    "location"
-    t.string    "role"
+    t.string   "email"
+    t.string   "encrypted_password",   :limit => 128, :default => "", :null => false
+    t.string   "reset_password_token"
+    t.datetime "remember_created_at"
+    t.integer  "sign_in_count",                       :default => 0
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.string   "current_sign_in_ip"
+    t.string   "last_sign_in_ip"
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "gender"
+    t.string   "locale"
+    t.integer  "timezone"
+    t.string   "facebook_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "location"
+    t.string   "role"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
