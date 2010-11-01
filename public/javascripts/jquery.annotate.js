@@ -108,8 +108,7 @@
     ///	<summary>
     ///		Adds a note to the image.
     ///	</summary>
-    if (image.mode == 'view')
-    {
+    if (image.mode == 'view') {
       image.mode = 'edit';
 
       // Create/prepare the editable note elements
@@ -164,12 +163,13 @@
     }
 
     // Set area
-    var area = $('<div class="image-annotate-edit-area"/>').appendTo(image.canvas.children('.image-annotate-edit'));
+    var area = $('<div class="image-annotate-edit-area"><div class="inner"/></div>').appendTo(image.canvas.children('.image-annotate-edit'));
     this.area = area;
-    this.area.css('height', this.note.height + 'px');
-    this.area.css('width', this.note.width + 'px');
-    this.area.css('left', this.note.left + 'px');
-    this.area.css('top', this.note.top + 'px');
+    area.height(this.note.height + 'px');
+    area.width(this.note.width + 'px');
+    area.css('left', this.note.left + 'px');
+    area.css('top', this.note.top + 'px');
+    fitInside($('div.inner', area), this.note.width, this.note.height);
 
     // Show the edition canvas and hide the view canvas
     image.canvas.children('.image-annotate-view').hide();
@@ -189,21 +189,15 @@
     // Would be better to use the containment option for resizable but buggy
     area.resizable({
       handles: 'all',
-
-      stop: function(e, ui) {
-        form.css('left', area.offset().left + 'px');
-        form.css('top', (parseInt(area.offset().top) + parseInt(area.height()) + 2) + 'px');
+      resize: function(e, ui) {
+        fitInside($('div.inner', area), area.width(), area.height());
+        positionForm(form, area);
       }
     })
       .draggable({
                    containment: image.canvas,
                    drag: function(e, ui) {
-                     form.css('left', area.offset().left + 'px');
-                     form.css('top', (parseInt(area.offset().top) + parseInt(area.height()) + 2) + 'px');
-                   },
-                   stop: function(e, ui) {
-                     form.css('left', area.offset().left + 'px');
-                     form.css('top', (parseInt(area.offset().top) + parseInt(area.height()) + 2) + 'px');
+                     positionForm(form, area);
                    }
                  });
     return this;
@@ -229,7 +223,7 @@
     this.editable = (note.editable && image.editable);
 
     // Add the area
-    this.area = $('<div class="image-annotate-area' + (this.editable ? ' image-annotate-area-editable' : '') + '"><div></div></div>');
+    this.area = $('<div class="image-annotate-area' + (this.editable ? ' image-annotate-area-editable' : '') + '"><div class="inner"/></div>');
     this.area.attr('id', "data-image-annotate-id-" + note.id);
     image.canvas.children('.image-annotate-view').prepend(this.area);
 
@@ -263,8 +257,7 @@
     ///	<summary>
     ///		Sets the position of an annotation.
     ///	</summary>
-    this.area.children('div').height((parseInt(this.note.height) - 2) + 'px');
-    this.area.children('div').width((parseInt(this.note.width) - 2) + 'px');
+    fitInside($('div.inner', this.area), this.note.width, this.note.height);
     this.area.css('left', (this.note.left) + 'px');
     this.area.css('top', (this.note.top) + 'px');
     this.form.css('left', (this.note.left) + 'px');
@@ -336,8 +329,7 @@
     this.form.hide();
 
     // Resize
-    this.area.children('div').height(editable.area.height() + 'px');
-    this.area.children('div').width((editable.area.width() - 2) + 'px');
+    fitInside($('div.inner', this.area), editable.area.width(), editable.area.height());
     this.area.css('left', (editable.area.position().left) + 'px');
     this.area.css('top', (editable.area.position().top) + 'px');
     this.form.css('left', (editable.area.position().left) + 'px');
@@ -352,5 +344,16 @@
     this.note.id = editable.note.id;
     this.editable = true;
   };
+
+  function fitInside(child, width, height) {
+    $(child).width((parseInt(width) - 2) + 'px');
+    $(child).height((parseInt(height) - 2) + 'px');
+
+  }
+
+  function positionForm(form, area) {
+    form.css('left', area.offset().left + 'px');
+    form.css('top', (parseInt(area.offset().top) + parseInt(area.height()) + 7) + 'px');
+  }
 
 })(jQuery);

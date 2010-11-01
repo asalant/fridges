@@ -249,17 +249,34 @@ describe FridgesController do
   end
 
   describe "DELETE destroy" do
-    before do
-      sign_in users(:alon)
-      delete :destroy, :id => fridges(:alon)
+    context "when logged in as admin" do
+      before do
+        sign_in users(:admin)
+        delete :destroy, :id => fridges(:alon)
+      end
+
+      it "destroys the requested fridge" do
+        lambda { Fridge.find fridges(:alon) }.should raise_exception(ActiveRecord::RecordNotFound)
+      end
+
+      it "redirects to the fridges list" do
+        response.should redirect_to(fridges_url)
+      end
     end
 
-    it "destroys the requested fridge" do
-      lambda { Fridge.find fridges(:alon) }.should raise_exception(ActiveRecord::RecordNotFound)
-    end
+    context "when logged in as user" do
+      before do
+        sign_in users(:rob)
+        delete :destroy, :id => fridges(:rob)
+      end
 
-    it "redirects to the fridges list" do
-      response.should redirect_to(fridges_url)
+      it "destroys the requested fridge" do
+        lambda { Fridge.find fridges(:rob) }.should raise_exception(ActiveRecord::RecordNotFound)
+      end
+
+      it "redirects to the fridges list" do
+        response.should redirect_to(user_fridges_url(users(:rob)))
+      end
     end
   end
 
