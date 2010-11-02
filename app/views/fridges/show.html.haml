@@ -49,7 +49,7 @@
 .grid_8
 
   .photo
-    =image_tag @fridge.photo.url(:large), :id => 'fridge_photo', 'data-id' => @fridge.id
+    =image_tag URI.escape(@fridge.photo.url(:large)), :id => 'fridge_photo', 'data-id' => @fridge.id
 
   %br{:clear => 'all'}
 
