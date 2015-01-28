@@ -19,7 +19,6 @@ group :development do
   gem 'sqlite3-ruby', :require => 'sqlite3'
   gem 'heroku'
   gem 'taps'
-  gem 'hpricot'
   gem 'ruby_parser'
 end
 
@@ -29,5 +28,5 @@ group :test do
 end
 
 group :test, :development do
-  gem 'rspec-rails', '>= 2.0.0.beta.20'
+  gem 'rspec-rails', '2.4.0'
 end
